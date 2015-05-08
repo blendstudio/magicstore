@@ -2,4 +2,55 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+
+  div(ng-controller='LoginController as login')
+
+    h2 Sign In
+
+    div
+      form(ng-submit='login.signIn()', name='sign in')
+        label(for='signInEmail') E-mail
+        br
+        input(ng-model='user.email',
+          id='signInEmail', type='email', name='email', 
+          placeholder='example@email.com', required)
+        br
+        br
+
+        label(for='signInPassword') Password
+        br
+        input(ng-model='user.password',
+          id='signInPassword', type='password', name='password', 
+          pattern=".{2,}", title="8 characters minimum", required)
+        br
+
+        input(type='submit', value='Sign in')
+
+    h2 Register
+
+    div
+      form(ng-submit='login.register()', name='register')
+        label(for='registerEmail') E-mail
+        br
+        input(ng-model='user.email',
+          id='registerEmail', name='email', type='email', 
+          placeholder='example@email.com', required)
+        br
+        br
+
+        label(for='registerPassword') Password
+        br
+        input(ng-model='user.password',
+          id='registerPassword', type='password', name='password',
+          pattern=".{2,}", title="8 characters minimum", required)
+        br
+
+        label(for='passwordConfirmation') Confirm your password
+        br
+        input(ng-model='user.passwordConfirmation', 
+          id='passwordConfirmation', type='password', name='passwordConfirmation', 
+          pattern=".{2,}", title="8 characters minimum", required)
+        span(id='passwordConfirmationMessage')
+        br
+
+        input(type='submit', value='Register')
