@@ -8,7 +8,6 @@ router.get('/', function(req, res, next) {
 
 /* POST home page. */
 router.post('/', function(req, res, next) {
-  console.log(req.body);
   res.render('index', { title: 'MagicStore' });
 });
 
