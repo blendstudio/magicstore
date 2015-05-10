@@ -11,6 +11,19 @@ var cards = require('./routes/cards');
 
 var api = require('./routes/api');
 
+// connects to mongodb
+var mongoose = require('mongoose');
+var mongo = {};
+
+mongo = 'mongodb://localhost/magicstore';
+mongoose.connect(mongo);
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'mongoose connection'));
+db.once('open', function callback () {
+  console.log('mongoose connection [Opened: connected to [' + mongo + ']]');
+});
+
 var app = express();
 
 // view engine setup
