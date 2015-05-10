@@ -5,18 +5,18 @@ block content
 
   div(ng-controller='HomeController as home')
     h3 Cards
-    button(ng-click='page = 1' ng-disabled='page === 1') first
-    button(ng-click='page = page - 1' ng-disabled='page === 1') prev
-    |  page 
-    input(type='number' ng-model='page')
-    |  items per page
-    input(type='number' ng-model='items' ng-change='setCardsCollection(items)')
-    |  
-    button(ng-click='page = page + 1' ng-disabled='page === lastPage') next
-    button(ng-click='page = lastPage' ng-disabled='page === lastPage') last
-    |  search  
-    input(type='text' ng-model='query' ng-change='search(query)')
+    
+    include ./pagination.jade
+    
     hr
-    div(ng-repeat='card in cards[page - 1] track by card.id' style='float:left; margin-right:7px;')
-      p {{card.name}}
-      img(src='http://api.mtgdb.info/content/card_images/{{card.id}}.jpeg')
+    
+    // cards
+    div(style='min-height: 600px;')
+      div(ng-repeat='card in cards[page - 1] track by card.id' style='float:left; margin-right:7px;')
+        p {{card.name}}
+        img(src='http://api.mtgdb.info/content/card_images/{{card.id}}.jpeg')
+        p  
+
+    hr(style='clear: both;')
+
+    include ./pagination.jade
