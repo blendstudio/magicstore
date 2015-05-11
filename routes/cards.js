@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-var _ = require('lodash');
+var mongoose = require('mongoose');
+var Cards = require('../models/Card');
 
-var cards = require('../data/cards.json');
+var _ = require('lodash');
 
 /* GET cards page. */
 router.get('/', function(req, res, next) {
-  
   res.render('cards', { title: 'MagicStore' });
 });
 

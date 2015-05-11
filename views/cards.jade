@@ -12,9 +12,12 @@ block content
     
     // cards
     div(style='min-height: 600px;')
-      div(ng-repeat='card in cards[page - 1] track by card.id' style='float:left; margin-right:7px;')
-        p {{card.name}}
-        img(src='http://api.mtgdb.info/content/card_images/{{card.id}}.jpeg')
+      div(ng-repeat='card in cards track by card.id' style='float:left; margin-right:65px; margin-bottom:25px;')
+        p
+          h4 {{card.name}}
+        div(class='card-container')
+          div(class='card')
+            img(src='http://api.mtgdb.info/content/card_images/{{card.id}}.jpeg')
         p  
 
     hr(style='clear: both;')

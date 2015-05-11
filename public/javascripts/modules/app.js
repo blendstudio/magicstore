@@ -6,35 +6,39 @@
     
     var data = {};
     
+    $scope.random = false;
+    
     // pagination
-    $scope.items = 10;
+    $scope.items = 6  ;
     $scope.page = 1;
     $scope.lastPage = 1;
     
-    // retrieve data
-    $http.get('/api/cards', { cache: true })
-      .success(function(data) {
-        $scope.cardsdb = data;
-        $scope.setCardsCollection();
-      });
+    $scope.query = '';
     
-    $scope.chunks = function(data, n) {
-      return _.chunk(data, n);
-    };
-    
-    $scope.setCardsCollection = function() {
-      $scope.cards = $scope.chunks($scope.cardsdb, $scope.items);
-      $scope.lastPage = $scope.cards.length;
+    $scope.setCardsCollection = function(data, skip, limit) {
+      $scope.cards = data.cards;
+      $scope.count = data.count;
+      $scope.page = 1 + skip / limit;
+      $scope.lastPage = Math.ceil($scope.count / limit);
     };
     
     // search bar
-    $scope.search = function(query) {
-      if (!query) {
-        $scope.setCardsCollection();
-      } else {
-        
-      }
+    $scope.search = function(query, skip, limit, random) {
+      $http.get('/api/cards', {
+          cache: true,
+          params: {
+            random: random,
+            search: query,
+            skip: skip,
+            limit: limit,
+          },
+      }).success(function(data) {
+          $scope.setCardsCollection(data, skip, limit);
+        });
     };
+    
+    // retrieve data
+    $scope.search('', ($scope.page - 1) * $scope.items, $scope.items, $scope.random);
     
   }]);
 
@@ -56,3 +60,5 @@
   }]);
 
 })();
+
+//skip: ($scope.page - 1) * $scope.items,
