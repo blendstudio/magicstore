@@ -1,12 +1,11 @@
 extends layout
 
 block content
-  h1 #{title}
 
   div(ng-controller='CardsController as cardsCtrl')
     h3 Cartas
     
-    include ./pagination.jade
+    include ./partials/pagination.jade
     
     hr
     
@@ -22,4 +21,4 @@ block content
 
     hr(style='clear: both;')
 
-    include ./pagination.jade
+    include ./partials/pagination.jade
