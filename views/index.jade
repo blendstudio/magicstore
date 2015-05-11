@@ -5,7 +5,7 @@ block content
 
   div(ng-controller='LoginController as login')
 
-    h2 Sign In
+    h2 Entrar
 
     div
       form(ng-submit='login.signIn()', name='sign in')
@@ -13,20 +13,20 @@ block content
         br
         input(ng-model='user.email',
           id='signInEmail', type='email', name='email', 
-          placeholder='example@email.com', required)
+          placeholder='exemplo@email.com', required)
         br
         br
 
-        label(for='signInPassword') Password
+        label(for='signInPassword') Senha
         br
         input(ng-model='user.password',
           id='signInPassword', type='password', name='password', 
           pattern=".{2,}", title="8 characters minimum", required)
         br
 
-        input(type='submit', value='Sign in')
+        input(type='submit', value='Entrar')
 
-    h2 Register
+    h2 Registrar
 
     div
       form(ng-submit='login.register()', name='register')
@@ -34,18 +34,18 @@ block content
         br
         input(ng-model='user.email',
           id='registerEmail', name='email', type='email', 
-          placeholder='example@email.com', required)
+          placeholder='exemplo@email.com', required)
         br
         br
 
-        label(for='registerPassword') Password
+        label(for='registerPassword') Senha
         br
         input(ng-model='user.password',
           id='registerPassword', type='password', name='password',
           pattern=".{2,}", title="8 characters minimum", required)
         br
 
-        label(for='passwordConfirmation') Confirm your password
+        label(for='passwordConfirmation') Confirme sua senha
         br
         input(ng-model='user.passwordConfirmation', 
           id='passwordConfirmation', type='password', name='passwordConfirmation', 
@@ -53,4 +53,4 @@ block content
         span(id='passwordConfirmationMessage')
         br
 
-        input(type='submit', value='Register')
+        input(type='submit', value='Registrar')
