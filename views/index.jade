@@ -3,54 +3,38 @@ extends layout
 block content
   h1= title
 
-  div(ng-controller='LoginController as login')
+  div
 
     h2 Entrar
 
     div
-      form(ng-submit='login.signIn()', name='sign in')
+      form(ng-submit='signIn()' ng-controller='HomeController')
         label(for='signInEmail') E-mail
         br
-        input(ng-model='user.email',
-          id='signInEmail', type='email', name='email', 
-          placeholder='exemplo@email.com', required)
+        input(ng-model='account.email', id='signInEmail', type='email', name='email', placeholder='exemplo@email.com', required)
         br
         br
-
         label(for='signInPassword') Senha
         br
-        input(ng-model='user.password',
-          id='signInPassword', type='password', name='password', 
-          pattern=".{2,}", title="8 characters minimum", required)
+        input(ng-model='account.password', id='signInPassword', type='password', name='password', pattern=".{2,}", title="8 characters minimum", required)
         br
-
         input(type='submit', value='Entrar')
 
     h2 Registrar
 
     div
-      form(ng-submit='login.register()', name='register')
+      form(ng-submit='register()'  ng-controller='HomeController')
         label(for='registerEmail') E-mail
         br
-        input(ng-model='user.email',
-          id='registerEmail', name='email', type='email', 
-          placeholder='exemplo@email.com', required)
+        input(ng-model='account.email', id='registerEmail', name='email', type='email',  placeholder='exemplo@email.com', required)
         br
         br
-
         label(for='registerPassword') Senha
         br
-        input(ng-model='user.password',
-          id='registerPassword', type='password', name='password',
-          pattern=".{2,}", title="8 characters minimum", required)
+        input(ng-model='account.password', id='registerPassword', type='password', name='password', pattern=".{2,}", title="8 characters minimum", required)
         br
-
         label(for='passwordConfirmation') Confirme sua senha
         br
-        input(ng-model='user.passwordConfirmation', 
-          id='passwordConfirmation', type='password', name='passwordConfirmation', 
-          pattern=".{2,}", title="8 characters minimum", required)
-        span(id='passwordConfirmationMessage')
+        input(ng-model='account.passwordConfirmation',  id='passwordConfirmation', type='password', name='passwordConfirmation',  pattern=".{2,}", title="8 characters minimum", required)
         br
-
         input(type='submit', value='Registrar')

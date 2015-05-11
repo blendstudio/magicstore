@@ -2,16 +2,14 @@
   
   angular.module('store').controller('HomeController', ['$scope', '$http', function($scope, $http) {
 
-    $scope.user = {};
+    $scope.account = {};
 
-    this.signIn = function() {
-      console.log($scope.user);
-      $scope.user = {};
+    $scope.signIn = function() {
+      console.log($scope.account);
     };
 
-    this.register = function() {
-      console.log($scope.user);
-      $scope.user = {};
+    $scope.register = function() {
+      console.log($scope.account);
     };
 
   }]);
