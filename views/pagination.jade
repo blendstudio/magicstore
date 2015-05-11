@@ -1,16 +1,16 @@
 
 // pagination pane
 div(style='clear: both;')
-  button(ng-click='page = 1; search(query, (page - 1) * items, items, random)' ng-disabled='page === 1') first
-  button(ng-click='page = page - 1; search(query, (page - 1) * items, items, random)' ng-disabled='page === 1') prev
-  |  page 
+  button(ng-click='page = 1; search(query, (page - 1) * items, items, random)' ng-disabled='page === 1') Primeira
+  button(ng-click='page = page - 1; search(query, (page - 1) * items, items, random)' ng-disabled='page === 1') Anterior 
+  |  Página 
   input(type='number' min='1' ng-model='page' ng-change='search(query, (page - 1) * items, items, random)')
-  |  items per page 
+  |  Cartas por página 
   input(type='number' min='1' ng-model='items' ng-change='search(query, (page - 1) * items, items, random)')
   |  
-  button(ng-click='page = page + 1; search(query, (page - 1) * items, items, random)' ng-disabled='page === lastPage') next
-  button(ng-click='page = lastPage; search(query, (page - 1) * items, items, random)' ng-disabled='page === lastPage') last
-  |  search 
+  button(ng-click='page = page + 1; search(query, (page - 1) * items, items, random)' ng-disabled='page === lastPage') Próxima
+  button(ng-click='page = lastPage; search(query, (page - 1) * items, items, random)' ng-disabled='page === lastPage') Última
+  |  Procura rápida 
   input(type='text' ng-model='query' ng-change='search(query, 0, items, false); random = false' ng-model-options='{ debounce: 750 }')
-  |  random
+  |  Cartas aleatórias
   input(type='checkbox' ng-model='random' ng-change='query = null; search(query, (page - 1) * items, items, random)')

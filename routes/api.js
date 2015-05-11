@@ -38,16 +38,10 @@ router.get('/cards', function(req, res, next) {
     // search cards
     function(err, data) {
       count = data;
-      
-      console.log(typeof(random));
-      
+
       if (random === 'true') {
-        console.log('fr random ' + random);
-        
         query = Cards.findRandom({});
       } else {
-        console.log('f  random ' + random);
-        
         query = Cards.find({ name : new RegExp(search, 'i') });
       }
       
