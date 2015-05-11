@@ -18,6 +18,10 @@
         else {
           return null;
         }
+      },
+      
+      count: function() {
+        return messages.length;
       }
       
     };

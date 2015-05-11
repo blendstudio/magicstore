@@ -1,6 +1,6 @@
 (function() {
   
-  angular.module('store').controller('HomeController', ['$scope', '$rootScope', 'MessageService', function($scope, $rootScope, messages) {
+  angular.module('store').controller('HomeController', ['$scope', '$rootScope', '$http', 'MessageService', function($scope, $rootScope, $http, messages) {
 
     $scope.account = {};
 
