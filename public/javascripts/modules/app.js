@@ -1,5 +1,5 @@
 (function() {
   
-  angular.module('store', []);
+  angular.module('store', ['angular-md5']);
 
 })();

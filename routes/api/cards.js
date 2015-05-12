@@ -2,12 +2,12 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require('mongoose');
-var Cards = require('../models/Card');
+var Cards = require('../../models/Card');
 
 var _ = require('lodash');
 
-/* GET cards page. */
-router.get('/cards', function(req, res, next) {
+/* GET cards resources. */
+router.get('/', function(req, res, next) {
   
   var random = req.query.random;
   

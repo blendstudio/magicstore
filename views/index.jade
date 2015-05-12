@@ -5,10 +5,10 @@ block content
 
     include ./partials/messages.jade
 
-    h2 Entrar
+    h2 BrenoMi
 
     div
-      form(ng-submit='signIn()' ng-controller='HomeController')
+      form(ng-submit='signIn(account)' ng-controller='HomeController')
         label(for='signInEmail') E-mail
         br
         input(ng-model='account.email', id='signInEmail', type='email', name='email', placeholder='exemplo@email.com', required)
@@ -16,14 +16,14 @@ block content
         br
         label(for='signInPassword') Senha
         br
-        input(ng-model='account.password', id='signInPassword', type='password', name='password', pattern=".{2,}", title="8 characters minimum", required)
+        input(ng-model='account.password', id='signInPassword', type='password', name='password', pattern=".{8,}", title="8 characters minimum", required)
         br
         input(type='submit', value='Entrar')
 
-    h2 Registrar
+    h2 Muito Mi
 
     div
-      form(ng-submit='register()'  ng-controller='HomeController')
+      form(ng-submit='register(account)'  ng-controller='HomeController')
         label(for='registerEmail') E-mail
         br
         input(ng-model='account.email', id='registerEmail', name='email', type='email',  placeholder='exemplo@email.com', required)
@@ -31,10 +31,10 @@ block content
         br
         label(for='registerPassword') Senha
         br
-        input(ng-model='account.password', id='registerPassword', type='password', name='password', pattern=".{2,}", title="8 characters minimum", required)
+        input(ng-model='account.password', id='registerPassword', type='password', name='password', pattern=".{8,}", title="8 characters minimum", required)
         br
         label(for='passwordConfirmation') Confirme sua senha
         br
-        input(ng-model='account.passwordConfirmation',  id='passwordConfirmation', type='password', name='passwordConfirmation',  pattern=".{2,}", title="8 characters minimum", required)
+        input(ng-model='account.passwordConfirmation',  id='passwordConfirmation', type='password', name='passwordConfirmation',  pattern=".{8,}", title="8 characters minimum", required)
         br
         input(type='submit', value='Registrar')

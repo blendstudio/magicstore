@@ -6,10 +6,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 var cards = require('./routes/cards');
 
-var api = require('./routes/api');
+var apiCards = require('./routes/api/cards');
+var apiAccounts = require('./routes/api/accounts');
 
 // connects to mongodb
 var mongoose = require('mongoose');
@@ -40,9 +40,10 @@ app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
 app.use('/cards', cards);
-app.use('/api', api);
+
+app.use('/api/cards', apiCards);
+app.use('/api/accounts', apiAccounts);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
