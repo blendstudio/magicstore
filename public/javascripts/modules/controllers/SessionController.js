@@ -4,8 +4,8 @@
     
     $scope.account = {};
     
-    $scope.$on('account signed in', function(event, args) {
-      
+    $scope.$on('account signed in', function(event, account) {
+      $scope.account = account;
     });
     
   }]);

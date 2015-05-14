@@ -1,7 +1,0 @@
-
-// message pane
-p(ng-controller='MessagesController' ng-hide='message === null')
-  button(ng-click='close()') Fechar
-  |  
-  button(ng-click='next()' ng-disabled='messages.count() === 0') ({{messages.count()}}) Próxima 
-  |  {{message}}

@@ -1,25 +1,24 @@
 (function() {
   
-  angular.module('store').controller('HomeController', ['$scope', '$rootScope', '$http', 'md5', 'MessageService', function($scope, $rootScope, $http, md5, messages) {
+  angular.module('store').controller('HomeController', ['$scope', '$rootScope', '$http', '$location', 'md5', function($scope, $rootScope, $http, $location, md5) {
 
     $scope.account = {};
     
     $scope.signIn = function(account) {
       
       // encrypt password
-      var hash = md5.createHash(account.password);
+      account.password = md5.createHash(account.password);
       
       $http.get('/api/accounts', {
           cache: false,
           params: {
-            search: { 
-              email: account.email,
-              password: hash, 
-            }
+            search: account
           }
       }).
         success(function(data, status, headers, config) {
-          console.log(data);
+          $rootScope.$broadcast('account signed in', account);
+          
+          // session, cookies
         }).
         error(function(data, status, headers, config) {
           // TODO: error messages
@@ -30,22 +29,16 @@
     $scope.register = function(account) {
       
       // encrypt password
-      var hash = md5.createHash(account.password);
-      
-      console.log(hash);
+      account.password = account.passwordConfirmation = md5.createHash(account.password);
 
       var json = {
         action: 'register',
-        account: {
-          email: account.email,
-          password: hash,
-          passwordConfirmation: hash,
-        },
+        account: account,
       };
       
       $http.post('/api/accounts', json).
         success(function(data, status, headers, config) {
-          // TODO: sign in          
+          $scope.signIn(account);
         }).
         error(function(data, status, headers, config) {
           // TODO: error messages
