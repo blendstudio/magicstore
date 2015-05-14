@@ -1,21 +1,23 @@
 doctype html
 html(ng-app='store')
   head
-    title= title
+    title #{title}
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-  
-    h1= title
-    
+
+    include ./partials/session.jade
+
     block content
     
     script(src='/bower/lodash/lodash.min.js')
 
     script(src='/bower/angular/angular.min.js')
     script(src='/bower/angular-md5/angular-md5.min.js')
+    script(src='/bower/angular-messages/angular-messages.min.js')
 
     script(src='/javascripts/modules/app.js')
     script(src='/javascripts/modules/services/MessageService.js')
     script(src='/javascripts/modules/controllers/HomeController.js')
-    script(src='/javascripts/modules/controllers/MessagesController.js')
     script(src='/javascripts/modules/controllers/CardsController.js')
+    script(src='/javascripts/modules/controllers/SessionController.js')
+    script(src='/javascripts/modules/controllers/MessagesController.js')

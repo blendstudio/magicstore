@@ -9,8 +9,6 @@
       // encrypt password
       var hash = md5.createHash(account.password);
       
-      console.log(account);
-      
       $http.get('/api/accounts', {
           cache: false,
           params: {
@@ -31,17 +29,6 @@
 
     $scope.register = function(account) {
       
-      // check password and password confirmation
-      if (account.password !== account.passwordConfirmation) {
-        
-        messages.queue('A senha informada e sua confirmação de senha não são iguais.');
-        $rootScope.$broadcast('queue message');
-        
-        account.password = account.passwordConfirmation = '';
-        
-        return;
-      }
-         
       // encrypt password
       var hash = md5.createHash(account.password);
       
