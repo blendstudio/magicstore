@@ -16,19 +16,13 @@ router.get('/', function(req, res, next) {
   var limit = req.query.limit;
   var skip = req.query.skip;
   
-  var search = req.query.search;
-  
-  console.log(search);
-    
-  if (!search) {
-    search = '(.*?)';
-  }
+  var search = JSON.parse(req.query.search);
   
   var chain = [
     
     // get count
     function() {
-      query = Accounts.count({ email : new RegExp(search, 'i') });
+      query = Accounts.count(search);
       query.exec(chain.shift()); 
     },
     
@@ -36,7 +30,7 @@ router.get('/', function(req, res, next) {
     function(err, data) {
       count = data;
       
-      query = Accounts.find({ email : new RegExp(search, 'i') });
+      query = Accounts.find(search);
       query = query.skip(skip).
                 limit(limit);
       query.exec(chain.shift());
