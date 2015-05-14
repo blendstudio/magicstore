@@ -6,7 +6,7 @@ block content
     h2 Entrar
 
     div
-      form(name='signInForm' ng-submit='signIn(account)' ng-controller='HomeController' novalidate)
+      form(name='signInForm' ng-submit='signInForm.$valid && signIn(account)' ng-controller='HomeController' novalidate)
         label(for='signInEmail') E-mail
         br
         input(ng-model='account.email', id='signInEmail', type='email', name='email', placeholder='exemplo@email.com', required)
@@ -17,7 +17,7 @@ block content
         br
         label(for='signInPassword') Senha
         br
-        input(ng-model='account.password', id='signInPassword', type='password', name='password', pattern='.{8,}', minlength='8', required)
+        input(ng-model='account.password', id='signInPassword', type='password', name='password', minlength='8', required)
         span(ng-messages='signInForm.password.$error' ng-show='signInForm.password.$touched || signInForm.$submitted' role='alert' class='error')
           span(ng-message='required')  Campo obrigatório
           span(ng-message='minlength')  Sua senha deve possuir mais de 8 caracteres
@@ -27,18 +27,27 @@ block content
     h2 Registrar
 
     div
-      form(name='registerForm' ng-submit='register(account)' ng-controller='HomeController' novalidate)
+      form(name='registerForm' ng-submit='registerForm.$valid && register(account)' ng-controller='HomeController' novalidate)
         label(for='registerEmail') E-mail
         br
         input(ng-model='account.email', id='registerEmail', name='email', type='email',  placeholder='exemplo@email.com', required)
+        span(ng-messages='registerForm.email.$error' ng-show='registerForm.email.$touched || registerForm.$submitted' role='alert' class='error')
+          span(ng-message='required')  Campo obrigatório
+          span(ng-message='email')  E-mail inválido
         br
         br
         label(for='registerPassword') Senha
         br
-        input(ng-model='account.password', id='registerPassword', type='password', name='password', pattern=".{8,}", title="8 characters minimum", required)
+        input(ng-model='account.password', id='registerPassword', type='password', name='password', minlength='8', required)
+        span(ng-messages='registerForm.password.$error' ng-show='registerForm.password.$touched || registerForm.$submitted' role='alert' class='error')
+          span(ng-message='required')  Campo obrigatório
+          span(ng-message='minlength')  Sua senha deve possuir mais de 8 caracteres
         br
         label(for='passwordConfirmation') Confirme sua senha
         br
-        input(ng-model='account.passwordConfirmation',  id='passwordConfirmation', type='password', name='passwordConfirmation',  pattern=".{8,}", title="8 characters minimum", required)
+        input(ng-model='account.passwordConfirmation',  id='passwordConfirmation', type='password', name='passwordConfirmation', minlength='8', required)
+        span(ng-messages='registerForm.passwordConfirmation.$error' ng-show='registerForm.passwordConfirmation.$touched || registerForm.$submitted' role='alert' class='error')
+          span(ng-message='required')  Campo obrigatório
+          span(ng-message='minlength')  Sua senha deve possuir mais de 8 caracteres
         br
         input(type='submit', value='Registrar')
