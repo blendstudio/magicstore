@@ -1,6 +1,6 @@
 (function() {
   
-  angular.module('store').controller('HomeController', ['$scope', '$rootScope', '$http', '$location', 'md5', function($scope, $rootScope, $http, $location, md5) {
+  angular.module('store').controller('HomeController', ['$scope', '$rootScope', '$http', 'md5', function($scope, $rootScope, $http, md5) {
 
     $scope.account = {};
     
@@ -16,7 +16,8 @@
           }
       }).
         success(function(data, status, headers, config) {
-          $rootScope.$broadcast('account signed in', account);
+          $rootScope.$broadcast('account signed in', { email: account.email });
+          
           
           // session, cookies
         }).

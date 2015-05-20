@@ -1,5 +1,5 @@
 (function() {
   
-  angular.module('store', ['angular-md5', 'ngMessages']);
+  angular.module('store', ['angular-md5', 'ngMessages', 'ngCookies']);
 
 })();
