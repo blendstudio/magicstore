@@ -14,6 +14,12 @@ var FormatSchema = new Schema({
   legality:           String,
 });
 
+var StockSchema = new Schema({
+  condition:          String,
+  quantity:           Number,
+  price:              Number,
+});
+
 var CardSchema = new Schema({
   id:                 Number,
   relatedCardId:      Number,
@@ -38,10 +44,10 @@ var CardSchema = new Schema({
   promo:              Boolean,
   rulings:            [RulingSchema],
   formats:            [FormatSchema],
+  stock:              [StockSchema],
   releasedAt:         Date,
 });
 
 CardSchema.plugin(random, { path: 'random' });
 
 module.exports = mongoose.model('Card', CardSchema);
-

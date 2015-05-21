@@ -16,6 +16,7 @@
        url: '/cartas',
       templateUrl: '/states/cards.jade'
     });
+    
   }]);
 
 })();
