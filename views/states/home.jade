@@ -10,6 +10,7 @@ div
       span(ng-messages='signInForm.email.$error' ng-show='signInForm.email.$touched || signInForm.$submitted' role='alert' class='error')
         span(ng-message='required')  Campo obrigatório
         span(ng-message='email')  E-mail inválido
+      span(ng-show='signInFailed' class='error')  E-mail e/ou senha inválidos
       br
       br
       label(for='signInPassword') Senha
@@ -31,6 +32,7 @@ div
       span(ng-messages='registerForm.email.$error' ng-show='registerForm.email.$touched || registerForm.$submitted' role='alert' class='error')
         span(ng-message='required')  Campo obrigatório
         span(ng-message='email')  E-mail inválido
+      span(ng-show='registerFailed' class='error')  Não foi possível registrar sua conta de usuário agora, tente novamente mais tarde
       br
       br
       label(for='registerPassword') Senha

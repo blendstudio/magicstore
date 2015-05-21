@@ -4,7 +4,12 @@
 
     $scope.account = {};
     
+    $scope.signInFailed = false;
+    $scope.registerFailed = false;
+    
     $scope.signIn = function(account) {
+      
+      var password = account.password;
       
       // encrypt password
       account.password = md5.createHash(account.password);
@@ -16,12 +21,15 @@
           }
       }).
         success(function(data, status, headers, config) {
-          if (data.count > 0) {
+          if (data.count === 1) {
             $rootScope.$broadcast('account signed in', { email: account.email });
+          } else {
+            $scope.signInFailed = true;
+            account.password = password;
           }
         }).
         error(function(data, status, headers, config) {
-          // TODO: error messages
+          $scope.signInFailed = true;
         });
         
     };
@@ -41,7 +49,7 @@
           $scope.signIn(account);
         }).
         error(function(data, status, headers, config) {
-          // TODO: error messages
+          $scope.registerFailed = true;
         });
         
     };

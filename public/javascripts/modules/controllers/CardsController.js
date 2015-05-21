@@ -7,7 +7,7 @@
     $scope.random = false;
     
     // pagination
-    $scope.items = 6;
+    $scope.items = 4;
     $scope.page = 1;
     $scope.lastPage = 1;
     
