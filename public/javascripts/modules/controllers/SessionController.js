@@ -1,6 +1,6 @@
 (function() {
 
-  angular.module('store').controller('SessionController', ['$scope', '$http', '$cookies', function($scope, $http, $cookies) {
+  angular.module('store').controller('SessionController', ['$scope', '$http', '$location', '$state', '$cookies', function($scope, $http, $location, $state, $cookies) {
     
     $scope.email = $cookies.email;
     
@@ -14,6 +14,14 @@
       }
       return false;
     };
+    
+    // redirect to default page if signed in
+    $scope.$on('$stateChangeSuccess', function() {
+      if ($state.current.name === 'home' && $scope.isSignedIn()) {
+        // TODO: change to real one
+        $location.path('cards');
+      }
+    });
     
   }]);
   

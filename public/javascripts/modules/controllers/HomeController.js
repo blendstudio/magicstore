@@ -1,6 +1,6 @@
 (function() {
   
-  angular.module('store').controller('HomeController', ['$scope', '$rootScope', '$http', 'md5', function($scope, $rootScope, $http, md5) {
+  angular.module('store').controller('HomeController', ['$scope', '$rootScope', '$http', '$location', 'md5', function($scope, $rootScope, $http, $location, md5) {
 
     $scope.account = {};
     
@@ -18,6 +18,7 @@
         success(function(data, status, headers, config) {
           if (data.count > 0) {
             $rootScope.$broadcast('account signed in', { email: account.email });
+            $location.path('cards');
           }
         }).
         error(function(data, status, headers, config) {

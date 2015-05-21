@@ -1,0 +1,10 @@
+
+div(ng-controller='SessionController')
+
+  h1 #{title}
+  
+  button(ng-hide='isSignedIn()') Entrar
+  
+  span(ng-show='isSignedIn()') Olá, {{ email }}!
+  
+  button(ng-show='isSignedIn()') Sair

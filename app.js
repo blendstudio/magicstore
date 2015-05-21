@@ -5,8 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// routes
 var routes = require('./routes/index');
-var cards = require('./routes/cards');
 
 var apiCards = require('./routes/api/cards');
 var apiAccounts = require('./routes/api/accounts');
@@ -39,9 +39,15 @@ app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// route to SPA
 app.use('/', routes);
-app.use('/cards', cards);
 
+// handle states
+app.use('/states', function (req, res) {
+  res.render('./states' + req.path);
+});
+
+// API routes
 app.use('/api/cards', apiCards);
 app.use('/api/accounts', apiAccounts);
 
