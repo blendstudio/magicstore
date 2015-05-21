@@ -16,7 +16,10 @@ router.get('/', function(req, res, next) {
   var limit = req.query.limit;
   var skip = req.query.skip;
   
-  var search = JSON.parse(req.query.search);
+  var search = {};
+  if (req.query.search) {
+    search = JSON.parse(req.query.search);
+  }
   
   var chain = [
     

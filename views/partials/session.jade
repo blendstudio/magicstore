@@ -1,4 +1,4 @@
 
 h1 #{title}
 
-div(ng-controller='SessionController')
+div(ng-controller='SessionController', ng-show='isSignedIn()') Olá, {{ email }}!

@@ -16,10 +16,9 @@
           }
       }).
         success(function(data, status, headers, config) {
-          $rootScope.$broadcast('account signed in', { email: account.email });
-          
-          
-          // session, cookies
+          if (data.count > 0) {
+            $rootScope.$broadcast('account signed in', { email: account.email });
+          }
         }).
         error(function(data, status, headers, config) {
           // TODO: error messages
