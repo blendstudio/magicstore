@@ -1,12 +1,13 @@
 
-div(ng-controller='SessionController')
+div(ng-controller='SessionController' class='header')
 
-  h1 #{title}
+  img(src='images/ms-logo.png' class='logo')
   
-  button(ng-hide='isSignedIn()' ng-click='toHome()') Entrar
-  |  
-  
-  span(ng-show='isSignedIn()') {{ email }}
-  |  
-  
-  button(ng-show='isSignedIn()' ng-click='signOut()') Sair
+  div(class='profile')
+    a(href='' ng-hide='isSignedIn()' ng-click='toHome()' class='btn') Entrar
+    |  
+    
+    span(ng-show='isSignedIn()') {{ email }}
+    |  
+    
+    a(href='' ng-show='isSignedIn()' ng-click='signOut()' class='btn') Sair
