@@ -13,7 +13,7 @@
       templateUrl: '/states/home.jade'
     })
     .state('cards', {
-       url: '/cards',
+       url: '/cartas',
       templateUrl: '/states/cards.jade'
     });
   }]);
