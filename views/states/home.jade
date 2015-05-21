@@ -18,7 +18,7 @@ div
       input(ng-model='account.password', id='signInPassword', type='password', name='password', minlength='8', required)
       span(ng-messages='signInForm.password.$error' ng-show='signInForm.password.$touched || signInForm.$submitted' role='alert' class='error')
         span(ng-message='required')  Campo obrigatório
-        span(ng-message='minlength')  Sua senha deve possuir mais de 8 caracteres
+        span(ng-message='minlength')  Sua senha deve possuir 8 ou mais caracteres
       br
       input(type='submit', value='Entrar')
 
@@ -40,13 +40,13 @@ div
       input(ng-model='account.password', id='registerPassword', type='password', name='password', minlength='8', required)
       span(ng-messages='registerForm.password.$error' ng-show='registerForm.password.$touched || registerForm.$submitted' role='alert' class='error')
         span(ng-message='required')  Campo obrigatório
-        span(ng-message='minlength')  Sua senha deve possuir mais de 8 caracteres
+        span(ng-message='minlength')  Sua senha deve possuir 8 ou mais caracteres
       br
       label(for='passwordConfirmation') Confirme sua senha
       br
       input(ng-model='account.passwordConfirmation',  id='passwordConfirmation', type='password', name='passwordConfirmation', minlength='8', required)
       span(ng-messages='registerForm.passwordConfirmation.$error' ng-show='registerForm.passwordConfirmation.$touched || registerForm.$submitted' role='alert' class='error')
         span(ng-message='required')  Campo obrigatório
-        span(ng-message='minlength')  Sua senha deve possuir mais de 8 caracteres
+        span(ng-message='minlength')  Sua senha deve possuir 8 ou mais caracteres
       br
       input(type='submit', value='Registrar')
