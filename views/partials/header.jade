@@ -3,8 +3,10 @@ div(ng-controller='SessionController')
 
   h1 #{title}
   
-  button(ng-hide='isSignedIn()') Entrar
+  button(ng-hide='isSignedIn()' ng-click='toHome()') Entrar
+  |  
   
-  span(ng-show='isSignedIn()') Olá, {{ email }}!
+  span(ng-show='isSignedIn()') {{ email }}
+  |  
   
-  button(ng-show='isSignedIn()') Sair
+  button(ng-show='isSignedIn()' ng-click='signOut()') Sair

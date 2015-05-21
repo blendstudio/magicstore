@@ -18,7 +18,6 @@
         success(function(data, status, headers, config) {
           if (data.count > 0) {
             $rootScope.$broadcast('account signed in', { email: account.email });
-            $location.path('cards');
           }
         }).
         error(function(data, status, headers, config) {
