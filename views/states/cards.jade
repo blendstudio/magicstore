@@ -8,13 +8,11 @@ div(ng-controller='CardsController as cardsCtrl')
   // cards
   div(class='cards')
     div(ng-repeat='card in cards track by card.id' class='card')
-      p
-        h4 {{card.name}}
-      div(class='card-container')
-        div(class='card-image')
-          img(src='http://8e8460c4912582c4e519-11fcbfd88ed5b90cfb46edba899033c9.r65.cf1.rackcdn.com/sales/cardscans/MTG/UNH/en/nonfoil/Forest.jpg')
-      p  
-
+      div(class='card-image')
+        img(src='http://8e8460c4912582c4e519-11fcbfd88ed5b90cfb46edba899033c9.r65.cf1.rackcdn.com/sales/cardscans/MTG/UNH/en/nonfoil/Forest.jpg')
+      div(class='card-information') bla
+  
   hr(style='clear: both;')
-
+  
   include ../partials/pagination.jade
+  
