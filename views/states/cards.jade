@@ -54,7 +54,7 @@ div(ng-controller='CardsController as cardsCtrl')
           div(ng-click='enableCardText(card)' class='pointer')
             strong Texto
             strong(ng-hide='card.showCardText')  [&middot;&middot;&middot;]
-          div(ng-show='card.showCardText')
+          div(ng-show='card.showCardText' class='card-text')
             p
               | {{ card.description }}
             p

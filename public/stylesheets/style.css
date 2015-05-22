@@ -119,6 +119,19 @@ input.small {
   transform: scale(1.5);
   border-radius: 15px;
 }
+.card-text {
+  -webkit-transition: all ease 0.35s;
+  transition: all ease 0.35s;
+}
+.card-text.ng-hide {
+  opacity: 0;
+}
+.ng-hide:not(.ng-hide-animate) {
+  display: block !important;
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
 .pointer {
   cursor: pointer;
   -webkit-touch-callout: none;
