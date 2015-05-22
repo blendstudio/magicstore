@@ -7,6 +7,7 @@ div(ng-controller='CardsController as cardsCtrl')
   
   // cards
   div(class='cards')
+    div(id='product-list-top')
     div(ng-repeat='card in cards track by card.id' class='card')
       div(class='card-image')
         img(src='http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid={{card.id}}&type=card')
@@ -51,10 +52,8 @@ div(ng-controller='CardsController as cardsCtrl')
               | {{ card.loyalty }} 
         br
         p
-          div(ng-click='enableCardText(card)' class='pointer')
-            strong Texto
-            strong(ng-hide='card.showCardText')  [&middot;&middot;&middot;]
-          div(ng-show='card.showCardText' class='card-text')
+          strong Texto
+          div(class='card-text')
             p
               | {{ card.description }}
             p

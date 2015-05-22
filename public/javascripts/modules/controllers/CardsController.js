@@ -1,6 +1,6 @@
 (function() {
 
-  angular.module('store').controller('CardsController', ['$scope', '$http', function($scope, $http) {
+  angular.module('store').controller('CardsController', ['$scope', '$http', '$location', '$anchorScroll', function($scope, $http, $location, $anchorScroll) {
     
     var data = {};
     
@@ -32,11 +32,9 @@
           },
       }).success(function(data) {
           $scope.setCardsCollection(data, skip, limit);
+          $location.hash('product-list-top');
+          $anchorScroll();
         });
-    };
-    
-    $scope.enableCardText = function(card) {
-      card.showCardText = !card.showCardText;
     };
     
     // retrieve data

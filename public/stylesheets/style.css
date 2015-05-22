@@ -84,7 +84,7 @@ input.small {
 }
 .card-information {
   float: left;
-  width: 420px;
+  width: 380px;
   min-height: 277px;
   background-color: #e8e6e4;
   padding: 15px 17px 15px 17px;
@@ -118,19 +118,6 @@ input.small {
   -o-transform: scale(1.5);
   transform: scale(1.5);
   border-radius: 15px;
-}
-.card-text {
-  -webkit-transition: all ease 0.35s;
-  transition: all ease 0.35s;
-}
-.card-text.ng-hide {
-  opacity: 0;
-}
-.ng-hide:not(.ng-hide-animate) {
-  display: block !important;
-  position: absolute;
-  top: -9999px;
-  left: -9999px;
 }
 .pointer {
   cursor: pointer;
