@@ -50,14 +50,11 @@ div(ng-controller='CardsController as cardsCtrl')
               strong Lealdade: 
             td
               | {{ card.loyalty }} 
-        br
-        p
-          strong Texto
-          div(class='card-text')
-            p
-              | {{ card.description }}
-            p
-              i {{ card.flavor }}
+        div(class='card-text')
+          p
+            | {{ card.description }}
+          p
+            i {{ card.flavor }}
   
   hr(style='clear: both;')
   

@@ -18,6 +18,8 @@ var StockSchema = new Schema({
   condition:          String,
   quantity:           Number,
   price:              Number,
+  language:           String,
+  observations:       [String],
 });
 
 var CardSchema = new Schema({
