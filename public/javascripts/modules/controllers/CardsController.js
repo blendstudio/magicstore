@@ -35,6 +35,10 @@
         });
     };
     
+    $scope.enableCardText = function(card) {
+      card.showCardText = !card.showCardText;
+    };
+    
     // retrieve data
     $scope.search('', ($scope.page - 1) * $scope.items, $scope.items, $scope.random);
     

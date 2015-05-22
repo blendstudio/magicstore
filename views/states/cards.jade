@@ -9,8 +9,56 @@ div(ng-controller='CardsController as cardsCtrl')
   div(class='cards')
     div(ng-repeat='card in cards track by card.id' class='card')
       div(class='card-image')
-        img(src='http://8e8460c4912582c4e519-11fcbfd88ed5b90cfb46edba899033c9.r65.cf1.rackcdn.com/sales/cardscans/MTG/UNH/en/nonfoil/Forest.jpg')
-      div(class='card-information') bla
+        img(src='http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid={{card.id}}&type=card')
+      div(class='card-information')
+        strong(class='big') {{ card.name }}
+        hr
+        table
+          tr
+            td
+              strong Tipo: 
+            td
+              | {{ card.type }} {{ card.subType ? (' - ' + card.subType) : '' }}
+          tr
+            td
+              strong Cores: 
+            td
+              span(ng-repeat='color in card.colors') {{ $index > 0 ? (', ' + color[0].toUpperCase() + color.slice(1)) : (color[0].toUpperCase() + color.slice(1)) }}
+          tr
+            td
+              strong Raridade:   
+            td
+              | {{ card.rarity }}
+          tr
+            td
+              strong Edição: 
+            td
+              | {{ card.cardSetName }}
+          tr(ng-show='card.artist')
+            td
+              strong Artista: 
+            td
+              | {{ card.artist }}
+          tr(ng-show='card.type === "Creature" && (card.power || card.toughness)')
+            td
+              strong For/Res: 
+            td
+              | {{ card.power }}/{{ card.toughness }} 
+          tr(ng-show='card.type === "Planeswalker"')
+            td
+              strong Lealdade: 
+            td
+              | {{ card.loyalty }} 
+        br
+        p
+          div(ng-click='enableCardText(card)' class='pointer')
+            strong Texto
+            strong(ng-hide='card.showCardText')  [&middot;&middot;&middot;]
+          div(ng-show='card.showCardText')
+            p
+              | {{ card.description }}
+            p
+              i {{ card.flavor }}
   
   hr(style='clear: both;')
   

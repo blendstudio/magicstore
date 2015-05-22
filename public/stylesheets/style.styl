@@ -5,10 +5,36 @@ body
   
 a
   color: #00B7FF
+
+table
+  width: 100%
+  border-spacing: 0 7px
+
+td
+  padding: 2px 0px 2px 0px
+  border-bottom: 1px solid #bcbcbc
   
+td:first-child
+  width: 75px
+
 img
   max-width: 100%
   
+hr
+  border: 0
+  height: 1px
+  background: #333
+  background-image: linear-gradient(to right, #ccc, #333, #ccc)  
+
+strong
+  color: #282624
+  
+strong.big
+  font-size: 1.25em;
+
+input.small
+  width: 142px
+
 .btn
   -webkit-border-radius: 7
   -moz-border-radius: 7
@@ -38,8 +64,10 @@ img
   
 .main-content
   padding: 8px 240px 8px 240px
+  margin-left: 300px
 
 .cards
+  min-height: 675px;
   max-height: 675px;
   padding-left: 80px
   overflow-y: scroll
@@ -55,16 +83,23 @@ img
 
 .card-information
   float: left
-  height: 310px
-  background-color: #D8D6D4
+  width: 420px
+  min-height: 277px
+  background-color: #E8E6E4
+  padding: 15px 17px 15px 17px
+  border-radius: 15px
+  font-size: 0.85em
+  color: #484644
+  
+.card-information strong
+  font-weight: bolder
   
 .card-image
   float: left
   width: 223px
   height: 310px
   border-radius: 15px
-  margin-right: 100px
-  
+  margin-right: 70px
   
 .card-image img
   -webkit-transition: all .25s ease
@@ -81,6 +116,21 @@ img
   -o-transform: scale(1.5)
   transform: scale(1.5)
   border-radius: 15px
+
+.pointer
+  cursor: pointer
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -khtml-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+  color: #080604
+  &:hover
+    color: #484644
+    
+.pointer strong:hover
+  color: #484644
 
 .error
   color: #ff7a7a
