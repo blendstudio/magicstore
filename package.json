@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "dl": "node ./scripts/dl"
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.12.0",
