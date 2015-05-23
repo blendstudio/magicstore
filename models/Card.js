@@ -16,10 +16,11 @@ var FormatSchema = new Schema({
 
 var StockSchema = new Schema({
   condition:          String,
-  quantity:           Number,
-  price:              Number,
   language:           String,
   observations:       [String],
+  quantity:           Number,
+  price:              Number,
+  discount:           Number,
 });
 
 var CardSchema = new Schema({

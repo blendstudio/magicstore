@@ -10,12 +10,45 @@ table {
   width: 100%;
   border-spacing: 0 7px;
 }
+.stock table {
+  width: 100%;
+  border-spacing: 0;
+}
+.stock tr th {
+  cursor: default;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.stock tr {
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+.selected {
+  font-weight: bold;
+}
+.stock tr:nth-child(even) {
+  background-color: #d8d6d4;
+}
+.stock tr.selected {
+  background-color: #b8b6b4;
+}
+th {
+  text-align: left;
+  padding: 2px 0px 2px 0px;
+  border-bottom: 1px solid #bcbcbc;
+}
 td {
   padding: 2px 0px 2px 0px;
   border-bottom: 1px solid #bcbcbc;
 }
 td:first-child {
   width: 75px;
+}
+.stock td:first-child {
+  padding-left: 4px;
 }
 img {
   max-width: 100%;
@@ -32,8 +65,27 @@ strong {
 strong.big {
   font-size: 1.25em;
 }
+.small-font {
+  font-size: 10px;
+}
 input.small {
   width: 142px;
+}
+.hidden {
+  visibility: hidden;
+}
+.product-price-component.display-none {
+  display: none;
+}
+.stock td {
+  padding: 0;
+  line-height: 24px;
+}
+.stock td:first-child {
+  width: 150px;
+}
+.stock td:last-child {
+  font-size: 24px;
 }
 .btn {
   -webkit-border-radius: 7;
@@ -71,36 +123,143 @@ input.small {
   min-height: 675px;
   max-height: 675px;
   padding-left: 80px;
+  padding-right: 80px;
   overflow-y: scroll;
+}
+.cards.show-one {
+  overflow-y: auto;
+  min-height: auto;
+  max-height: auto;
 }
 .card:last-child {
   margin-bottom: 85px;
 }
 .card {
-  margin-top: 80px;
-  margin-bottom: 20px;
   width: 100%;
   display: inline-block;
 }
-.card-information {
+.card.show-one {
+  margin-top: 75px;
+}
+hr.separator.hidden {
+  margin-top: 50px;
+  margin-bottom: 25px;
+}
+hr.separator {
+  margin-top: 50px;
+  margin-bottom: 85px;
+}
+.product-price {
+  border-radius: 15px;
+  background-color: #171a21;
+  color: #b8b6b4;
+  min-height: 55px;
+  width: 225px;
+}
+.product-price.large-price {
+  width: 245px;
+}
+.product-price.small-price {
+  width: 180px;
+}
+.product-price.avaible {
+  min-height: 45px;
+}
+.product-price-component:first-child {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  width: 67px;
+  margin: 3px 0 3px 3px;
+  padding-left: 2px;
+}
+.product-price-component {
+  height: 39px;
+  display: inline;
   float: left;
+  background: #000;
+  margin: 3px 0 3px 0;
+}
+.price {
+  width: 82px;
+  text-align: right;
+  padding-right: 3px;
+  color: #b0aeac;
+}
+.price.rounded-corners {
+  width: 86px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  margin: 3px 0 3px 3px;
+}
+.old-price {
+  text-decoration: line-through;
+  color: #626366;
+  font-size: 11px;
+}
+.discount {
+  color: #a4d007;
+  background: #4c6b22;
+  font-size: 25px;
+  line-height: 40px;
+  text-align: center;
+}
+.add-to-cart-button {
+  background: linear-gradient(to bottom, #799905 5%, #536904 95%);
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  color: #d2e885;
+  width: 85px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  text-align: center;
+  user-select: none;
+  margin: 3px 3px 3px 0;
+}
+.add-to-cart-button:hover {
+  background: linear-gradient(to bottom, #a4d007 5%, #6b9105 95%);
+  color: #fff;
+}
+.add-to-cart-button .center strong {
+  line-height: 14px;
+}
+p.center {
+  margin-top: 11px;
+}
+.center {
+  text-align: center;
+}
+.center strong {
+  line-height: 30px;
+}
+.middle {
+  margin-left: auto;
+  margin-right: auto;
+}
+.card-informations {
+  float: left;
+}
+.card-information {
   width: 380px;
-  min-height: 277px;
+  margin-bottom: 10px;
   background-color: #e8e6e4;
   padding: 15px 17px 15px 17px;
   border-radius: 15px;
   font-size: 0.85em;
   color: #484644;
 }
-.card-information strong {
-  font-weight: bolder;
+.card-information.stock {
+  padding: 7px 17px 15px 17px;
+}
+.card-image-container {
+  float: left;
 }
 .card-image {
-  float: left;
   width: 223px;
   height: 310px;
   border-radius: 15px;
   margin-right: 70px;
+  margin-left: 70px;
+  margin-bottom: 10px;
 }
 .card-image img {
   -webkit-transition: all 0.25s ease;
@@ -135,9 +294,27 @@ input.small {
 .pointer strong:hover {
   color: #484644;
 }
+.dark {
+  color: #b8b6b4;
+}
+.dark:hover {
+  color: #d8d6d4;
+}
+.darker {
+  color: #e8e6e4;
+}
+.darker:hover {
+  color: #fff;
+}
 .error {
   color: #ff7a7a;
   font-weight: bold;
+}
+.red {
+  color: #f75a5a;
+}
+.green {
+  color: #105a10;
 }
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px #fff inset;
