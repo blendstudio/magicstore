@@ -5,10 +5,10 @@ div(ng-controller='SessionController' class='header')
     img(src='images/ms-logo.png' class='logo')
   
   div(class='profile')
-    a(href='' ng-hide='isSignedIn()' ng-click='toHome()' class='btn') Entrar
+    a(href='' ng-hide='isSignedIn()' ng-click='toHome()' class='button') Entrar
     |  
     
     span(ng-show='isSignedIn()') {{ email }}
     |  
     
-    a(href='' ng-show='isSignedIn()' ng-click='signOut()' class='btn') Sair
+    a(href='' ng-show='isSignedIn()' ng-click='signOut()' class='button') Sair

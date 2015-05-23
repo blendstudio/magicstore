@@ -1,5 +1,6 @@
 div(ng-controller='CardsController as cardsCtrl')
-  h2 Cartas
+  
+  .row
   
   include ../partials/pagination.jade
   
@@ -36,7 +37,7 @@ div(ng-controller='CardsController as cardsCtrl')
           //  strong(class='dark') R$ {{ selected[card.searchName + card.id].price }}
       
       div(class='card-informations')
-        div(class='card-information')
+        div(class='product-information')
           strong(class='big') {{ card.name }}
           hr
           table
@@ -81,7 +82,7 @@ div(ng-controller='CardsController as cardsCtrl')
             p
               i {{ card.flavor }}
               
-        div(class='card-information stock' ng-show='card.stock.length')
+        div(class='product-information stock' ng-show='card.stock.length')
           table
             tr
               th
