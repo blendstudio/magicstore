@@ -170,11 +170,11 @@ input:-webkit-autofill {
   width: 225px;
 }
 
-.product-price.large-price {
+.product-price.large {
   width: 245px;
 }
 
-.product-price.small-price {
+.product-price.small {
   width: 180px;
 }
 

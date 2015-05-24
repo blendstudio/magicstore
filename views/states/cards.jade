@@ -2,43 +2,46 @@ div(ng-controller='CardsController as cardsCtrl')
   
   .row
   
+  
   include ../partials/pagination.jade
   
   hr
   
-  // cards
-  div(class='cards {{ (items === 1) ? "show-one" : "" }}')
-    div(id='product-list-top')
-    div(ng-repeat='card in cards track by card.id' class='card {{ (items === 1) ? "show-one" : "" }}')
+  div.cards(class='{{ getDisplayMode() }}')
+    
+    #product-list-top
       
-      hr(class='separator {{ $first ? "hidden" : "" }}' ng-hide='items === 1')
+    div.card(ng-repeat='card in cards track by card.id' class='{{ getDisplayMode() }}')
       
-      div(class='card-image-container')
-        div(class='card-image')
+      hr.separator(class='{{ $first ? "hidden" : "" }}')
+      
+      div.card-image-container
+        div.card-image
           img(src='http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid={{card.id}}&type=card')
         
-        div(ng-show='!card.stock.length || selected[card.searchName + card.id].quantity === 0' class='product-price middle')
-          p(class='center')
-            strong(class='red') Indisponível
+        div.product-price.middle(ng-show='!isProdutcAvaible(card) || !selected[card.searchName + card.id].quantity')
+          p.center
+            strong.red Indisponível
             br
-            span(class='pointer dark small-font') Avise-me quando estiver disponível
-        div(ng-show='card.stock.length && selected[card.searchName + card.id].quantity > 0' class='product-price middle {{ selected[card.searchName + card.id].discount > 0 ? "large-price" : "small-price" }} avaible')
-          div(class='product-price-component {{ selected[card.searchName + card.id].discount > 0 ? "discount" : "display-none" }} ')
-            | {{ selected[card.searchName + card.id].discount > 0 ? '-' + selected[card.searchName + card.id].discount * 100 + '%' : '' }}
-          div(class='product-price-component price {{ selected[card.searchName + card.id].discount === 0 ? "rounded-corners" : "" }}')
-            div(class='old-price {{ selected[card.searchName + card.id].discount === 0 ? "hidden" : "" }}') {{ selected[card.searchName + card.id].price | currency:"R$ " }}
-            div(ng-hide='selected[card.searchName + card.id].discount === 0') {{ selected[card.searchName + card.id].price * selected[card.searchName + card.id].discount | currency:"R$ " }}
-            div(ng-hide='selected[card.searchName + card.id].discount > 0') {{ selected[card.searchName + card.id].price | currency:"R$ " }}
-          div(class='product-price-component add-to-cart-button')
+            span.pointer.dark.small-font Avise-me quando estiver disponível
+
+        div.product-price.middle.avaible(ng-show='isProdutcAvaible(card) && selected[card.searchName + card.id].quantity' class='{{ hasSelectedProdutcItemDiscount(card) ? "large" : "small" }}')
+          div.product-price-component.discount(ng-hide='!hasSelectedProdutcItemDiscount(card)')
+            | - {{ selected[card.searchName + card.id].discount * 100 + '%' }}
+          div.product-price-component.price(class='{{ hasSelectedProdutcItemDiscount(card) ? "" : "rounded-corners" }}')
+            div.old-price(ng-class='{ hidden: !hasSelectedProdutcItemDiscount(card) }')
+              | {{ selected[card.searchName + card.id].price | currency:"R$ " }}
+            div(ng-hide='!hasSelectedProdutcItemDiscount(card)')
+              | {{ selected[card.searchName + card.id].price * selected[card.searchName + card.id].discount | currency:"R$ " }}
+            div(ng-hide='hasSelectedProdutcItemDiscount(card)')
+              | {{ selected[card.searchName + card.id].price | currency:"R$ " }}
+          div.product-price-component.add-to-cart-button
             p(class='center')
               strong(class='darker') + Carrinho
-          
-          //p(class='center')
-          //  strong(class='dark') R$ {{ selected[card.searchName + card.id].price }}
-      
-      div(class='card-informations')
-        div(class='product-information')
-          strong(class='big') {{ card.name }}
+              
+      div.card-informations
+        div.product-information
+          strong.big {{ card.name }}
           hr
           table
             tr
@@ -76,13 +79,13 @@ div(ng-controller='CardsController as cardsCtrl')
                 strong Lealdade: 
               td
                 | {{ card.loyalty }} 
-          div(class='card-text')
+          div.card-text
             p
               | {{ card.description }}
             p
               i {{ card.flavor }}
               
-        div(class='product-information stock' ng-show='card.stock.length')
+        div.product-information.stock(ng-show='card.stock.length')
           table
             tr
               th
@@ -93,16 +96,16 @@ div(ng-controller='CardsController as cardsCtrl')
                 strong Preço
               th
                 
-            tr(ng-repeat='item in card.stock' class='item {{ selected[card.searchName + card.id] === item ? "selected" : "" }}' ng-click='setSelectedCardItem(card, item)')
+            tr.item(ng-repeat='item in card.stock' ng-class='{ selected: isSelected(card, item) }' ng-click='setSelectedProdutcItem(card, item)')
               td 
                 | {{ item.condition }} {{ item.observations.length ? ' - ' : '' }} 
                 span(ng-repeat='observation in item.observations') {{ $index > 0 ? (', ' + observation) : observation }}
               td
                 | {{ item.language }}
               td
-                span(class='{{ item.discount > 0 ? "green" : "" }} {{ item.quantity > 0 ? "" : "red" }}') {{ item.discount > 0 ? item.price * item.discount : item.price | currency:"R$ " }}
+                span(ng-class='{ green: item.discount, red: !item.quantity }') {{ item.discount > 0 ? item.price * item.discount : item.price | currency:"R$ " }}
               td
-                span(class='{{ selected[card.searchName + card.id] === item ? "" : "hidden" }}') &#8226;
+                span(ng-class='{ hidden: !isSelected(card, item) }') &#8226;
   
   div(ng-hide='items === 1')
     
