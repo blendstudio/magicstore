@@ -7,7 +7,7 @@
     $scope.showAdvancedOptions = false;
 
     $scope.random = false;
-    $scope.getAvaibleOnly = true;
+    $scope.getAvaibleOnly = false;
 
     // pagination variables
     $scope.items = 10;
@@ -41,8 +41,6 @@
       }
 
       var skip = ($scope.page - 1) * $scope.items;
-
-      console.log(search);
 
       $http.get('/api/cards', {
           cache: true,
