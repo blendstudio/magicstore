@@ -1,5 +1,5 @@
 
-@media (min-width: 1750px) and (min-height: 850px) {
+/* @media (min-width: 1750px) and (min-height: 850px) {
 
   /* tags
    */
@@ -346,7 +346,7 @@
   }
 
   .pagination-panel input[type=text], input[type=number] {
-    width: 80px;
+    width: 64px;
   }
 
   .pagination-panel input.big {
@@ -634,4 +634,4 @@
 
   /* ad-hoc
    */
-}
+/*}*/page
