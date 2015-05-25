@@ -1,16 +1,29 @@
 
-// pagination pane
-div(style='clear: both;')
-  button(ng-click='page = 1; search(query, (page - 1) * items, items, random)' ng-disabled='page === 1') Primeira
-  button(ng-click='page = page - 1; search(query, (page - 1) * items, items, random)' ng-disabled='page === 1') Anterior 
-  |  Página 
-  input(type='number' min='1' ng-model='page' ng-change='search(query, (page - 1) * items, items, random)' class='small')
-  |  Cartas por página 
-  input(type='number' min='1' ng-model='items' ng-change='search(query, (page - 1) * items, items, random)' class='small')
-  |  
-  button(ng-click='page = page + 1; search(query, (page - 1) * items, items, random)' ng-disabled='page === lastPage') Próxima
-  button(ng-click='page = lastPage; search(query, (page - 1) * items, items, random)' ng-disabled='page === lastPage') Última
-  |  Filtro 
-  input(type='text' ng-model='query' ng-change='search(query, 0, items, false); random = false' ng-model-options='{ debounce: 750 }')
-  |  Cartas aleatórias
-  input(type='checkbox' ng-model='random' ng-change='query = null; search(query, (page - 1) * items, items, random)')
+div.pagination-panel
+  
+  p.center
+    a.button(ng-click='showAdvancedOptions = !showAdvancedOptions') Busca {{ showAdvancedOptions ? "Avançada" : "Simples" }}
+    span.space 
+    a.button(ng-click='paginate("first")' ng-class='{ disabled: page === 1 }') Primeira
+    a.button(ng-click='paginate("-")' ng-class='{ disabled: page === 1 }') Anterior 
+    span.input 
+      label(for='page') Página 
+      input.dark(type='number' min='1' ng-model='page' ng-change='search(query)' ng-model-options='{ debounce: 250 }' id='page')
+      label(for='items')  Itens 
+      input.dark(type='number' min='1' ng-model='items' ng-change='search(query)' ng-model-options='{ debounce: 250 }' id='items')
+    a.button(ng-click='paginate("+")' ng-class='{ disabled: page === lastPage }') Próxima
+    a.button(ng-click='paginate("last")' ng-class='{ disabled: page === lastPage }') Última
+    span.space 
+    span.input.search-panel
+      label(for='busca')
+        img.search-icon(src='/images/icons/search.png')
+      input.dark.big(type='text' ng-model='query' ng-change='page = 1; search(query); random = false' ng-model-options='{ debounce: 750 }' id='busca')
+  
+  div.advanced-options(class='{{ showAdvancedOptions ? "visible" : "hidden" }}')
+    strong.dark Produtos
+    div.pointer.checkbox(ng-click='random = !random; page = 1; query = null; search(query)')
+      input(type='checkbox' ng-model='random' ng-change='random = !random; query = null; page = 1;')
+      span.pointer.dark Cartas aleatórias
+    div.pointer.checkbox(ng-click='getAvaibleOnly = !getAvaibleOnly; page = 1; search(query)')
+      input(type='checkbox' ng-model='getAvaibleOnly' ng-change='getAvaibleOnly = !getAvaibleOnly; page = 1;')
+      span.dark Apenas produtos disponíveis

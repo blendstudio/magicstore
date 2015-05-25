@@ -1,7 +1,6 @@
-div(ng-controller='CardsController as cardsCtrl')
+div(ng-controller='CardsController')
   
   .row
-  
   
   include ../partials/pagination.jade
   
@@ -9,11 +8,11 @@ div(ng-controller='CardsController as cardsCtrl')
   
   div.cards(class='{{ getDisplayMode() }}')
     
-    #product-list-top
+    div#product-list-top
       
     div.card(ng-repeat='card in cards track by card.id' class='{{ getDisplayMode() }}')
       
-      hr.separator(class='{{ $first ? "hidden" : "" }}')
+      hr.separator(class='{{ $first ? "hidden" : "" }}' id='{{ $index }}')
       
       div.card-image-container
         div.card-image
@@ -27,7 +26,7 @@ div(ng-controller='CardsController as cardsCtrl')
 
         div.product-price.middle.avaible(ng-show='isProdutcAvaible(card) && selected[card.searchName + card.id].quantity' class='{{ hasSelectedProdutcItemDiscount(card) ? "large" : "small" }}')
           div.product-price-component.discount(ng-hide='!hasSelectedProdutcItemDiscount(card)')
-            | - {{ selected[card.searchName + card.id].discount * 100 + '%' }}
+            | -{{ selected[card.searchName + card.id].discount * 100 + '%' }}
           div.product-price-component.price(class='{{ hasSelectedProdutcItemDiscount(card) ? "" : "rounded-corners" }}')
             div.old-price(ng-class='{ hidden: !hasSelectedProdutcItemDiscount(card) }')
               | {{ selected[card.searchName + card.id].price | currency:"R$ " }}
@@ -106,10 +105,3 @@ div(ng-controller='CardsController as cardsCtrl')
                 span(ng-class='{ green: item.discount, red: !item.quantity }') {{ item.discount > 0 ? item.price * item.discount : item.price | currency:"R$ " }}
               td
                 span(ng-class='{ hidden: !isSelected(card, item) }') &#8226;
-  
-  div(ng-hide='items === 1')
-    
-    hr(style='clear: both;')
-  
-    include ../partials/pagination.jade
-  

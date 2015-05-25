@@ -4,7 +4,10 @@
 
     $scope.selected = {};
 
+    $scope.showAdvancedOptions = false;
+
     $scope.random = false;
+    $scope.getAvaibleOnly = true;
 
     // pagination variables
     $scope.items = 10;
@@ -23,24 +26,66 @@
       $scope.selected = {};
     };
 
-    $scope.search = function(query, skip, limit, random) {
+    $scope.search = function(query) {
+
+      var search = {};
+
+      if ($scope.getAvaibleOnly) {
+        search = {
+          stock: { $elemMatch: { quantity: { $gt: 0 } } }
+        };
+      }
+
+      if (query) {
+        search.name = query;
+      }
+
+      var skip = ($scope.page - 1) * $scope.items;
+
+      console.log(search);
+
       $http.get('/api/cards', {
           cache: true,
           params: {
-            random: random,
-            search: query,
+            random: $scope.random,
+            search: search,
             skip: skip,
-            limit: limit,
+            limit: $scope.items,
           },
       }).success(function(data) {
-          $scope.setCardsCollection(data, skip, limit);
+          $scope.setCardsCollection(data, skip, $scope.items);
           $location.hash('product-list-top');
           $anchorScroll();
+          $location.hash('');
         });
     };
 
+    $scope.paginate = function(operation) {
+      switch (operation) {
+        case '+':
+          if ($scope.page < $scope.lastPage)
+            $scope.page++;
+          break;
+
+        case '-':
+          if ($scope.page > 1)
+            $scope.page--;
+          break;
+
+        case 'first':
+          $scope.page = 1;
+          break;
+
+        case 'last':
+          $scope.page = $scope.lastPage;
+          break;
+      }
+
+      $scope.search($scope.query);
+    }
+
     // retrieve data
-    $scope.search('', ($scope.page - 1) * $scope.items, $scope.items, $scope.random);
+    $scope.search('');
 
     $scope.getDisplayMode = function() {
       if ($scope.item === 1) {
