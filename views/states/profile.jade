@@ -1,0 +1,109 @@
+div(ng-controller='ProfileController')
+  
+  div.row
+  
+  hr
+  
+  div.cards(class='{{ getDisplayMode() }}')
+    
+    div#product-list-top
+      
+    div.card(ng-repeat='card in cards track by card.id' class='{{ getDisplayMode() }}')
+      
+      hr.separator(class='{{ $first ? "hidden" : "" }}' id='{{ $index }}')
+      
+      div.card-image-container
+        div.card-image
+          img(src='http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid={{card.id}}&type=card')
+        
+        div.product-price.middle(ng-show='!isProdutcAvaible(card) || !selected[card.searchName + card.id].quantity')
+          p.center
+            strong.red Indisponível
+            br
+            span.pointer.dark.small-font Avise-me quando estiver disponível
+
+        div.product-price.middle.avaible(ng-show='isProdutcAvaible(card) && selected[card.searchName + card.id].quantity' class='{{ hasSelectedProdutcItemDiscount(card) ? "large" : "small" }}')
+          div.product-price-component.discount(ng-hide='!hasSelectedProdutcItemDiscount(card)')
+            | -{{ selected[card.searchName + card.id].discount * 100 + '%' }}
+          div.product-price-component.price(class='{{ hasSelectedProdutcItemDiscount(card) ? "" : "rounded-corners" }}')
+            div.old-price(ng-class='{ hidden: !hasSelectedProdutcItemDiscount(card) }')
+              | {{ selected[card.searchName + card.id].price | currency:"R$ " }}
+            div(ng-hide='!hasSelectedProdutcItemDiscount(card)')
+              | {{ selected[card.searchName + card.id].price * selected[card.searchName + card.id].discount | currency:"R$ " }}
+            div(ng-hide='hasSelectedProdutcItemDiscount(card)')
+              | {{ selected[card.searchName + card.id].price | currency:"R$ " }}
+          div.product-price-component.add-to-cart-button
+            p(class='center')
+              strong(class='darker') + Carrinho
+              
+      div.card-informations
+        div.product-information
+          strong.big {{ card.name }}
+          hr
+          table
+            tr
+              td
+                strong Tipo: 
+              td
+                | {{ card.type }} {{ card.subType ? (' - ' + card.subType) : '' }}
+            tr
+              td
+                strong Cores: 
+              td
+                span(ng-repeat='color in card.colors') {{ $index > 0 ? (', ' + color[0].toUpperCase() + color.slice(1)) : (color[0].toUpperCase() + color.slice(1)) }}
+            tr
+              td
+                strong Raridade:   
+              td
+                | {{ card.rarity }}
+            tr
+              td
+                strong Edição: 
+              td
+                | {{ card.cardSetName }}
+            tr(ng-show='card.artist')
+              td
+                strong Artista: 
+              td
+                | {{ card.artist }}
+            tr(ng-show='card.type === "Creature" && (card.power || card.toughness)')
+              td
+                strong For/Res: 
+              td
+                | {{ card.power }}/{{ card.toughness }} 
+            tr(ng-show='card.type === "Planeswalker"')
+              td
+                strong Lealdade: 
+              td
+                | {{ card.loyalty }} 
+          div.card-text
+            p
+              | {{ card.description }}
+            p
+              i {{ card.flavor }}
+              
+        div.product-information.stock(ng-show='card.stock.length')
+          table
+            tr
+              th
+                strong Produto
+              th
+                strong Idioma
+              th
+                strong Preço
+              th
+                
+            tr.item(ng-repeat='item in card.stock' ng-class='{ selected: isSelected(card, item) }' ng-click='setSelectedProdutcItem(card, item)')
+              td 
+                | {{ item.condition }} {{ item.observations.length ? ' - ' : '' }} 
+                span(ng-repeat='observation in item.observations') {{ $index > 0 ? (', ' + observation) : observation }}
+              td
+                | {{ item.language }}
+              td
+                span(ng-class='{ green: item.discount, red: !item.quantity }') {{ item.discount > 0 ? item.price * item.discount : item.price | currency:"R$ " }}
+              td
+                span(ng-class='{ hidden: !isSelected(card, item) }') &#8226;
+                
+  div.row
+    
+  hr

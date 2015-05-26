@@ -4,7 +4,7 @@ div.user-form
       h2 Entrar
 
       div
-        form(name='signInForm' ng-submit='signInForm.$valid && signIn(account)' ng-controller='HomeController' novalidate)
+        form(name='signInForm' ng-submit='signInForm.$valid && signIn(account, "sign in")' ng-controller='HomeController' novalidate)
           span.input
             label(for='signInEmail') E-mail 
             input.dark(ng-model='account.email', id='signInEmail', type='email', name='email', placeholder='exemplo@email.com', required)

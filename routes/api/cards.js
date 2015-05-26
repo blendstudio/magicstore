@@ -30,8 +30,6 @@ router.get('/', function(req, res, next) {
     random = false;
   }
 
-  console.log(search);
-
   var chain = [
 
     // get count
