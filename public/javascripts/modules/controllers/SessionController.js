@@ -28,17 +28,21 @@
       }
     });
 
-    $scope.toHome = function() {
-      if ($state.current.name !== 'home') {
-        $state.go('home');
+    $scope.navigate = function(path) {
+      if ($state.current.name !== path) {
+        $state.go(path);
       }
     };
 
     $scope.signOut = function() {
 
       // clear session
+      $scope.avatar = null;
       $scope.email = null;
+      $scope.username = null;
+      delete $cookies.avatar;
       delete $cookies.email;
+      delete $cookies.username;
 
       // redirect to home
       $state.go('home');

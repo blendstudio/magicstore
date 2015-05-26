@@ -22,6 +22,7 @@
 
   a {
     color: #00b7ff;
+    text-decoration: none;
   }
 
   img {
@@ -299,6 +300,29 @@
     font-size: 12px;
   }
 
+  /*
+   */
+
+  img.avatar {
+    width: 32px;
+    -webkit-border-radius: 32px;
+	  -moz-border-radius: 32px;
+    -ms-border-radius: 32px;
+    border-radius: 32px;
+    margin: -3px 5px 0 0;
+    vertical-align: middle;
+  }
+
+  a.profile-link {
+    display: inline-block;
+    margin: 0 5px 0 0;
+    float: left;
+  }
+
+  a.profile-link:hover strong {
+    color: #d8d6d4;
+  }
+
   /* top navigation panel
    */
   .logo {
@@ -403,6 +427,84 @@
     user-select: none;
     margin-right: 4px;
   }
+
+  /* avatar
+   */
+   .avatar-image-container {
+     float: left;
+   }
+
+   /* card-animation
+    */
+   .avatar-image {
+     background-color: #171a21;
+     width: 120px;
+     height: 120px;
+     border-radius: 15px;
+     margin-right: 70px;
+     margin-left: 70px;
+     margin-bottom: 10px;
+   }
+
+   .avatar-image img {
+     border-radius: 15px;
+     margin: 3px 0 3px 0;
+     -webkit-transition: all 0.25s ease;
+     -moz-transition: all .25s ease;
+     -o-transition: all 0.25s ease;
+     -ms-transition: all 0.25s ease;
+     transition: all 0.25s ease;
+   }
+
+   .avatar-image:hover img {
+     -webkit-transform: scale(1.5);
+     -moz-transform: scale(1.5);
+     -ms-transform: scale(1.5);
+     -o-transform: scale(1.5);
+     transform: scale(1.5);
+     border-radius: 15px;
+   }
+
+  .avatar-edition {
+    background-color: #171a21;
+    color: #b8b6b4;
+    border-radius: 15px;
+    min-height: 50px;
+    width: 130px;
+  }
+
+  .avatar-edition-component {
+      background: #000;
+      margin: 3px 0 3px 0;
+      display: inline;
+      float: left;
+      height: 40px;
+    }
+
+    .edit-button {
+      background: linear-gradient(to bottom, #799905 5%, #536904 95%);
+      border-radius: 12px;
+      color: #d2e885;
+      text-align: center;
+      margin: 5px 5px 5px 5px;
+      cursor: pointer;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      width: 120px;
+    }
+
+    .edit-button:hover {
+      background: linear-gradient(to bottom, #a4d007 5%, #6b9105 95%);
+      color: #fff;
+    }
+
+    .edit-button .center strong {
+      line-height: 14px;
+    }
+
 
   /* product
    */

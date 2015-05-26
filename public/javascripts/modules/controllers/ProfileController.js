@@ -1,16 +1,16 @@
 (function() {
 
-  angular.module('store').controller('ProfileController', ['$scope', '$http', '$location', '$anchorScroll', function($scope, $http, $location, $anchorScroll) {
+  angular.module('store').controller('ProfileController', ['$scope', '$http', '$location', '$anchorScroll', '$cookies', function($scope, $http, $location, $anchorScroll, $cookies) {
 
     $scope.selected = {};
 
     $scope.showAdvancedOptions = false;
 
     $scope.random = false;
-    $scope.getAvaibleOnly = false;
+    $scope.getAvaibleOnly = true;
 
     // pagination variables
-    $scope.items = 10;
+    $scope.items = 1;
     $scope.page = 1;
     $scope.lastPage = 1;
 
@@ -18,6 +18,9 @@
 
     $scope.setCardsCollection = function(data, skip, limit) {
       $scope.cards = data.cards;
+      $scope.avatar = $cookies.avatar;
+      $scope.email = $cookies.email;
+      $scope.username = $cookies.username;
       $scope.count = data.count;
       $scope.page = 1 + skip / limit;
       $scope.lastPage = Math.ceil($scope.count / limit);
@@ -57,30 +60,6 @@
           $location.hash('');
         });
     };
-
-    $scope.paginate = function(operation) {
-      switch (operation) {
-        case '+':
-          if ($scope.page < $scope.lastPage)
-            $scope.page++;
-          break;
-
-        case '-':
-          if ($scope.page > 1)
-            $scope.page--;
-          break;
-
-        case 'first':
-          $scope.page = 1;
-          break;
-
-        case 'last':
-          $scope.page = $scope.lastPage;
-          break;
-      }
-
-      $scope.search($scope.query);
-    }
 
     // retrieve data
     $scope.search('');

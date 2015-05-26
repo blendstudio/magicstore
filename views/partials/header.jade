@@ -1,14 +1,14 @@
 
 div(ng-controller='SessionController' class='header')
 
-  a(href='#/')
+  a(href='' ng-click='navigate("home")')
     img(src='images/ms-logo.png' class='logo')
   
   div(class='profile')
-    a(href='' ng-hide='isSignedIn()' ng-click='toHome()' class='button') Entrar
-    |  
+    a.button(href='' ng-hide='isSignedIn()' ng-click='navigate("home")') Entrar 
     
-    strong.dark.pointer(ng-show='isSignedIn()') {{ username }}
-    |  
-    
-    a(href='' ng-show='isSignedIn()' ng-click='signOut()' class='button') Sair
+    a.profile-link(href='' ng-click='navigate("profile")')
+      img.avatar.pointer(ng-show='avatar' ng-src='{{avatar ? avatar : "/images/avatars/null.png" }}')
+      strong.dark.pointer(ng-show='isSignedIn()') {{ username }} 
+
+    a.button(href='' ng-show='isSignedIn()' ng-click='signOut()') Sair
