@@ -2,11 +2,11 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require('mongoose');
-var Accounts = require('../../models/Account');
+var Profile = require('../../models/Profile');
 
 var _ = require('lodash');
 
-/* GET accounts resources. */
+/* GET profiles resources. */
 router.get('/', function(req, res, next) {
 
   var count = 0;
@@ -25,22 +25,22 @@ router.get('/', function(req, res, next) {
 
     // get count
     function() {
-      query = Accounts.count(search);
+      query = Profile.count(search);
       query.exec(chain.shift());
     },
 
-    // search accounts
+    // search profiles
     function(err, data) {
       count = data;
 
-      query = Accounts.find(search);
+      query = Profile.find(search);
       query = query.skip(skip).
                 limit(limit);
       query.exec(chain.shift());
     },
 
     function(err, data) {
-      res.json({ accounts: data, count: count });
+      res.json({ profiles: data, count: count });
     },
   ];
 
@@ -48,37 +48,27 @@ router.get('/', function(req, res, next) {
 
 });
 
-/* POST accounts resources. */
+/* POST profiles resources. */
 router.post('/', function(req, res, next) {
 
-  //var action =
-  var account = {};
-
-  account = req.body.account;
+  var profile = {};
+  
+  profile = req.body.profile;
 
   var query = {};
 
-  // check passwords
-  if (account.password !== account.passwordConfirmation) {
-    res.status(403);
-    res.json({ message: 'A senha informada e sua confirmação de senha não são iguais.' });
-
-    return;
-  }
-
-  query = Accounts.find({ email : account.email });
+  query = Profile.find({ email : profile.email });
 
   query.exec(function(err, data) {
     if (data.length) {
       res.status(409);
-      res.json({ message: 'E-mail já cadastrado.' });
+      res.json({ message: 'Perfil já cadastrado.' });
 
       return;
     }
 
-    // Nesse momento devemos salvar um profile
-    account = new Accounts(account);
-    account.save(function(err) {
+    profile = new Profile(profile);
+    profile.save(function(err) {
       if (err) throw err;
 
       res.status(201);

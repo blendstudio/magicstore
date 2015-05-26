@@ -8,7 +8,7 @@ div(ng-controller='SessionController' class='header')
     a(href='' ng-hide='isSignedIn()' ng-click='toHome()' class='button') Entrar
     |  
     
-    span(ng-show='isSignedIn()') {{ email }}
+    strong.dark.pointer(ng-show='isSignedIn()') {{ username }}
     |  
     
     a(href='' ng-show='isSignedIn()' ng-click='signOut()' class='button') Sair

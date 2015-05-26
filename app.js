@@ -10,6 +10,7 @@ var routes = require('./routes/index');
 
 var apiCards = require('./routes/api/cards');
 var apiAccounts = require('./routes/api/accounts');
+var apiProfiles = require('./routes/api/profiles');
 
 // connects to mongodb
 var mongoose = require('mongoose');
@@ -32,7 +33,7 @@ app.set('view engine', 'jade');
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
-//app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(logger('combined', {
   skip: function (req, res) { return res.statusCode < 400; }
 }));
@@ -53,6 +54,7 @@ app.use('/states', function (req, res) {
 // API routes
 app.use('/api/cards', apiCards);
 app.use('/api/accounts', apiAccounts);
+app.use('/api/profiles', apiProfiles);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
