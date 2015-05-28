@@ -17,7 +17,7 @@ div(ng-controller='ProductsController')
       
       section
         div.product-image(ng-class='{ "card-image" : true }')
-          img(src='http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid={{product.id}}&type=card')
+          img(ng-src='images/cards/{{product.id}}.jpg')
         
         section.product-price
           div.unavailable(ng-show='!selected[product.searchName + product.id].quantity')
