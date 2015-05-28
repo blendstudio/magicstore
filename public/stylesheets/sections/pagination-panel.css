@@ -89,4 +89,8 @@ section.pagination-panel .advanced-options.visible {
     width: 180px;
   }
 
+  section.pagination-panel .search-panel {
+    padding: 2px 2px 2px 2px;
+  }
+
 }

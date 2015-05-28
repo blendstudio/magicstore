@@ -7,7 +7,7 @@
     $scope.showAdvancedOptions = false;
 
     $scope.random = false;
-    $scope.getAvaibleOnly = false;
+    $scope.getAvaibleOnly = true;
 
     // pagination variables
     $scope.items = 10;
