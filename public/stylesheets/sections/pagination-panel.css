@@ -1,0 +1,79 @@
+
+section.pagination-panel .space {
+  margin-right: 20px;
+}
+
+section.pagination-panel .input,
+section.pagination-panel .button {
+  margin-right: 4px;
+}
+
+section.pagination-panel input[type=text],
+section.pagination-panel input[type=number],
+section.pagination-panel input[type=email],
+section.pagination-panel input[type=password] {
+  margin-right: 2px;
+}
+
+section.pagination-panel input[type="checkbox"] {
+  margin: -2px 4px 0 0;
+}
+
+section.pagination-panel input[type=number] {
+  width: 64px;
+}
+
+section.pagination-panel input[type=text] {
+  width: 128px;
+}
+
+section.pagination-panel .search-panel  {
+  padding: 5px 2px 4px 2px;
+}
+
+section.pagination-panel .search-icon {
+  width: auto;
+  height: 14px;
+  position: relative;
+  top: 2px;
+}
+
+section.pagination-panel .advanced-options.hidden,
+section.pagination-panel .advanced-options.visible {
+  max-height: 0;
+  overflow-y: hidden;
+  -webkit-transition: max-height .125s ease;
+  -moz-transition: max-height .125s ease;
+  transition: max-height .125s ease;
+}
+
+section.pagination-panel .advanced-options.visible {
+  max-height: 42px;
+}
+
+@media screen and (max-width: 1439px) {
+
+  section.pagination-panel .break {
+    display: block;
+  }
+
+  section.pagination-panel .input {
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  section.pagination-panel .button:first-child {
+    width: calc(100% - 28px);
+  }
+
+  section.pagination-panel .button {
+    margin-bottom: 4px;
+    display: inline-block;
+    width: calc(50% - 28px);
+  }
+
+  section.pagination-panel input[type=text] {
+    width: 180px;
+  }
+
+}

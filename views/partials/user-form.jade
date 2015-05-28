@@ -1,0 +1,54 @@
+section.modal(ng-controller='UserFormController' ng-show='modal' ng-click='closeUserFormModal()')
+  
+  section#user-form(ng-click='$event.stopPropagation()')
+    section
+      h2 Entrar
+
+      form(name='signInForm' ng-submit='signInForm.$valid && signIn(account, "sign in")' novalidate)
+        span.input
+          label.pointer(for='signInEmail') E-mail 
+          input(ng-model='account.email', id='signInEmail', type='email', name='email', placeholder='exemplo@email.com', required)
+        span.error(ng-messages='signInForm.email.$error' ng-show='signInForm.email.$touched || signInForm.$submitted' role='alert')
+          span(ng-message='required')  Campo obrigatório touched: {{ signInForm.email.$touched }} submitted: {{ signInForm.$submitted}}
+          span(ng-message='email')  E-mail inválido
+        span.error(ng-show='signInFailed')  E-mail e/ou senha inválidos
+        br
+        br
+        span.input
+          label.pointer(for='signInPassword') Senha 
+          input(ng-model='account.password', id='signInPassword', type='password', name='password', minlength='8', required)
+        span.error(ng-messages='signInForm.password.$error' ng-show='signInForm.password.$touched || signInForm.$submitted' role='alert')
+          span(ng-message='required')  Campo obrigatório
+          span(ng-message='minlength')  Sua senha deve possuir 8 ou mais caracteres
+        p
+          input.button(type='submit', value='Entrar')
+
+    section
+      h2 Registrar
+
+      form(name='registerForm' ng-submit='registerForm.$valid && register(account)' novalidate)
+        span.input
+          label.pointer(for='registerEmail') E-mail 
+          input(ng-model='account.email', id='registerEmail', name='email', type='email', placeholder='exemplo@email.com', required)
+        span.error(ng-messages='registerForm.email.$error' ng-show='registerForm.email.$touched || registerForm.$submitted' role='alert')
+          span(ng-message='required')  Campo obrigatório
+          span(ng-message='email')  E-mail inválido
+        span.error(ng-show='registerFailed')  Não foi possível registrar sua conta de usuário agora, tente novamente mais tarde
+        br
+        br
+        span.input
+          label.pointer(for='registerPassword') Senha 
+          input(ng-model='account.password', id='registerPassword', type='password', name='password', minlength='8', required)
+        span.error(ng-messages='registerForm.password.$error' ng-show='registerForm.password.$touched || registerForm.$submitted' role='alert')
+          span(ng-message='required')  Campo obrigatório
+          span(ng-message='minlength')  Sua senha deve possuir 8 ou mais caracteres
+        br
+        br
+        span.input
+          label.pointer(for='passwordConfirmation') Senha 
+          input(ng-model='account.passwordConfirmation',  id='passwordConfirmation', type='password', name='passwordConfirmation', minlength='8', required)
+        span.error(ng-messages='registerForm.passwordConfirmation.$error' ng-show='registerForm.passwordConfirmation.$touched || registerForm.$submitted' role='alert')
+          span(ng-message='required')  Campo obrigatório
+          span(ng-message='minlength')  Sua senha deve possuir 8 ou mais caracteres
+        p
+          input.button(type='submit', value='Registrar')

@@ -8,7 +8,9 @@ html(ng-app='store')
 
     include ./partials/header.jade
     
-    div(ui-view class='main-content')
+    include ./partials/menu.jade
+    
+    div#main-content(ui-view)
     
     script(src='/bower/lodash/lodash.min.js')
 
@@ -24,8 +26,8 @@ html(ng-app='store')
 
     script(src='/javascripts/modules/app.js')
     script(src='/javascripts/modules/services/MessageService.js')
-    script(src='/javascripts/modules/controllers/HomeController.js')
     script(src='/javascripts/modules/controllers/CardsController.js')
     script(src='/javascripts/modules/controllers/ProfileController.js')
     script(src='/javascripts/modules/controllers/SessionController.js')
     script(src='/javascripts/modules/controllers/MessagesController.js')
+    script(src='/javascripts/modules/controllers/UserFormController.js')

@@ -1,29 +1,33 @@
 
-div.pagination-panel
+section.pagination-panel
   
   p.center
-    a.button(ng-click='showAdvancedOptions = !showAdvancedOptions') Busca {{ showAdvancedOptions ? "Simples" : "Avançada" }}
+    a.button(ng-click='showAdvancedOptions = !showAdvancedOptions') Mudar para Busca {{ showAdvancedOptions ? "Simples" : "Avançada" }}
     span.space 
+    span.break
     a.button(ng-click='paginate("first")' ng-class='{ disabled: page === 1 }') Primeira
     a.button(ng-click='paginate("-")' ng-class='{ disabled: page === 1 }') Anterior 
+    span.break
     span.input 
-      label(for='page') Página 
-      input.dark(type='number' min='1' ng-model='page' ng-change='search(query)' ng-model-options='{ debounce: 250 }' id='page')
-      label(for='items')  Itens 
-      input.dark(type='number' min='1' ng-model='items' ng-change='search(query)' ng-model-options='{ debounce: 250 }' id='items')
+      label.pointer(for='page') Página 
+      input(type='number' min='1' ng-model='page' ng-change='search(query)' ng-model-options='{ debounce: 250 }' id='page')
+      label.pointer(for='items')  Itens 
+      input(type='number' min='1' ng-model='items' ng-change='search(query)' ng-model-options='{ debounce: 250 }' id='items')
+    span.break
     a.button(ng-click='paginate("+")' ng-class='{ disabled: page === lastPage }') Próxima
     a.button(ng-click='paginate("last")' ng-class='{ disabled: page === lastPage }') Última
     span.space 
+    span.break
     span.input.search-panel
-      label(for='busca')
+      label.pointer(for='busca')
         img.search-icon(src='/images/icons/search.png')
-      input.dark.big(type='text' ng-model='query' ng-change='page = 1; search(query); random = false' ng-model-options='{ debounce: 750 }' id='busca')
+      input(type='text' ng-model='query' ng-change='page = 1; search(query); random = false' ng-model-options='{ debounce: 750 }' id='busca')
   
-  div.advanced-options(class='{{ showAdvancedOptions ? "visible" : "hidden" }}')
-    strong.dark Produtos
+  section.advanced-options(class='{{ showAdvancedOptions ? "visible" : "hidden" }}')
+    strong Produtos
     div.pointer.checkbox(ng-click='random = !random; page = 1; query = null; search(query)')
       input(type='checkbox' ng-model='random' ng-change='random = !random; query = null; page = 1;')
-      span.pointer.dark Cartas aleatórias
+      span.pointer Cartas aleatórias
     div.pointer.checkbox(ng-click='getAvaibleOnly = !getAvaibleOnly; page = 1; search(query)')
       input(type='checkbox' ng-model='getAvaibleOnly' ng-change='getAvaibleOnly = !getAvaibleOnly; page = 1;')
-      span.dark Apenas produtos disponíveis
+      span Apenas produtos disponíveis

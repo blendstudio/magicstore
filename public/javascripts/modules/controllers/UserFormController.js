@@ -1,11 +1,27 @@
 (function() {
 
-  angular.module('store').controller('HomeController', ['$scope', '$rootScope', '$http', 'md5', function($scope, $rootScope, $http, md5) {
+  angular.module('store').controller('UserFormController', ['$scope', '$rootScope', '$http', 'md5', function($scope, $rootScope, $http, md5) {
+
+    $scope.modal = false;
 
     $scope.account = {};
 
     $scope.signInFailed = false;
     $scope.registerFailed = false;
+
+    $scope.$on('show user form modal', function() {
+      $scope.modal = true;
+    });
+
+    $scope.closeUserFormModal = function() {
+      $scope.modal = false;
+      $scope.account.password = null;
+      $scope.account.passwordConfirmation = null;
+      $scope.signInForm.$setPristine();
+      $scope.signInForm.$setUntouched();
+      $scope.registerForm.$setPristine();
+      $scope.registerForm.$setUntouched();
+    }
 
     $scope.signIn = function(account, action) {
 
@@ -39,6 +55,7 @@
               success(function(data, status, headers, config) {
                 if (data.count === 1) {
                   $rootScope.$broadcast('user signed in', data.profiles[0]);
+                  $scope.closeUserFormModal();
                 } else {
                   $scope.signInFailed = true;
                   account.password = password;
@@ -47,7 +64,7 @@
               error(function(data, status, headers, config) {
                 $scope.signInFailed = true;
               });
-              
+
           } else {
             $scope.signInFailed = true;
             account.password = password;

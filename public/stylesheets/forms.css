@@ -1,0 +1,58 @@
+
+input:focus {
+  outline: none;
+}
+
+input[type=text], input[type=number], input[type=email], input[type=password]  {
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -ms-border-radius: 7px;
+  border-radius: 7px;
+  background-color: #585654;
+  color: #fff;
+  border: 1px solid #787674;
+  padding-left: 8px;
+}
+
+input[type="checkbox"] {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  width: 10px;
+  height: 10px;
+}
+
+input.button {
+  border: 0px solid;
+}
+
+.input {
+  text-decoration: none;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -ms-border-radius: 7px;
+  border-radius: 7px;
+  background: #787674;
+  color: #fff;
+  padding: 4px 2px 4px 12px;
+}
+
+.input:hover {
+  background: #989694;
+}
+
+form .input {
+  margin-right: 4px;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #585654 inset;
+  -moz-box-shadow: 0 0 0 1000px #585654 inset;
+  -ms-box-shadow: 0 0 0 1000px #585654 inset;
+  box-shadow: 0 0 0 1000px #585654 inset;
+  -webkit-text-fill-color: #fff !important;
+  -moz-text-fill-color: #fff !important;
+  -ms-text-fill-color: #fff !important;
+  text-fill-color: #fff !important;
+  color: #fff !important;
+}

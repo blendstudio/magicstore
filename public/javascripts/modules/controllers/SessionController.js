@@ -1,6 +1,6 @@
 (function() {
 
-  angular.module('store').controller('SessionController', ['$scope', '$http', '$state', '$cookies', function($scope, $http, $state, $cookies) {
+  angular.module('store').controller('SessionController', ['$scope', '$rootScope', '$http', '$state', '$cookies', function($scope, $rootScope, $http, $state, $cookies) {
 
     $scope.avatar = $cookies.avatar;
     $scope.email = $cookies.email;
@@ -47,6 +47,10 @@
       // redirect to home
       $state.go('home');
 
+    };
+
+    $scope.showUserFormModal = function() {
+      $rootScope.$broadcast('show user form modal');
     };
 
   }]);

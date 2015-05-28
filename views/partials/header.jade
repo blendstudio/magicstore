@@ -1,14 +1,15 @@
 
-div(ng-controller='SessionController' class='header')
+div#header(ng-controller='SessionController')
 
-  a(href='' ng-click='navigate("home")')
-    img(src='images/ms-logo.png' class='logo')
+  img.logo.pointer(src='images/ms-logo.png' ng-click='navigate("home")')
   
-  div(class='profile')
-    a.button(href='' ng-hide='isSignedIn()' ng-click='navigate("home")') Entrar 
+  span.profile
+    a.button(href='' ng-hide='isSignedIn()' ng-click='showUserFormModal()') Entrar 
     
-    a.profile-link(href='' ng-click='navigate("profile")')
-      img.avatar.pointer(ng-show='avatar' ng-src='{{avatar ? avatar : "/images/avatars/null.png" }}')
-      strong.dark.pointer(ng-show='isSignedIn()') {{ username }} 
+    div.profile-link.pointer(href='' ng-click='navigate("profile")')
+      img.avatar(ng-show='avatar' ng-src='{{avatar ? avatar : "/images/avatars/null.png" }}')
+      strong.pointer.link(ng-show='isSignedIn()') {{ username }} 
 
     a.button(href='' ng-show='isSignedIn()' ng-click='signOut()') Sair
+
+  include ./user-form.jade 
