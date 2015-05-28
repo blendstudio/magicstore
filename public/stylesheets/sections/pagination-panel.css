@@ -51,7 +51,22 @@ section.pagination-panel .advanced-options.visible {
   max-height: 42px;
 }
 
-@media screen and (max-width: 1439px) {
+@media screen and (min-width: 1280px) and (max-width: 1599px) {
+
+  section.pagination-panel .search-panel {
+    display: block;
+    margin: 8px auto 0 auto;
+    width: 212px;
+    padding: 2px 0px 2px 2px;
+  }
+
+  section.pagination-panel input[type=text] {
+    width: 180px;
+  }
+
+}
+
+@media screen and (max-width: 1279px) {
 
   section.pagination-panel .break {
     display: block;

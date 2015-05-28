@@ -6,12 +6,19 @@
 
     $scope.account = {};
 
-    $scope.signInFailed = false;
-    $scope.registerFailed = false;
+    $scope.forms = {};
+    $scope.forms.error = {};
 
     $scope.$on('show user form modal', function() {
       $scope.modal = true;
     });
+
+    $scope.resetFormCustomErrors = function() {
+      $scope.signInForm.$error.http = undefined;
+      $scope.signInForm.$error.profile = undefined;
+      $scope.signInForm.$error.account = undefined;
+      $scope.signInForm.$error.password = undefined;
+    };
 
     $scope.closeUserFormModal = function() {
       $scope.modal = false;
@@ -57,29 +64,45 @@
                   $rootScope.$broadcast('user signed in', data.profiles[0]);
                   $scope.closeUserFormModal();
                 } else {
-                  $scope.signInFailed = true;
+                  $scope.forms.error = { 'profile' : true, 'message' : 'Perfil não encontrado' };
+                  console.error($scope.forms.error);
                   account.password = password;
                 }
               }).
               error(function(data, status, headers, config) {
-                $scope.signInFailed = true;
+                $scope.forms.error = { 'http' : true, 'message' : '/api/profiles http status code ' + status };
+                console.error($scope.forms.error);
+                account.password = password;
               });
 
           } else {
-            $scope.signInFailed = true;
+            $scope.forms.error = { 'account' : true, 'message' : 'E-mail e/ou senha inválidos' };
+            console.error($scope.forms.error);
             account.password = password;
           }
         }).
         error(function(data, status, headers, config) {
-          $scope.signInFailed = true;
+          $scope.forms.error = { 'htpp' : true, 'message' : '/api/accounts http status code ' + status };
+          console.error($scope.forms.error);
+          account.password = password;
         });
 
     };
 
     $scope.register = function(account) {
 
+      if (account.password !== account.passwordConfirmation) {
+        $scope.forms.error = { 'password' : true, 'message' : 'Sua senha e confirmação de senha não são iguais' };
+        console.error($scope.forms.error);
+        return;
+      }
+
+      var password = account.password;
+      var passwordConfirmation = account.passwordConfirmation;
+
       // encrypt password
-      account.password = account.passwordConfirmation = md5.createHash(account.password);
+      account.password = md5.createHash(account.password);
+      account.passwordConfirmation = md5.createHash(account.passwordConfirmation);
 
       var manas = [
         'black',
@@ -110,12 +133,18 @@
               $scope.signIn(account, 'register');
             }).
             error(function(data, status, headers, config) {
-              $scope.registerFailed = true;
+              $scope.forms.error = { 'http' : true, 'message' : '/api/profiles http status code ' + status };
+              console.error($scope.forms.error);
+              account.password = password;
+              account.passwordConfirmation = passwordConfirmation;
             });
 
         }).
         error(function(data, status, headers, config) {
-          $scope.registerFailed = true;
+          $scope.forms.error = { 'htpp' : true, 'message' : '/api/accounts http status code ' + status };
+          console.error($scope.forms.error);
+          account.password = password;
+          account.passwordConfirmation = passwordConfirmation;
         });
 
     };

@@ -1,0 +1,20 @@
+
+section.modal {
+  background-color: rgba(0, 0, 0, 0.75);
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 60vh;
+  width: 60vw;
+  padding: 20vh 20vw 20vh 20vw;
+}
+
+section.modal .modal-content {
+  background: url("../images/backgrounds/rockywall.png");
+  width: 55vw;
+  padding: 4px 4px 10px 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  border-radius: 20px;
+}

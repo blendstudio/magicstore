@@ -1,0 +1,26 @@
+
+.button {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -ms-border-radius: 7px;
+  border-radius: 7px;
+  text-decoration: none;
+  color: #fff;
+  background: #787674;
+  padding: 4px 12px 4px 12px;
+  font-size: 100%;
+}
+
+.button:hover {
+  background: #989694;
+  text-decoration: none;
+}
+
+.button.disabled {
+  background: #545250;
+}
