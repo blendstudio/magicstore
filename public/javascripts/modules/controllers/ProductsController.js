@@ -1,6 +1,6 @@
 (function() {
 
-  angular.module('store').controller('CardsController', ['$scope', '$http', '$location', '$anchorScroll', function($scope, $http, $location, $anchorScroll) {
+  angular.module('store').controller('ProductsController', ['$scope', '$http', '$location', '$anchorScroll', function($scope, $http, $location, $anchorScroll) {
 
     $scope.selected = {};
 
@@ -16,14 +16,18 @@
 
     $scope.query = '';
 
-    $scope.setCardsCollection = function(data, skip, limit) {
-      $scope.cards = data.cards;
+    $scope.setProductsCollection = function(data, skip, limit) {
+      $scope.products = data.products;
       $scope.count = data.count;
       $scope.page = 1 + skip / limit;
       $scope.lastPage = Math.ceil($scope.count / limit);
 
       // clear selected items
       $scope.selected = {};
+
+      _.forEach($scope.products, function(product) {
+        $scope.setSelectedProdutcItem(product);
+      });
     };
 
     $scope.search = function(query) {
@@ -42,7 +46,7 @@
 
       var skip = ($scope.page - 1) * $scope.items;
 
-      $http.get('/api/cards', {
+      $http.get('/api/products', {
           cache: true,
           params: {
             random: $scope.random,
@@ -51,7 +55,7 @@
             limit: $scope.items,
           },
       }).success(function(data) {
-          $scope.setCardsCollection(data, skip, $scope.items);
+          $scope.setProductsCollection(data, skip, $scope.items);
           $location.hash('product-list-top');
           $anchorScroll();
           $location.hash('');
@@ -93,7 +97,7 @@
       return '';
     };
 
-    $scope.hasSelectedProdutcItemDiscount = function(product) {
+    $scope.hasDiscount = function(product) {
       var item = $scope.selected[product.searchName + product.id];
 
       if (item && item.discount) {
@@ -120,8 +124,9 @@
         return item.quantity > 0;
       });
 
+      // if no items are avaible, return one
       if (!items.length) {
-        return null;
+        return $scope.selected[product.searchName + product.id] = product.stock[0];
       }
 
       itemsWithDiscount = _.filter(items, function(item) {
@@ -135,18 +140,6 @@
 
       // return an avaible item
       return $scope.selected[product.searchName + product.id] = items[0];
-    };
-
-    $scope.isProdutcAvaible = function(product) {
-      if ($scope.selected[product.searchName + product.id]) {
-        return $scope.selected[product.searchName + product.id];
-      }
-
-      if (product && product.stock.length > 0) {
-        return $scope.setSelectedProdutcItem(product, null);
-      }
-
-      return false;
     };
 
     $scope.isSelected = function(product, item) {

@@ -3,25 +3,14 @@
   width: 223px;
   height: 310px;
   border-radius: 15px;
-  margin-right: 70px;
-  margin-left: 70px;
-  margin-bottom: 10px;
+  margin: 0 70px 10px 70px;
 }
 
-.card-image img {
-  border-radius: 15px;
-  -webkit-transition: all 0.25s ease;
-  -moz-transition: all .25s ease;
-  -o-transition: all 0.25s ease;
-  -ms-transition: all 0.25s ease;
-  transition: all 0.25s ease;
-}
+@media screen and (max-width: 1023px) {
 
-.card-image:hover img {
-  -webkit-transform: scale(1.5);
-  -moz-transform: scale(1.5);
-  -ms-transform: scale(1.5);
-  -o-transform: scale(1.5);
-  transform: scale(1.5);
-  border-radius: 15px;
+  .card-image {
+    display: block;
+    margin: auto;
+  }
+
 }

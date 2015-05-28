@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 // routes
 var routes = require('./routes/index');
 
-var apiCards = require('./routes/api/cards');
+var apiProducts = require('./routes/api/products');
 var apiAccounts = require('./routes/api/accounts');
 var apiProfiles = require('./routes/api/profiles');
 
@@ -52,7 +52,7 @@ app.use('/states', function (req, res) {
 });
 
 // API routes
-app.use('/api/cards', apiCards);
+app.use('/api/products', apiProducts);
 app.use('/api/accounts', apiAccounts);
 app.use('/api/profiles', apiProfiles);
 

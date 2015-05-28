@@ -1,0 +1,40 @@
+
+.center {
+  text-align: center;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.space {
+  margin-right: 20px;
+}
+
+.error {
+  color: #ff7a7a;
+  font-weight: bold;
+}
+
+.green {
+  color: #105a10;
+}
+
+.red {
+  color: #f75a5a;
+}
+
+.pointer {
+  cursor: pointer;
+  user-select: none;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.small {
+  font-size: 85%;
+}

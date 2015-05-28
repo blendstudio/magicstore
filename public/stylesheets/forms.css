@@ -4,9 +4,6 @@ input:focus {
 }
 
 input[type=text], input[type=number], input[type=email], input[type=password]  {
-  -webkit-border-radius: 7px;
-  -moz-border-radius: 7px;
-  -ms-border-radius: 7px;
   border-radius: 7px;
   background-color: #585654;
   color: #fff;
@@ -28,9 +25,6 @@ input.button {
 
 .input {
   text-decoration: none;
-  -webkit-border-radius: 7px;
-  -moz-border-radius: 7px;
-  -ms-border-radius: 7px;
   border-radius: 7px;
   background: #787674;
   color: #fff;
@@ -46,9 +40,6 @@ form .input {
 }
 
 input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 1000px #585654 inset;
-  -moz-box-shadow: 0 0 0 1000px #585654 inset;
-  -ms-box-shadow: 0 0 0 1000px #585654 inset;
   box-shadow: 0 0 0 1000px #585654 inset;
   -webkit-text-fill-color: #fff !important;
   -moz-text-fill-color: #fff !important;

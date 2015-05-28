@@ -8,7 +8,7 @@ div#header(ng-controller='SessionController')
     
     div.profile-link.pointer(href='' ng-click='navigate("profile")')
       img.avatar(ng-show='avatar' ng-src='{{avatar ? avatar : "/images/avatars/null.png" }}')
-      strong.pointer.link(ng-show='isSignedIn()') {{ username }} 
+      strong.pointer.link(ng-show='isSignedIn()') {{ username.truncate(12) }}
 
     a.button(href='' ng-show='isSignedIn()' ng-click='signOut()') Sair
 

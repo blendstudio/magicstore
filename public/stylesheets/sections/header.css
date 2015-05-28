@@ -24,9 +24,6 @@
 
 #header img.avatar {
   width: 32px;
-  -webkit-border-radius: 32px;
-  -moz-border-radius: 32px;
-  -ms-border-radius: 32px;
   border-radius: 32px;
   margin-right: 8px;
   vertical-align: middle;

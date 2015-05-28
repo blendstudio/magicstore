@@ -12,9 +12,9 @@
       url: '/',
       templateUrl: '/states/home.jade'
     })
-    .state('cards', {
-       url: '/cartas',
-      templateUrl: '/states/cards.jade'
+    .state('products', {
+       url: '/produtos',
+      templateUrl: '/states/products.jade'
     })
     .state('profile', {
        url: '/perfil',

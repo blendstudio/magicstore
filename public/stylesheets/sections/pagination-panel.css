@@ -42,8 +42,6 @@ section.pagination-panel .advanced-options.hidden,
 section.pagination-panel .advanced-options.visible {
   max-height: 0;
   overflow-y: hidden;
-  -webkit-transition: max-height .125s ease;
-  -moz-transition: max-height .125s ease;
   transition: max-height .125s ease;
 }
 

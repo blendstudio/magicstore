@@ -6,12 +6,12 @@ var Cards = require('../../models/Card');
 
 var _ = require('lodash');
 
-/* GET cards resources. */
+/* GET products resources. */
 router.get('/', function(req, res, next) {
 
   var random = req.query.random;
 
-  var cards = {};
+  var products = {};
   var count = 0;
 
   var query = {};
@@ -38,7 +38,7 @@ router.get('/', function(req, res, next) {
       query.exec(chain.shift());
     },
 
-    // search cards
+    // search products
     function(err, data) {
       count = data;
 
@@ -54,8 +54,7 @@ router.get('/', function(req, res, next) {
     },
 
     function(err, data) {
-      cards = data;
-      res.json({ cards: cards, count: count });
+      res.json({ products: data, count: count });
     },
   ];
 

@@ -1,9 +1,11 @@
 
 @import 'scrollbar.css';
+@import 'semantic.css';
 @import 'buttons.css';
 @import 'modals.css';
 @import 'forms.css';
 
+@import 'sections/products.css';
 @import 'sections/header.css';
 @import 'sections/cards.css';
 @import 'sections/menu.css';
@@ -43,39 +45,6 @@ strong.link:hover {
   color: #d8d6d4;
 }
 
-.center {
-  text-align: center;
-}
-
-.hidden {
-  visibility: hidden;
-}
-
-.space {
-  margin-right: 20px;
-}
-
-.error {
-  color: #ff7a7a;
-  font-weight: bold;
-}
-
-.red {
-  color: #f75a5a;
-}
-
-.green {
-  color: #105a10;
-}
-
-.pointer {
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
 #main-content {
   padding: 8px 0 8px 12px;
   margin-right: 10vw;
@@ -83,4 +52,12 @@ strong.link:hover {
   width: 60vw;
 }
 
-/*  */
+@media screen and (max-width: 1023px) {
+
+  #main-content {
+    float: none;
+    margin: 0 10vw 0 10vw;
+    width: calc(80vw - 22px);
+  }
+
+}

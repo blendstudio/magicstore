@@ -17,14 +17,14 @@
       $scope.avatar = $cookies.avatar = profile.avatar;
       $scope.email = $cookies.email = profile.email;
       $scope.username = $cookies.username = profile.username;
-      $state.go('cards');
+      $state.go('products');
     });
 
     // redirect to default page if signed in
     $scope.$on('$stateChangeSuccess', function() {
       if ($state.current.name === 'home' && $scope.isSignedIn()) {
         // TODO: change to real one
-        $state.go('cards');
+        $state.go('products');
       }
     });
 

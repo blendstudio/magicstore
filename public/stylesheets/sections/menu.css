@@ -6,3 +6,11 @@
 
   min-height: 1px;
 }
+
+@media screen and (max-width: 1023px) {
+
+  #menu {
+    float: none;
+  }
+
+}
