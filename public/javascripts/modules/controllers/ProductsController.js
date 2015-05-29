@@ -107,11 +107,27 @@
       return false;
     };
 
+    $scope.switchWithFirstItem = function(product, item) {
+      var i = _.indexOf(product.stock, item);
+
+      var firstItem = {};
+
+      if (i !== 0) {
+        firstItem = product.stock[0];
+
+        product.stock[0] = item;
+        product.stock[i] = firstItem;
+
+        // product.stock = _.sortByAll(product.stock, ['quantity', 'discount'], _.values).reverse();
+      }
+    };
+
     // returns the selected item
     $scope.setSelectedProdutcItem = function(product, item) {
 
       // if an item as given, set it selected
       if (item) {
+        $scope.switchWithFirstItem(product, item);
         return $scope.selected[product.searchName + product.id] = item;
       }
 
@@ -126,7 +142,9 @@
 
       // if no items are avaible, return one
       if (!items.length) {
-        return $scope.selected[product.searchName + product.id] = product.stock[0];
+        item = $scope.selected[product.searchName + product.id] = product.stock[0];
+        $scope.switchWithFirstItem(product, item);
+        return item;
       }
 
       itemsWithDiscount = _.filter(items, function(item) {
@@ -135,10 +153,13 @@
 
       // select discounted item
       if (itemsWithDiscount.length) {
-        return $scope.selected[product.searchName + product.id] = itemsWithDiscount[0];
+        item = $scope.selected[product.searchName + product.id] = itemsWithDiscount[0];
+        $scope.switchWithFirstItem(product, item);
+        return item;
       }
 
       // return an avaible item
+      item = $scope.selected[product.searchName + product.id] = items[0];
       return $scope.selected[product.searchName + product.id] = items[0];
     };
 
