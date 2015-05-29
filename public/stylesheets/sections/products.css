@@ -207,6 +207,10 @@ article.product .stock tr {
 
 @media screen and (max-width: 1279px) {
 
+  section.products {
+    max-height: 65vh;
+  }
+
   section.products section.left {
     float: none;
     margin-top: 0;
@@ -219,11 +223,11 @@ article.product .stock tr {
   }
 
   article.product .stock {
-    margin: 16px auto 10px auto;
+    margin: 8px auto 10px auto;
   }
 
   article.product .table-scroll {
-    max-height: 34px;
+    max-height: 42px;
     overflow: auto;
   }
 
