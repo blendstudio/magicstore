@@ -2,7 +2,7 @@
 section.pagination-panel
   
   p.center
-    a.button(ng-click='showAdvancedOptions = !showAdvancedOptions') Mudar para Busca {{ showAdvancedOptions ? "Simples" : "Avançada" }}
+    a.button(ng-click='showAdvancedOptions = !showAdvancedOptions') Busca {{ showAdvancedOptions ? "Simples" : "Avançada" }}
     span.space 
     span.break
     a.button(ng-click='paginate("first")' ng-class='{ disabled: page === 1 }') Primeira

@@ -26,7 +26,9 @@
       $scope.selected = {};
 
       _.forEach($scope.products, function(product) {
-        $scope.setSelectedProdutcItem(product);
+        if (product.stock.length) {
+          $scope.setSelectedProdutcItem(product);
+        }
       });
     };
 

@@ -25,7 +25,7 @@ div(ng-controller='ProductsController')
                     tr
                       th
                         strong Produto
-                      th
+                      th.language-flag
                         strong Idioma
                       th
                         strong Preço
@@ -34,8 +34,8 @@ div(ng-controller='ProductsController')
                     td 
                       | {{ item.condition }} {{ item.observations.length ? ' - ' : '' }} 
                       span(ng-repeat='observation in item.observations') {{ $index > 0 ? (', ' + observation) : observation }}
-                    td
-                      | {{ item.language }}    
+                    td.language-flag
+                      img.language-flag(ng-src='images/language-flags/{{ item.language }}.png')
                     td
                       span(ng-class='{ "green" : item.discount, "red" : !item.quantity }') {{ item.discount > 0 ? item.price * item.discount : item.price | currency:"R$ " }}
                     td
@@ -43,7 +43,7 @@ div(ng-controller='ProductsController')
 
         section.left
           div.product-image(ng-class='{ "card-image" : true }')
-            img(ng-src='images/cards/{{product.id}}.jpg')
+            img(ng-src='http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid={{product.id}}&type=card')
               
           section.product-price(ng-class='{ "large" : selected[product.searchName + product.id].discount && selected[product.searchName + product.id].quantity, "small" : !selected[product.searchName + product.id].discount && selected[product.searchName + product.id].quantity }')
             div.unavailable(ng-show='!selected[product.searchName + product.id].quantity')

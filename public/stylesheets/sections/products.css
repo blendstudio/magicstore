@@ -141,6 +141,22 @@ article.product .stock {
   width: 283px;
 }
 
+article.product .stock td.language-flag {
+  padding: 0;
+}
+
+article.product .stock th.language-flag {
+  display: block;
+  margin: auto;
+  width: 36px;
+}
+
+article.product .stock img.language-flag {
+  height: 17px;
+  display: block;
+  margin: auto;
+}
+
 article.product table {
   width: 100%;
   border-spacing: 0;
@@ -148,10 +164,6 @@ article.product table {
 
 article.product td {
   padding: 2px 0 2px 0;
-}
-
-article.product tr td:nth-child(2) {
-  width: 50px;
 }
 
 article.product .table-wrapper {
