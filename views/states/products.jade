@@ -17,51 +17,53 @@ div(ng-controller='ProductsController')
       
       section
         section.right
-          section.stock(ng-show='product.stock.length')
-            table
-              tr
-                th
-                  strong Produto
-                th
-                  strong Idioma
-                th
-                  strong Preço
-                th
-                  
-              tr.item(ng-repeat='item in product.stock' ng-class='{ "selected" : isSelected(product, item) }' ng-click='setSelectedProdutcItem(product, item)')
-                td 
-                  | {{ item.condition }} {{ item.observations.length ? ' - ' : '' }} 
-                  span(ng-repeat='observation in item.observations') {{ $index > 0 ? (', ' + observation) : observation }}
-                td
-                  | {{ item.language }}
-                td
-                  span(ng-class='{ "green" : item.discount, "red" : !item.quantity }') {{ item.discount > 0 ? item.price * item.discount : item.price | currency:"R$ " }}
-                td
-                  span(ng-class='{ "hidden" : !isSelected(product, item) }') &#8226;
-        
-        div.product-image(ng-class='{ "card-image" : true }')
-          img(ng-src='images/cards/{{product.id}}.jpg')
-        
+          section.stock(ng-class='{ "hidden" : !product.stock.length }')
+            div.table-wrapper
+              div.table-scroll
+                table
+                  thead
+                    tr
+                      th
+                        strong Produto
+                      th
+                        strong Idioma
+                      th
+                        strong Preço
+                      th
+                  tr.item(ng-repeat='item in product.stock' id='item-{{$index}}' ng-class='{ "selected" : isSelected(product, item) }' ng-click='setSelectedProdutcItem(product, item)')
+                    td 
+                      | {{ item.condition }} {{ item.observations.length ? ' - ' : '' }} 
+                      span(ng-repeat='observation in item.observations') {{ $index > 0 ? (', ' + observation) : observation }}
+                    td
+                      | {{ item.language }}    
+                    td
+                      span(ng-class='{ "green" : item.discount, "red" : !item.quantity }') {{ item.discount > 0 ? item.price * item.discount : item.price | currency:"R$ " }}
+                    td
+                      span(ng-class='{ "hidden" : !isSelected(product, item) }') &diams;
+
         section.left
-          section.product-price
+          div.product-image(ng-class='{ "card-image" : true }')
+            img(ng-src='images/cards/{{product.id}}.jpg')
+              
+          section.product-price(ng-class='{ "large" : selected[product.searchName + product.id].discount && selected[product.searchName + product.id].quantity, "small" : !selected[product.searchName + product.id].discount && selected[product.searchName + product.id].quantity }')
             div.unavailable(ng-show='!selected[product.searchName + product.id].quantity')
               p.center
                 strong.red Indisponível
                 br
                 span.pointer.small Avise-me quando estiver disponível
 
-            div.available(ng-show='selected[product.searchName + product.id].quantity' class='{{ hasDiscount(product) ? "large" : "small" }}')
-              div.product-price-component.discount(ng-hide='!hasDiscount(product)')
+            div.available(ng-show='selected[product.searchName + product.id].quantity')
+              div.component.discount(ng-hide='!hasDiscount(product)')
                 | -{{ selected[product.searchName + product.id].discount * 100 + '%' }}
-              div.product-price-component.price(ng-class='{ "rounded-corners" : hasDiscount(product) }')
+              div.component.price(ng-class='{ "rounded-corners" : hasDiscount(product) }')
                 div.old-price(ng-class='{ "hidden" : !hasDiscount(product) }')
                   | {{ selected[product.searchName + product.id].price | currency:"R$ " }}
                 div(ng-hide='!hasDiscount(product)')
                   | {{ selected[product.searchName + product.id].price * selected[product.searchName + product.id].discount | currency:"R$ " }}
                 div(ng-hide='hasDiscount(product)')
                   | {{ selected[product.searchName + product.id].price | currency:"R$ " }}
-              div.product-price-component.add-to-cart-button
-                p(class='center')
+              span.component.add-to-cart-button.pointer
+                p.center
                   strong(class='darker') + Carrinho
               
       div.product-informations
