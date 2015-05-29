@@ -141,14 +141,17 @@ article.product .stock {
   width: 283px;
 }
 
+article.product .stock td:first-child {
+  padding: 2px 3px 2px 6px;
+}
+
 article.product .stock td.language-flag {
   padding: 0;
 }
 
 article.product .stock th.language-flag {
   display: block;
-  margin: auto;
-  width: 36px;
+  width: 55px;
 }
 
 article.product .stock img.language-flag {
@@ -173,6 +176,7 @@ article.product .table-wrapper {
 article.product .table-wrapper table thead th strong {
   position: absolute;
   top: -12px;
+  padding-left: 15px;
 }
 
 article.product .table-scroll {
@@ -197,9 +201,24 @@ article.product .stock.hidden {
 article.product .stock tr th {
   text-align: left;
   font-size: 106.25%;
-  cursor: default;
-  -webkit-user-select: text;
-  user-select: text;
+}
+
+article.product .stock th.description {
+  width: 114px;
+}
+
+article.product .stock td.description {
+  width: 114px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+article.product .stock tr th .sort-icons {
+  display: inline-block;
+  position: absolute;
+  top: -12px;
+  height: 12px;
 }
 
 article.product .stock tr {

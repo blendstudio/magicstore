@@ -16,6 +16,7 @@ div(ng-controller='ProductsController')
       hr.separator(ng-class='{ "hidden" : $first }' id='{{ $index }}')
       
       section
+        
         section.right
           section.stock(ng-class='{ "hidden" : !product.stock.length }')
             div.table-wrapper
@@ -24,22 +25,28 @@ div(ng-controller='ProductsController')
                   thead
                     tr
                       th
+                      th.description.pointer(ng-click='sortStock(product, "condition")' ng-class='{ "sorted" : sort[product.searchName + product.id]["condition"] }')
+                        img.sort-icons(ng-src='images/icons/arrow-up.png' ng-class='{ "hidden" : !(sort[product.searchName + product.id]["condition"] === "asc") }')
+                        img.sort-icons(ng-src='images/icons/arrow-down.png' ng-class='{ "hidden" : !(sort[product.searchName + product.id]["condition"] === "desc") }')
                         strong Produto
-                      th.language-flag
+                      th.language-flag.pointer(ng-click='sortStock(product, "language")' ng-class='{ "sorted" : sort[product.searchName + product.id]["language"] }')
+                        img.sort-icons(ng-src='images/icons/arrow-up.png' ng-class='{ "hidden" : !(sort[product.searchName + product.id]["language"] === "asc") }')
+                        img.sort-icons(ng-src='images/icons/arrow-down.png' ng-class='{ "hidden" : !(sort[product.searchName + product.id]["language"] === "desc") }')
                         strong Idioma
-                      th
+                      th.pointer(ng-click='sortStock(product, "price")' ng-class='{ "sorted" : sort[product.searchName + product.id]["price"] }')
+                        img.sort-icons(ng-src='images/icons/arrow-up.png' ng-class='{ "hidden" : !(sort[product.searchName + product.id]["price"] === "asc") }')
+                        img.sort-icons(ng-src='images/icons/arrow-down.png' ng-class='{ "hidden" : !(sort[product.searchName + product.id]["price"] === "desc") }')
                         strong Preço
-                      th
+                      
                   tr.item(ng-repeat='item in product.stock' id='item-{{$index}}' ng-class='{ "selected" : isSelected(product, item) }' ng-click='setSelectedProdutcItem(product, item)')
-                    td 
-                      | {{ item.condition }} {{ item.observations.length ? ' - ' : '' }} 
+                    td
+                      span(ng-class='{ "hidden" : !isSelected(product, item) }') &diams;
+                    td.description {{ item.condition + ' ' + (item.observations.length ? ' - ' : '') }} 
                       span(ng-repeat='observation in item.observations') {{ $index > 0 ? (', ' + observation) : observation }}
                     td.language-flag
                       img.language-flag(ng-src='images/language-flags/{{ item.language }}.png')
                     td
                       span(ng-class='{ "green" : item.discount, "red" : !item.quantity }') {{ item.discount > 0 ? item.price * item.discount : item.price | currency:"R$ " }}
-                    td
-                      span(ng-class='{ "hidden" : !isSelected(product, item) }') &diams;
 
         section.left
           div.product-image(ng-class='{ "card-image" : true }')
@@ -66,8 +73,8 @@ div(ng-controller='ProductsController')
                 p.center
                   strong(class='darker') + Carrinho
               
-      div.product-informations
-        //div.product-information
+      //div.product-informations
+        div.product-information
           strong.big {{ product.name }}
           hr
           table

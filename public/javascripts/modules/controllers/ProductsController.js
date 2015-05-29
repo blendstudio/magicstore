@@ -3,6 +3,7 @@
   angular.module('store').controller('ProductsController', ['$scope', '$http', '$location', '$anchorScroll', function($scope, $http, $location, $anchorScroll) {
 
     $scope.selected = {};
+    $scope.sort = {};
 
     $scope.showAdvancedOptions = false;
 
@@ -22,12 +23,18 @@
       $scope.page = 1 + skip / limit;
       $scope.lastPage = Math.ceil($scope.count / limit);
 
-      // clear selected items
+      // clear selected items, sort methods
       $scope.selected = {};
+      $scope.sort = {};
 
       _.forEach($scope.products, function(product) {
         if (product.stock.length) {
           $scope.setSelectedProdutcItem(product);
+
+          product.stock = _.chain(product.stock)
+                           .sortByAll(['discount', 'quantity'], _.values)
+                           .value()
+                           .reverse();
         }
       });
     };
@@ -91,36 +98,33 @@
     // retrieve data
     $scope.search('');
 
-    $scope.getDisplayMode = function() {
-      if ($scope.item === 1) {
-        return 'show-one';
+    $scope.sortStock = function(product, field) {
+
+      product.stock = _.sortBy(product.stock, field);
+
+      if (!$scope.sort[product.searchName + product.id]) {
+        $scope.sort[product.searchName + product.id] = {};
       }
 
-      return '';
-    };
+      switch ($scope.sort[product.searchName + product.id][field]) {
 
-    $scope.hasDiscount = function(product) {
-      var item = $scope.selected[product.searchName + product.id];
+        case 'asc':
+          $scope.sort[product.searchName + product.id][field] = 'desc';
+          break;
 
-      if (item && item.discount) {
-        return true;
+        case 'desc':
+          $scope.sort[product.searchName + product.id][field] = 'asc';
+          break;
+
+        default:
+          // clear sort for product for others fields
+          $scope.sort[product.searchName + product.id] = {};
+          $scope.sort[product.searchName + product.id][field] = 'asc';
+          break;
       }
 
-      return false;
-    };
-
-    $scope.switchWithFirstItem = function(product, item) {
-      var i = _.indexOf(product.stock, item);
-
-      var firstItem = {};
-
-      if (i !== 0) {
-        firstItem = product.stock[0];
-
-        product.stock[0] = item;
-        product.stock[i] = firstItem;
-
-        // product.stock = _.sortByAll(product.stock, ['quantity', 'discount'], _.values).reverse();
+      if ($scope.sort[product.searchName + product.id][field] === 'desc') {
+        product.stock = product.stock.reverse();
       }
     };
 
@@ -129,7 +133,6 @@
 
       // if an item as given, set it selected
       if (item) {
-        $scope.switchWithFirstItem(product, item);
         return $scope.selected[product.searchName + product.id] = item;
       }
 
@@ -145,7 +148,6 @@
       // if no items are avaible, return one
       if (!items.length) {
         item = $scope.selected[product.searchName + product.id] = product.stock[0];
-        $scope.switchWithFirstItem(product, item);
         return item;
       }
 
@@ -156,7 +158,6 @@
       // select discounted item
       if (itemsWithDiscount.length) {
         item = $scope.selected[product.searchName + product.id] = itemsWithDiscount[0];
-        $scope.switchWithFirstItem(product, item);
         return item;
       }
 
@@ -167,6 +168,24 @@
 
     $scope.isSelected = function(product, item) {
       if ($scope.selected[product.searchName + product.id] === item) {
+        return true;
+      }
+
+      return false;
+    };
+
+    $scope.getDisplayMode = function() {
+      if ($scope.item === 1) {
+        return 'show-one';
+      }
+
+      return '';
+    };
+
+    $scope.hasDiscount = function(product) {
+      var item = $scope.selected[product.searchName + product.id];
+
+      if (item && item.discount) {
         return true;
       }
 
