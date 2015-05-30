@@ -19,6 +19,10 @@
     .state('profile', {
        url: '/perfil',
       templateUrl: '/states/profile.jade'
+    })
+    .state('shopping cart', {
+       url: '/carrinho',
+      templateUrl: '/states/cart.jade'
     });
 
   }]);
