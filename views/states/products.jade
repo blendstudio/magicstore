@@ -71,7 +71,7 @@ div(ng-controller='ProductsController')
                   | {{ selected[product.searchName + product.id].price | currency:"R$ " }}
               span.component.add-to-cart-button.pointer
                 p.center
-                  strong(class='darker') + Carrinho
+                  strong(class='darker' ng-click='addToCart(product)') + Carrinho
               
       //div.product-informations
         div.product-information
