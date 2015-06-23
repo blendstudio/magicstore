@@ -14,4 +14,7 @@ section.modal .modal-content {
   width: 55vw;
   padding: 4px 4px 10px 20px;
   border-radius: 20px;
+  position: relative;
+  z-index: 1;
+
 }

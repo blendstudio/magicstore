@@ -1,0 +1,29 @@
+
+Primary Tasks
+
+  Menu
+
+  Shopping Cart
+
+  - Shopping cart page
+  - Shopping cart modal
+
+  Profile
+
+  Contact
+
+  About
+
+  Payment
+
+  Shipment
+
+  Admin
+
+  - Create home
+  - Cards as products
+
+Secondary Tasks
+
+  - Carousel for products
+  - Keep session for 3 days, at least
