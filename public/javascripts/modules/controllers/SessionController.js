@@ -49,8 +49,15 @@
 
     };
 
-    $scope.showUserFormModal = function() {
-      $rootScope.$broadcast('show user form modal');
+    $scope.showModal = function(modal) {
+      switch (modal) {
+        case 'UserForm':
+          $rootScope.$broadcast('show user form modal');
+          break;
+        case 'ShoppingCart':
+          $rootScope.$broadcast('show shopping cart modal');
+          break;
+      }
     };
 
   }]);

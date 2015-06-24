@@ -28,3 +28,8 @@
   margin-right: 8px;
   vertical-align: middle;
 }
+
+#shopping-cart-button {
+  display: inline-block;
+  padding: 0 0 0 7px;
+}

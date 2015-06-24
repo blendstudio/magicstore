@@ -1,15 +1,19 @@
 
-div#header(ng-controller='SessionController')
+section#header(ng-controller='SessionController')
 
   img.logo.pointer(src='images/ms-logo.png' ng-click='navigate("home")')
   
   span.profile
-    a.button(href='' ng-hide='isSignedIn()' ng-click='showUserFormModal()') Entrar 
+    a.button(href='' ng-hide='isSignedIn()' ng-click='showModal("UserForm")') Entrar 
     
     div.profile-link.pointer(href='' ng-click='navigate("profile")')
       img.avatar(ng-show='avatar' ng-src='{{avatar ? avatar : "/images/avatars/null.png" }}')
       strong.pointer.link(ng-show='isSignedIn()') {{ username.truncate(12) }}
 
     a.button(href='' ng-show='isSignedIn()' ng-click='signOut()') Sair
+    
+    section#shopping-cart-button
+      a.button(href='' ng-show='isSignedIn()' ng-click='showModal("ShoppingCart")') Carrinho
 
   include ./user-form.jade 
+  include ./shopping-cart.jade 
