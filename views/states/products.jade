@@ -73,48 +73,48 @@ div(ng-controller='ProductsController')
                 p.center
                   strong(class='darker' ng-click='addToCart(product)') + Carrinho
               
-      //div.product-informations
-        div.product-information
-          strong.big {{ product.name }}
-          hr
-          table
-            tr
-              td
-                strong Tipo: 
-              td
-                | {{ product.type }} {{ product.subType ? (' - ' + product.subType) : '' }}
-            tr
-              td
-                strong Cores: 
-              td
-                span(ng-repeat='color in product.colors') {{ $index > 0 ? (', ' + color[0].toUpperCase() + color.slice(1)) : (color[0].toUpperCase() + color.slice(1)) }}
-            tr
-              td
-                strong Raridade:   
-              td
-                | {{ product.rarity }}
-            tr
-              td
-                strong Edição: 
-              td
-                | {{ product.cardSetName }}
-            tr(ng-show='product.artist')
-              td
-                strong Artista: 
-              td
-                | {{ product.artist }}
-            tr(ng-show='product.type === "Creature" && (product.power || product.toughness)')
-              td
-                strong For/Res: 
-              td
-                | {{ product.power }}/{{ product.toughness }} 
-            tr(ng-show='product.type === "Planeswalker"')
-              td
-                strong Lealdade: 
-              td
-                | {{ product.loyalty }} 
-          div.card-text
-            p
-              | {{ product.description }}
-            p
-              i {{ product.flavor }}
+      //- div.product-informations
+      //-   div.product-information
+      //-     strong.big {{ product.name }}
+      //-     hr
+      //-     table
+      //-       tr
+      //-         td
+      //-           strong Tipo: 
+      //-         td
+      //-           | {{ product.type }} {{ product.subType ? (' - ' + product.subType) : '' }}
+      //-       tr
+      //-         td
+      //-           strong Cores: 
+      //-         td
+      //-           span(ng-repeat='color in product.colors') {{ $index > 0 ? (', ' + color[0].toUpperCase() + color.slice(1)) : (color[0].toUpperCase() + color.slice(1)) }}
+      //-       tr
+      //-         td
+      //-           strong Raridade:   
+      //-         td
+      //-           | {{ product.rarity }}
+      //-       tr
+      //-         td
+      //-           strong Edição: 
+      //-         td
+      //-           | {{ product.cardSetName }}
+      //-       tr(ng-show='product.artist')
+      //-         td
+      //-           strong Artista: 
+      //-         td
+      //-           | {{ product.artist }}
+      //-       tr(ng-show='product.type === "Creature" && (product.power || product.toughness)')
+      //-         td
+      //-           strong For/Res: 
+      //-         td
+      //-           | {{ product.power }}/{{ product.toughness }} 
+      //-       tr(ng-show='product.type === "Planeswalker"')
+      //-         td
+      //-           strong Lealdade: 
+      //-         td
+      //-           | {{ product.loyalty }} 
+      //-     div.card-text
+      //-       p
+      //-         | {{ product.description }}
+      //-       p
+      //-         i {{ product.flavor }}
