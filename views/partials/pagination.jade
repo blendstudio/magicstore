@@ -25,7 +25,7 @@ section.pagination-panel
   
   section.advanced-options(class='{{ showAdvancedOptions ? "visible" : "hidden" }}')
     strong Produtos
-    div.pointer.checkbox(ng-click='random = !random; getAvaibleOnly = false; page = 1; query = null; search(query)')
+    div.pointer.checkbox(ng-click='random = !random; page = 1; query = null; search(query)')
       input(type='checkbox' ng-model='random')
       span.pointer Cartas aleatórias
     div.pointer.checkbox(ng-click='getAvaibleOnly = !getAvaibleOnly; page = 1; search(query)')
