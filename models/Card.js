@@ -1,6 +1,6 @@
 
 var mongoose = require('mongoose');
-var random = require('mongoose-random');
+var Product = require('./Product');
 
 var Schema = mongoose.Schema;
 
@@ -14,22 +14,11 @@ var FormatSchema = new Schema({
   legality:           String,
 });
 
-var StockSchema = new Schema({
-  condition:          String,
-  language:           String,
-  observations:       [String],
-  quantity:           Number,
-  price:              Number,
-  discount:           Number,
-});
-
-var CardSchema = new Schema({
+var CardSchema = Product.schema.extend({
   id:                 Number,
   relatedCardId:      Number,
   setNumber:          Number,
-  name:               String,
   searchName:         String,
-  description:        String,
   flavor:             String,
   colors:             [String],
   manacost:           String,
@@ -47,10 +36,7 @@ var CardSchema = new Schema({
   promo:              Boolean,
   rulings:            [RulingSchema],
   formats:            [FormatSchema],
-  stock:              [StockSchema],
   releasedAt:         Date,
 });
-
-CardSchema.plugin(random, { path: 'random' });
 
 module.exports = mongoose.model('Card', CardSchema);
