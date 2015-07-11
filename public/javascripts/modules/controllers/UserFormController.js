@@ -65,25 +65,21 @@
                   $scope.closeUserFormModal();
                 } else {
                   $scope.forms.error = { 'profile' : true, 'message' : 'Perfil não encontrado' };
-                  console.error($scope.forms.error);
                   account.password = password;
                 }
               }).
               error(function(data, status, headers, config) {
                 $scope.forms.error = { 'http' : true, 'message' : '/api/profiles http status code ' + status };
-                console.error($scope.forms.error);
                 account.password = password;
               });
 
           } else {
             $scope.forms.error = { 'account' : true, 'message' : 'E-mail e/ou senha inválidos' };
-            console.error($scope.forms.error);
             account.password = password;
           }
         }).
         error(function(data, status, headers, config) {
           $scope.forms.error = { 'htpp' : true, 'message' : '/api/accounts http status code ' + status };
-          console.error($scope.forms.error);
           account.password = password;
         });
 
@@ -93,7 +89,6 @@
 
       if (account.password !== account.passwordConfirmation) {
         $scope.forms.error = { 'password' : true, 'message' : 'Sua senha e confirmação de senha não são iguais' };
-        console.error($scope.forms.error);
         return;
       }
 
@@ -134,7 +129,6 @@
             }).
             error(function(data, status, headers, config) {
               $scope.forms.error = { 'http' : true, 'message' : '/api/profiles http status code ' + status };
-              console.error($scope.forms.error);
               account.password = password;
               account.passwordConfirmation = passwordConfirmation;
             });
@@ -142,7 +136,6 @@
         }).
         error(function(data, status, headers, config) {
           $scope.forms.error = { 'htpp' : true, 'message' : '/api/accounts http status code ' + status };
-          console.error($scope.forms.error);
           account.password = password;
           account.passwordConfirmation = passwordConfirmation;
         });

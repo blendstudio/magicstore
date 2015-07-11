@@ -13,12 +13,28 @@ var apiCards = require('./routes/api/products/cards');
 var apiAccounts = require('./routes/api/accounts');
 var apiProfiles = require('./routes/api/profiles');
 
+var app = express();
+
+// TODO: ???
+var options = {
+  user: 'magicstore',
+  password:  'magicstore'
+};
+
+// display env
+console.log('\n\t Environment:\t' + app.get('env') + '\n');
+
 // connects to mongodb
 var mongoose = require('mongoose');
-var mongo = {};
+var mongo = '';
 
-mongo = 'mongodb://localhost/magicstore';
-mongoose.connect(mongo);
+if (app.get('env') === 'development') {
+  mongo = 'mongodb://localhost/magicstore';
+  mongoose.connect(mongo);
+} else {
+  mongo = 'mongodb://' + options.user + ':' + options.password + '@oceanic.mongohq.com:10004/app24606530';
+  mongoose.connect(mongo);
+}
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'mongoose connection'));
@@ -26,18 +42,19 @@ db.once('open', function callback () {
   console.log('mongoose connection [Opened: connected to [' + mongo + ']]');
 });
 
-var app = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
-app.use(logger('dev'));
-//app.use(logger('combined', {
-//  skip: function (req, res) { return res.statusCode < 400; }
-//}));
+if (app.get('env') === 'development') {
+  app.use(logger('dev'));
+} else {
+  app.use(logger('combined', {
+    skip: function (req, res) { return res.statusCode < 400; }
+  }));
+}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
