@@ -2,11 +2,11 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require('mongoose');
-var Cards = require('../../models/Card');
+var Cards = require('../../../models/Card');
 
 var _ = require('lodash');
 
-/* GET products resources. */
+/* GET products */
 router.get('/', function(req, res, next) {
 
   var random = req.query.random;
@@ -59,6 +59,11 @@ router.get('/', function(req, res, next) {
   ];
 
   chain.shift()();
+
+});
+
+/* POST products */
+router.post('/', function() {
 
 });
 

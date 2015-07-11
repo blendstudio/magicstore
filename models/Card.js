@@ -28,6 +28,7 @@ var CardSchema = Product.schema.extend({
   subType:            String,
   power:              Number,
   toughness:          Number,
+  language:           String,
   loyalty:            Number,
   rarity:             String,
   artist:             String,

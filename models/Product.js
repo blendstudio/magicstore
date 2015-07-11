@@ -7,7 +7,6 @@ var Schema = mongoose.Schema;
 
 var StockSchema = new Schema({
   condition:          String,
-  language:           String,
   observations:       [String],
   quantity:           Number,
   price:              Number,

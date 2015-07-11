@@ -55,7 +55,7 @@
 
       var skip = ($scope.page - 1) * $scope.items;
 
-      $http.get('/api/products', {
+      $http.get('/api/cards', {
           cache: true,
           params: {
             random: $scope.random,

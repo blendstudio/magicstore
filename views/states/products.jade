@@ -17,8 +17,10 @@ div(ng-controller='ProductsController')
       
       section
         
+        //(ng-class='{ "hidden" : !product.stock.length }')
+        
         section.right
-          section.stock(ng-class='{ "hidden" : !product.stock.length }')
+          section.stock
             div.table-wrapper
               div.table-scroll
                 table
@@ -33,6 +35,10 @@ div(ng-controller='ProductsController')
                         img.sort-icons(ng-src='images/icons/arrow-up.png' ng-class='{ "hidden" : !(sort[product.searchName + product.id]["language"] === "asc") }')
                         img.sort-icons(ng-src='images/icons/arrow-down.png' ng-class='{ "hidden" : !(sort[product.searchName + product.id]["language"] === "desc") }')
                         strong Idioma
+                      //- th.pointer(ng-click='sortStock(product, "price")' ng-class='{ "sorted" : sort[product.searchName + product.id]["quantity"] }')
+                      //-   img.sort-icons(ng-src='images/icons/arrow-up.png' ng-class='{ "hidden" : !(sort[product.searchName + product.id]["quantity"] === "asc") }')
+                      //-   img.sort-icons(ng-src='images/icons/arrow-down.png' ng-class='{ "hidden" : !(sort[product.searchName + product.id]["quantity"] === "desc") }')
+                      //-   strong Quantidade
                       th.pointer(ng-click='sortStock(product, "price")' ng-class='{ "sorted" : sort[product.searchName + product.id]["price"] }')
                         img.sort-icons(ng-src='images/icons/arrow-up.png' ng-class='{ "hidden" : !(sort[product.searchName + product.id]["price"] === "asc") }')
                         img.sort-icons(ng-src='images/icons/arrow-down.png' ng-class='{ "hidden" : !(sort[product.searchName + product.id]["price"] === "desc") }')
@@ -44,7 +50,9 @@ div(ng-controller='ProductsController')
                     td.description {{ item.condition + ' ' + (item.observations.length ? ' - ' : '') }} 
                       span(ng-repeat='observation in item.observations') {{ $index > 0 ? (', ' + observation) : observation }}
                     td.language-flag
-                      img.language-flag(ng-src='images/language-flags/{{ item.language }}.png')
+                      img.language-flag(ng-src='images/language-flags/{{ product.language }}.png')
+                    //- td.qunatity
+                    //-   span {{ item.quantity }}
                     td
                       span(ng-class='{ "green" : item.discount, "red" : !item.quantity }') {{ item.discount > 0 ? item.price * item.discount : item.price | currency:"R$ " }}
 

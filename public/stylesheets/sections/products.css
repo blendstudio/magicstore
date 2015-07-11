@@ -145,6 +145,15 @@ article.product .stock td:first-child {
   padding: 2px 3px 2px 6px;
 }
 
+article.product .stock td:nth-child(3) {
+  width: 68px;
+}
+
+article.product .stock td:last-child {
+  width: 72px;
+  text-align: center;
+}
+
 article.product .stock td.language-flag {
   padding: 0;
 }
@@ -177,6 +186,10 @@ article.product .table-wrapper table thead th strong {
   position: absolute;
   top: -12px;
   padding-left: 15px;
+}
+
+article.product .table-wrapper table thead th:last-child strong {
+  padding-left: 20px;
 }
 
 article.product .table-scroll {

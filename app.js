@@ -8,7 +8,8 @@ var bodyParser = require('body-parser');
 // routes
 var routes = require('./routes/index');
 
-var apiProducts = require('./routes/api/products');
+var apiProducts = require('./routes/api/products/products');
+var apiCards = require('./routes/api/products/cards');
 var apiAccounts = require('./routes/api/accounts');
 var apiProfiles = require('./routes/api/profiles');
 
@@ -33,10 +34,10 @@ app.set('view engine', 'jade');
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
-// app.use(logger('dev'));
-app.use(logger('combined', {
-  skip: function (req, res) { return res.statusCode < 400; }
-}));
+app.use(logger('dev'));
+//app.use(logger('combined', {
+//  skip: function (req, res) { return res.statusCode < 400; }
+//}));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -53,6 +54,7 @@ app.use('/states', function (req, res) {
 
 // API routes
 app.use('/api/products', apiProducts);
+app.use('/api/cards', apiCards);
 app.use('/api/accounts', apiAccounts);
 app.use('/api/profiles', apiProfiles);
 
