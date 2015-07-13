@@ -5,14 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-// routes
-var routes = require('./routes/index');
-
-var apiProducts = require('./routes/api/products/products');
-var apiCards = require('./routes/api/products/cards');
-var apiAccounts = require('./routes/api/accounts');
-var apiProfiles = require('./routes/api/profiles');
-
 var app = express();
 
 // TODO: ???
@@ -21,10 +13,10 @@ var options = {
   password:  'magicstore'
 };
 
-// display env
+// display environment
 console.log('\n\t Environment:\t' + app.get('env') + '\n');
 
-// connects to mongodb
+// mongodb configuration
 var mongoose = require('mongoose');
 var mongo = '';
 
@@ -46,8 +38,10 @@ db.once('open', function callback () {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+// favicon
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
+// logger configuration
 if (app.get('env') === 'development') {
   app.use(logger('dev'));
 } else {
@@ -56,10 +50,20 @@ if (app.get('env') === 'development') {
   }));
 }
 
+// server configuration
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// routes
+var routes = require('./routes/index');
+
+var apiProducts = require('./routes/api/products/products');
+var apiCards = require('./routes/api/products/cards');
+var apiAccounts = require('./routes/api/accounts');
+var apiProfiles = require('./routes/api/profiles');
+var apiSessions = require('./routes/api/sessions');
 
 // route to SPA
 app.use('/', routes);
@@ -69,11 +73,12 @@ app.use('/states', function (req, res) {
   res.render('./states' + req.path);
 });
 
-// API routes
+// api routes
 app.use('/api/products', apiProducts);
 app.use('/api/cards', apiCards);
 app.use('/api/accounts', apiAccounts);
 app.use('/api/profiles', apiProfiles);
+app.use('/api/sessions', apiSessions);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,6 +1,8 @@
 (function() {
 
-  angular.module('store').controller('SessionController', ['$scope', '$rootScope', '$http', '$state', '$cookies', function($scope, $rootScope, $http, $state, $cookies) {
+  angular.module('store').controller('SessionController', ['SessionService', '$scope', '$rootScope', '$http', '$state', '$cookies', function(sessions, $scope, $rootScope, $http, $state, $cookies) {
+
+    $scope.sid    = $cookies.sid;
 
     $scope.avatar = $cookies.avatar;
     $scope.email = $cookies.email;
@@ -20,8 +22,15 @@
       $state.go('products');
     });
 
-    // redirect to default page if signed in
     $scope.$on('$stateChangeSuccess', function() {
+
+      // create session
+      sessions.create().then(function (data) {
+        
+        console.log(data);
+      });
+
+      // redirect to default page if signed in
       if ($state.current.name === 'home' && $scope.isSignedIn()) {
         // TODO: change to real one
         $state.go('products');
