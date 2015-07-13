@@ -4,6 +4,15 @@
 
     $scope.sid = $cookies.sid;
 
+    var createSession = function() {
+      if (!$scope.sid) {
+        SessionService.create().then(function (data) {
+          $scope.sid = data._id;
+          $cookies.sid = data._id;
+        });
+      }
+    };
+
     $scope.isSignedIn = function() {
       if ($scope.email) {
         return true;
@@ -12,6 +21,8 @@
     };
 
     $scope.$on('user signed in', function(event, profile) {
+      createSession();
+
       SessionService.createProfile($scope.sid, profile);
 
       var profile = SessionService.getProfile();
@@ -23,18 +34,15 @@
     });
 
     $scope.$on('$stateChangeSuccess', function() {
-      // create session
-      if (!$scope.sid) {
-        SessionService.create().then(function (data) {
-          $scope.sid = $cookies.sid = data._id;
-        });
-      }
+      createSession();
 
       // $scope.loadProfile();
       SessionService.loadProfile($scope.sid).then(function (response) {
-        $scope.email = response.profiles[0].email;
-        $scope.username = response.profiles[0].username;
-        $scope.avatar = response.profiles[0].avatar;
+        if (response) {
+          $scope.email = response.profiles[0].email;
+          $scope.username = response.profiles[0].username;
+          $scope.avatar = response.profiles[0].avatar;
+        }
       });
 
       // redirect to default page if signed in
@@ -55,11 +63,13 @@
 
       // clear session
       $scope.sid = null;
-      delete $cookies.sid;
+      delete $cookies['sid'];
 
       $scope.email = null;
       $scope.username = null;
       $scope.avatar = null;
+
+      createSession();
 
       // redirect to home
       $state.go('home');

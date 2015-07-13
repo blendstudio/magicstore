@@ -39,11 +39,20 @@
     var loadProfile = function(sessionId) {
       var promise = loadSession(sessionId).then(function(response) {
         var session = response;
-        return $http.get('/api/profiles', { params: { search: { _id: session.profileId } } });
+
+        if (session.profileId) {
+          return $http.get('/api/profiles', { params: { search: { _id: session.profileId } } });
+        }
+
+        return null;
       })
       .then(function(response) {
-        setProfile(response.data);
-        return response.data;
+        if (response) {
+          setProfile(response.data);
+          return response.data;
+        }
+        
+        return null;
       });
 
       return promise;
