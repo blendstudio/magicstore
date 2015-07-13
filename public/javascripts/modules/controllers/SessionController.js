@@ -1,34 +1,39 @@
 (function() {
 
-  angular.module('store').controller('SessionController', ['SessionService', '$scope', '$rootScope', '$http', '$state', '$cookies', function(sessions, $scope, $rootScope, $http, $state, $cookies) {
+  angular.module('store').controller('SessionController', ['SessionService', '$scope', '$rootScope', '$http', '$state', '$cookies', function(SessionService, $scope, $rootScope, $http, $state, $cookies) {
 
     $scope.sid    = $cookies.sid;
 
-    $scope.avatar = $cookies.avatar;
-    $scope.email = $cookies.email;
-    $scope.username = $cookies.username;
-
     $scope.isSignedIn = function() {
-      if ($cookies.email) {
+      if ($scope.email) {
         return true;
       }
       return false;
     };
 
     $scope.$on('user signed in', function(event, profile) {
-      $scope.avatar = $cookies.avatar = profile.avatar;
-      $scope.email = $cookies.email = profile.email;
-      $scope.username = $cookies.username = profile.username;
+      var session = SessionService.getSession();
+      SessionService.setProfile(session._id, profile);
+
+      SessionService.log();
+
+      var profile = SessionService.getProfile();
+      $scope.email = profile.email;
+      $scope.username = profile.username;
+      $scope.avatar = profile.avatar;
+
       $state.go('products');
     });
 
     $scope.$on('$stateChangeSuccess', function() {
 
       // create session
-      sessions.create().then(function (data) {
-        
-        console.log(data);
-      });
+      if (!$scope.sid) {
+        SessionService.create().then(function (data) {
+          SessionService.setSession(data);
+          $scope.sid = $cookies.sid = data._id;
+        });
+      }
 
       // redirect to default page if signed in
       if ($state.current.name === 'home' && $scope.isSignedIn()) {
@@ -37,6 +42,7 @@
       }
     });
 
+    // TODO: to service
     $scope.navigate = function(path) {
       if ($state.current.name !== path) {
         $state.go(path);
@@ -46,12 +52,12 @@
     $scope.signOut = function() {
 
       // clear session
-      $scope.avatar = null;
+      $scope.sid = null;
+      delete $cookies.sid;
+
       $scope.email = null;
       $scope.username = null;
-      delete $cookies.avatar;
-      delete $cookies.email;
-      delete $cookies.username;
+      $scope.avatar = null;
 
       // redirect to home
       $state.go('home');

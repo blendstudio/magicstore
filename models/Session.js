@@ -5,9 +5,8 @@ var extend = require('mongoose-schema-extend');
 var Schema = mongoose.Schema;
 
 var SessionSchema = new Schema({
-  profile:      Schema.Types.ObjectId,
-  cart:         Schema.Types.ObjectId,
-  persistent:   Boolean,
+  profileId:      Schema.Types.ObjectId,
+  cartId:         Schema.Types.ObjectId,
 });
 
 module.exports = mongoose.model('Session', SessionSchema);

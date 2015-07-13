@@ -18,9 +18,6 @@
 
     $scope.setCardsCollection = function(data, skip, limit) {
       $scope.cards = data.cards;
-      $scope.avatar = $cookies.avatar;
-      $scope.email = $cookies.email;
-      $scope.username = $cookies.username;
       $scope.count = data.count;
       $scope.page = 1 + skip / limit;
       $scope.lastPage = Math.ceil($scope.count / limit);

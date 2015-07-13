@@ -51,11 +51,26 @@ router.get('/', function(req, res, next) {
 /* POST profiles resources. */
 router.post('/', function(req, res, next) {
 
-  var session = new Session();
-  session.save(function (err) {
-    if (err) throw err;
-    res.json(session);
-  });
+  var sessionId = req.body.sessionId;
+  var profileId = req.body.profileId;
+
+  if (sessionId) {
+    Session.findById(sessionId, function(err, doc) {
+      if (err) throw err;
+
+      doc.profileId = profileId;
+      doc.save(function (err) {
+        if (err) throw err;
+        res.json(session);
+      });
+    });
+  } else {
+    var session = new Session();
+    session.save(function (err) {
+      if (err) throw err;
+      res.json(session);
+    });
+  }
 
 });
 
