@@ -10,10 +10,11 @@ section#header(ng-controller='SessionController')
       img.avatar(ng-show='avatar' ng-src='{{avatar ? avatar : "/images/avatars/null.png" }}')
       strong.pointer.link(ng-show='isSignedIn()') {{ username.truncate(12) }}
 
+    section#shopping-cart-button
+      img(ng-click='showModal("ShoppingCart")' ng-src='{{ "/images/icons/cartBrenomi.png" }}') 
+      
     a.button(href='' ng-show='isSignedIn()' ng-click='signOut()') Sair
     
-    section#shopping-cart-button
-      a.button(href='' ng-show='isSignedIn()' ng-click='showModal("ShoppingCart")') Carrinho
 
   include ./user-form.jade 
   include ./shopping-cart.jade 

@@ -33,3 +33,17 @@
   display: inline-block;
   padding: 0 0 0 7px;
 }
+
+#shopping-cart-button img {
+  border-radius: 32px;
+  width: 32px;
+  height: 32px;
+  background-color: #4C6B22;
+  vertical-align: middle;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+#shopping-cart-button img:hover {
+  background-color: #6B9630;
+}

@@ -2,7 +2,7 @@
 
   angular.module('store').controller('SessionController', ['SessionService', '$scope', '$rootScope', '$http', '$state', '$cookies', function(SessionService, $scope, $rootScope, $http, $state, $cookies) {
 
-    $scope.sid    = $cookies.sid;
+    $scope.sid = $cookies.sid;
 
     $scope.isSignedIn = function() {
       if ($scope.email) {
@@ -12,10 +12,7 @@
     };
 
     $scope.$on('user signed in', function(event, profile) {
-      var session = SessionService.getSession();
-      SessionService.setProfile(session._id, profile);
-
-      SessionService.log();
+      SessionService.createProfile($scope.sid, profile);
 
       var profile = SessionService.getProfile();
       $scope.email = profile.email;
@@ -26,14 +23,19 @@
     });
 
     $scope.$on('$stateChangeSuccess', function() {
-
       // create session
       if (!$scope.sid) {
         SessionService.create().then(function (data) {
-          SessionService.setSession(data);
           $scope.sid = $cookies.sid = data._id;
         });
       }
+
+      // $scope.loadProfile();
+      SessionService.loadProfile($scope.sid).then(function (response) {
+        $scope.email = response.profiles[0].email;
+        $scope.username = response.profiles[0].username;
+        $scope.avatar = response.profiles[0].avatar;
+      });
 
       // redirect to default page if signed in
       if ($state.current.name === 'home' && $scope.isSignedIn()) {

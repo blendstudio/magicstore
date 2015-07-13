@@ -8,44 +8,11 @@ var _ = require('lodash');
 
 /* GET profiles resources. */
 router.get('/', function(req, res, next) {
+  var id = req.query.id;
 
-  var count = 0;
-
-  var query = {};
-
-  var limit = req.query.limit;
-  var skip = req.query.skip;
-
-  var search = {};
-  if (req.query.search) {
-    search = JSON.parse(req.query.search);
-  }
-
-  var chain = [
-
-    // get count
-    function() {
-      query = Profile.count(search);
-      query.exec(chain.shift());
-    },
-
-    // search profiles
-    function(err, data) {
-      count = data;
-
-      query = Profile.find(search);
-      query = query.skip(skip).
-                limit(limit);
-      query.exec(chain.shift());
-    },
-
-    function(err, data) {
-      res.json({ profiles: data, count: count });
-    },
-  ];
-
-  chain.shift()();
-
+  Session.findById(id, function(err, doc) {
+    res.json(doc);
+  });
 });
 
 /* POST profiles resources. */
@@ -61,7 +28,7 @@ router.post('/', function(req, res, next) {
       doc.profileId = profileId;
       doc.save(function (err) {
         if (err) throw err;
-        res.json(session);
+        res.json(doc);
       });
     });
   } else {
