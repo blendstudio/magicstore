@@ -1,81 +1,71 @@
 (function() {
 
-  angular.module('store').controller('SessionController', ['SessionService', '$scope', '$rootScope', '$http', '$state', '$cookies', function(SessionService, $scope, $rootScope, $http, $state, $cookies) {
+  angular.module('store').controller('SessionController',
+    ['SessionService', '$cookies', '$http', '$rootScope', '$scope', '$state',
+    function(SessionService, $cookies, $http, $rootScope, $scope, $state) {
 
-    $scope.sid = $cookies.sid;
+    // controller states
+    $scope.signedIn = false;
+    $scope.sid      = $cookies.sid;
 
-    var createSession = function() {
-      if (!$scope.sid) {
-        SessionService.create().then(function (data) {
-          $scope.sid = data._id;
-          $cookies.sid = data._id;
-        });
-      }
-    };
-
-    $scope.isSignedIn = function() {
-      if ($scope.email) {
-        return true;
-      }
-      return false;
-    };
-
-    $scope.$on('user signed in', function(event, profile) {
-      createSession();
-
-      SessionService.createProfile($scope.sid, profile);
-
-      var profile = SessionService.getProfile();
-      $scope.email = profile.email;
-      $scope.username = profile.username;
-      $scope.avatar = profile.avatar;
-
-      $state.go('products');
-    });
-
-    $scope.$on('$stateChangeSuccess', function() {
-      createSession();
-
-      // $scope.loadProfile();
+    // load profile to scope to show username and avatar on view
+    var loadProfileToScope = function() {
       SessionService.loadProfile($scope.sid).then(function (response) {
         if (response) {
+          // set signed in flag to true
+          $scope.signedIn = true;
+
+          // load profile information to scope
           $scope.email = response.profiles[0].email;
           $scope.username = response.profiles[0].username;
           $scope.avatar = response.profiles[0].avatar;
         }
       });
+    };
 
-      // redirect to default page if signed in
-      if ($state.current.name === 'home' && $scope.isSignedIn()) {
-        // TODO: change to real one
-        $state.go('products');
+
+    $scope.isSignedIn = function() {
+      return $scope.signedIn;
+    };
+
+    // create new session
+    var createSession = function() {
+      if (!$scope.sid) {
+        SessionService.create().then(function (data) {
+          $scope.sid = $cookies.sid = data._id;
+        });
       }
-    });
+    };
 
-    // TODO: to service
+    // close session
+    $scope.closeSession = function() {
+      // clear session
+      $scope.sid = null;
+      delete $cookies['sid'];
+
+      // clear profile information
+      $scope.email = null;
+      $scope.username = null;
+      $scope.avatar = null;
+
+      // set signed in flag to false
+      $scope.signedIn = false;
+
+      // create new anonymous session
+      createSession();
+
+      // redirect to home
+      $state.go('home');
+    };
+
+    // navigate to path
     $scope.navigate = function(path) {
       if ($state.current.name !== path) {
         $state.go(path);
       }
     };
 
-    $scope.signOut = function() {
-
-      // clear session
-      $scope.sid = null;
-      delete $cookies['sid'];
-
-      $scope.email = null;
-      $scope.username = null;
-      $scope.avatar = null;
-
-      createSession();
-
-      // redirect to home
-      $state.go('home');
-
-    };
-
+    // show modal
     $scope.showModal = function(modal) {
       switch (modal) {
         case 'UserForm':
@@ -87,6 +77,40 @@
       }
     };
 
-  }]);
+    // events
 
+    $scope.$on('user signed in', function(event, profile) {
+      // create new session if none
+      if (!$scope.sid) {
+        createSession();
+      }
+
+      // link profile to current session and load it to scope
+      SessionService.linkProfileToSession($scope.sid, profile).then(function (response) {
+        loadProfileToScope();
+      });
+
+      $state.go('products');
+    });
+
+    // change state on spa
+    $scope.$on('$stateChangeSuccess', function() {
+      // create new session if none
+      if (!$scope.sid) {
+        createSession();
+      }
+
+      // if there was a session, load profile to scope
+      else {
+        loadProfileToScope();
+      }
+
+      // redirect to default page if signed in
+      if ($state.current.name === 'home' && $scope.isSignedIn()) {
+        // TODO: change to real one
+        $state.go('products');
+      }
+    });
+
+  }]);
 })();

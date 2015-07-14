@@ -7,12 +7,6 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
-// TODO: ???
-var options = {
-  user: 'magicstore',
-  password:  'magicstore'
-};
-
 // display environment
 console.log('\n\t Environment:\t' + app.get('env') + '\n');
 
@@ -20,11 +14,16 @@ console.log('\n\t Environment:\t' + app.get('env') + '\n');
 var mongoose = require('mongoose');
 var mongo = '';
 
+var credentials = {
+  user: 'magicstore',
+  password:  'magicstore'
+};
+
 if (app.get('env') === 'development') {
   mongo = 'mongodb://localhost/magicstore';
   mongoose.connect(mongo);
 } else {
-  mongo = 'mongodb://' + options.user + ':' + options.password + '@oceanic.mongohq.com:10004/app24606530';
+  mongo = 'mongodb://' + credentials.user + ':' + credentials.password + '@oceanic.mongohq.com:10004/app24606530';
   mongoose.connect(mongo);
 }
 
@@ -59,6 +58,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // routes
 var routes = require('./routes/index');
 
+// api routes
 var apiProducts = require('./routes/api/products/products');
 var apiCards = require('./routes/api/products/cards');
 var apiAccounts = require('./routes/api/accounts');
@@ -68,7 +68,7 @@ var apiSessions = require('./routes/api/sessions');
 // route to SPA
 app.use('/', routes);
 
-// handle states
+// states
 app.use('/states', function (req, res) {
   res.render('./states' + req.path);
 });
