@@ -2,13 +2,13 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require('mongoose');
-var Accounts = require('../../models/Account');
+var Model = Account = require('../../models/Account');
 
 var _ = require('lodash');
 
 /* GET accounts resources. */
 router.get('/', function(req, res, next) {
-
+  // apply filters
   var count = 0;
 
   var query = {};
@@ -25,27 +25,27 @@ router.get('/', function(req, res, next) {
 
     // get count
     function() {
-      query = Accounts.count(search);
+      query = Model.count(search);
       query.exec(chain.shift());
     },
 
-    // search accounts
+    // search for models
     function(err, data) {
       count = data;
 
-      query = Accounts.find(search);
+      query = Model.find(search);
       query = query.skip(skip).
                 limit(limit);
       query.exec(chain.shift());
     },
 
+    // return response
     function(err, data) {
-      res.json({ accounts: data, count: count });
+      res.json({ values: data, count: count });
     },
   ];
 
   chain.shift()();
-
 });
 
 /* POST accounts resources. */
@@ -66,7 +66,7 @@ router.post('/', function(req, res, next) {
     return;
   }
 
-  query = Accounts.find({ email : account.email });
+  query = Account.find({ email : account.email });
 
   query.exec(function(err, data) {
     if (data.length) {
@@ -77,7 +77,7 @@ router.post('/', function(req, res, next) {
     }
 
     // Nesse momento devemos salvar um profile
-    account = new Accounts(account);
+    account = new Account(account);
     account.save(function(err) {
       if (err) throw err;
 

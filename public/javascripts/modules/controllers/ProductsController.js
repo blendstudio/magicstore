@@ -18,7 +18,7 @@
     $scope.query = '';
 
     $scope.setProductsCollection = function(data, skip, limit) {
-      $scope.products = data.products;
+      $scope.products = data.values;
       $scope.count = data.count;
       $scope.page = 1 + skip / limit;
       $scope.lastPage = Math.ceil($scope.count / limit);

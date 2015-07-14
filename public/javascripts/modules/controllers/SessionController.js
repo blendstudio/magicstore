@@ -16,9 +16,9 @@
           $scope.signedIn = true;
 
           // load profile information to scope
-          $scope.email = response.profiles[0].email;
-          $scope.username = response.profiles[0].username;
-          $scope.avatar = response.profiles[0].avatar;
+          $scope.email = response.values[0].email;
+          $scope.username = response.values[0].username;
+          $scope.avatar = response.values[0].avatar;
         }
       });
     };

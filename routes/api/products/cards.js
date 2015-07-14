@@ -2,16 +2,15 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require('mongoose');
-var Cards = require('../../../models/Card');
+var Model = Card = require('../../../models/Card');
 
 var _ = require('lodash');
 
 /* GET products */
 router.get('/', function(req, res, next) {
-
   var random = req.query.random;
 
-  var products = {};
+  // apply filters
   var count = 0;
 
   var query = {};
@@ -19,9 +18,7 @@ router.get('/', function(req, res, next) {
   var limit = req.query.limit;
   var skip = req.query.skip;
 
-  var search = req.query.search;
-
-  search = JSON.parse(search);
+  var search = JSON.parse(req.query.search);
 
   if (!search.name) {
     search.name = new RegExp('(.*?)', 'i');
@@ -31,21 +28,20 @@ router.get('/', function(req, res, next) {
   }
 
   var chain = [
-
     // get count
     function() {
-      query = Cards.count(search);
+      query = Model.count(search);
       query.exec(chain.shift());
     },
 
-    // search products
+    // search for models
     function(err, data) {
       count = data;
 
       if (random === 'true') {
-        query = Cards.findRandom(search);
+        query = Model.findRandom(search);
       } else {
-        query = Cards.find(search);
+        query = Model.find(search);
       }
 
       query = query.skip(skip)
@@ -53,18 +49,13 @@ router.get('/', function(req, res, next) {
       query.exec(chain.shift());
     },
 
+    // return response
     function(err, data) {
-      res.json({ products: data, count: count });
+      res.json({ values: data, count: count });
     },
   ];
 
   chain.shift()();
-
-});
-
-/* POST products */
-router.post('/', function() {
-
 });
 
 module.exports = router;

@@ -61,7 +61,7 @@
             }).
               success(function(data, status, headers, config) {
                 if (data.count === 1) {
-                  $rootScope.$broadcast('user signed in', data.profiles[0]);
+                  $rootScope.$broadcast('user signed in', data.values[0]);
                   $scope.closeUserFormModal();
                 } else {
                   $scope.forms.error = { 'profile' : true, 'message' : 'Perfil não encontrado' };

@@ -11,7 +11,7 @@
     };
 
     var loadSession = function(sessionId) {
-      var promise = $http.get('/api/sessions', { params: { id : sessionId } }).then(function(response) {
+      var promise = $http.get('/api/sessions', { params: { search: { '_id': sessionId } } }).then(function(response) {
         return response.data;
       });
 
@@ -20,16 +20,20 @@
 
     var loadProfile = function(sessionId) {
       var promise = loadSession(sessionId).then(function(response) {
-        var session = response;
-        
+        if (response.count != 1) {
+          return null;
+        }
+
+        var session = response.values[0];
+
         if (session && session.profileId) {
-          return $http.get('/api/profiles', { cache: true, params: { search: { _id: session.profileId } } });
+          return $http.get('/api/profiles', { params: { search: { '_id': session.profileId } } });
         }
 
         return null;
       })
       .then(function(response) {
-        if (response) {
+        if (response && response.data.count == 1) {
           return response.data;
         }
 

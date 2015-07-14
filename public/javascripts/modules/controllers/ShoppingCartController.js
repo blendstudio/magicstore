@@ -1,6 +1,8 @@
 (function() {
 
-  angular.module('store').controller('ShoppingCartController', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
+  angular.module('store').controller('ShoppingCartController',
+    ['$http', '$rootScope', '$scope',
+    function($http, $rootScope, $scope) {
 
     $scope.modal = false;
 
