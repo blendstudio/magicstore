@@ -23,6 +23,10 @@
     .state('shopping cart', {
        url: '/carrinho',
       templateUrl: '/states/cart.jade'
+    })
+    .state('administration', {
+       url: '/admin',
+      templateUrl: '/states/admin.jade'
     });
 
   }]);

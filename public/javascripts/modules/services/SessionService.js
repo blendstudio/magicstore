@@ -39,8 +39,8 @@
     var loadProfile = function(sessionId) {
       var promise = loadSession(sessionId).then(function(response) {
         var session = response;
-
-        if (session.profileId) {
+        
+        if (session && session.profileId) {
           return $http.get('/api/profiles', { params: { search: { _id: session.profileId } } });
         }
 
@@ -51,7 +51,7 @@
           setProfile(response.data);
           return response.data;
         }
-        
+
         return null;
       });
 
