@@ -7,19 +7,19 @@
     var isSignedProfileAdmin = function() {
       if ($cookies.sid) {
         // load profile from session id stored in cookie
-        SessionService.loadProfile($cookies.sid).then(function (response) {
+        var promise = SessionService.loadProfile($cookies.sid).then(function (response) {
           // if there is no response, or no profile that is an admin, false
           if (!response) {
             return false;
           }
-          else if (!(response.profiles[0].types
-              && response.profiles[0].types.contains('admin'))) {
+          else if (!(response.values[0].types
+              && response.values[0].types.includes('admin'))) {
             return false;
           }
           return true;
         });
-        // if service fails to run, false
-        return false;
+
+        return promise;
       }
 
       // if no cookie, no session, no profile
@@ -28,9 +28,11 @@
 
     // redirect user if he is not an admin
     var checkPermission = function() {
-      if (!isSignedProfileAdmin()) {
-        $state.go('home');
-      }
+      isSignedProfileAdmin().then(function(value) {
+        if (!value) {
+          $state.go('home');
+        }
+      });
     };
 
     // redirect user if he is not an admin

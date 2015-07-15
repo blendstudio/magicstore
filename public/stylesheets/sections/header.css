@@ -10,6 +10,7 @@
 #header img.logo {
   width: 170px;
   height: 50px;
+  margin-left: 1vw;
 }
 
 #header .profile {
