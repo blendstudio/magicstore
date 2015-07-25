@@ -1,11 +1,15 @@
 (function() {
 
   angular.module('store').controller('MenuController',
-    ['SessionService', '$cookies', '$location', '$scope', '$state',
-    function(SessionService, $cookies, $location, $scope, $state) {
+    ['SessionService', '$cookies', '$location', '$scope', '$sessionStorage', '$state',
+    function(SessionService, $cookies, $location, $scope, $sessionStorage, $state) {
 
-    $scope.admin = false;
-    $scope.menu  = 'nav';
+    $scope.admin    = false;
+    $scope.$storage = $sessionStorage;
+
+    if (!$scope.$storage.menu) {
+      $scope.$storage.menu = 'nav';
+    }
 
     // load profile
     $scope.loadProfile = function() {
@@ -21,7 +25,7 @@
     };
 
     $scope.activateMenu = function(menu) {
-      $scope.menu = menu;
+      $scope.$storage.menu = menu;
     };
 
     $scope.navigate = function(state, params) {

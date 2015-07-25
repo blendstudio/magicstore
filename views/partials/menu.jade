@@ -1,9 +1,10 @@
 
 nav#menu(ng-controller='MenuController')
   nav.menu-switch
-    img(src='/images/icons/menu.png' ng-click='activateMenu("nav")' ng-class='menu === "nav" ? "active" : "" ')
-    img(src='/images/icons/wrench.png' ng-click='activateMenu("admin")' ng-class='menu === "admin" ? "active" : "" ' ng-show='admin')
-  ul#nav(ng-show='menu === "nav"')
+    img(src='/images/icons/menu.png' ng-click='activateMenu("nav")' ng-class='$storage.menu === "nav" ? "active" : "" ')
+    img(src='/images/icons/wrench.png' ng-click='activateMenu("admin")' ng-class='$storage.menu === "admin" ? "active" : "" ' ng-show='admin')
+    
+  ul#nav(ng-show='$storage.menu === "nav"')
     hr
     li(ui-sref-active="active-parent") #[a(href='' ui-sref='home') Começo]
     
@@ -39,3 +40,22 @@ nav#menu(ng-controller='MenuController')
     
     hr
     li(ui-sref-active="active-parent") #[a(href='' ui-sref='contact') Contato]
+    
+  ul#nav(ng-show='$storage.menu === "admin"')
+    hr
+    li(ui-sref-active="active-parent") #[a(href='' ui-sref='administration.start') Começo]
+    
+    hr
+    li(ui-sref-active="active-parent") #[a(href='' ui-sref='administration.resources({ "resource" : "products" })') Produtos]
+      ul
+        li(ui-sref-active="active") #[a(href='' ui-sref='administration.resources.option({ "resource" : "products", "option" : "create" })') Novo produto]
+        li(ui-sref-active="active") #[a(href='' ui-sref='administration.resources.option({ "resource" : "products", "option" : "read" })') Consultar produto]
+        li(ui-sref-active="active") #[a(href='' ui-sref='administration.resources.option({ "resource" : "products", "option" : "edit" })') Editar produto]
+        li(ui-sref-active="active") #[a(href='' ui-sref='administration.resources.option({ "resource" : "products", "option" : "remove" })') Remover produto]
+        
+    hr
+    li(ui-sref-active="active-parent") #[a(href='' ui-sref='administration.resources({ "resource" : "users", "option" : "read" })') Usuários]
+      ul
+        li(ui-sref-active="active") #[a(href='' ui-sref='administration.resources.option({ "resource" : "users", "option" : "read" })') Consultar usuários]
+        li(ui-sref-active="active") #[a(href='' ui-sref='administration.resources.option({ "resource" : "users", "option" : "edit" })') Editar usuários]
+        li(ui-sref-active="active") #[a(href='' ui-sref='administration.resources.option({ "resource" : "users", "option" : "remove" })') Remover usuários]

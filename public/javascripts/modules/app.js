@@ -1,6 +1,6 @@
 (function() {
 
-  var app = angular.module('store', ['ui.router', 'ngCookies', 'ngMessages', 'angular-md5']);
+  var app = angular.module('store', ['angular-md5', 'ngCookies', 'ngMessages', 'ngStorage', 'ui.router']);
 
   app.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', function($httpProvider, $stateProvider, $urlRouterProvider) {
 
@@ -83,7 +83,21 @@
     .state('administration', {
       url: '/admin',
       templateUrl: '/states/admin.jade'
-    });
+    })
+    .state('administration.start', {
+      url: '/start',
+      templateUrl: '/states/admin.jade'
+    })
+    .state('administration.resources', {
+      url: '/:resource',
+      templateUrl: '/states/admin.jade'
+    })
+    .state('administration.resources.option', {
+      url: '/:option',
+      templateUrl: '/states/admin.jade'
+    })
+
+    ;
 
     // unknown states go to home
     $urlRouterProvider.otherwise('/');

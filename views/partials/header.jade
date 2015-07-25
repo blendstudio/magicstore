@@ -4,16 +4,15 @@ section#header(ng-controller='SessionController')
   img.logo.pointer(src='images/ms-logo.png' ng-click='navigate("home")')
   
   span.profile
-    a.button.glow(href='' ng-hide='signedIn' ng-click='showModal("UserForm")') Entrar 
+    img.icon(ng-hide='signedIn' ng-click='showModal("UserForm")' ng-src='{{ "/images/icons/signin.png" }}' alt='Entrar') 
     
     div.profile-link.pointer(href='' ng-click='navigate("profile")')
       img.avatar(ng-show='avatar' ng-src='{{ avatar ? avatar : "/images/avatars/null.png" }}')
       strong.pointer.link(ng-show='signedIn') {{ username.truncate(12) }}
 
-    section#shopping-cart-button
-      img(ng-click='showModal("ShoppingCart")' ng-src='{{ "/images/icons/cartBrenomi.png" }}') 
-      
-    a.button(href='' ng-show='signedIn' ng-click='closeSession()') Sair
+    img.icon(ng-click='showModal("ShoppingCart")' ng-src='{{ "/images/icons/cart.png" }}' alt='Carrinho de compras')
+    
+    img.icon(ng-show='signedIn' ng-click='closeSession()' ng-src='{{ "/images/icons/signout.png" }}' alt='Sair')
     
 
   include ./user-form.jade 
