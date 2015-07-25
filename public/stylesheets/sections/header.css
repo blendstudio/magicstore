@@ -56,6 +56,6 @@
 
 #header img.icon.glow {
   -webkit-animation-name: glow;
-  -webkit-animation-duration: 4s;
+  -webkit-animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
 }
