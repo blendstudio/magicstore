@@ -47,3 +47,19 @@
 #header img.icon:hover {
   transform: scale(1.5);
 }
+
+@-webkit-keyframes pulse {
+  from { transform: scale(1.0); }
+  50% { transform: scale(1.5); }
+  to { transform: scale(1.0); }
+}
+
+#header img.icon.signin {
+  -webkit-animation-name: pulse;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
+}
+
+#header img.icon.signin:hover {
+  -webkit-animation-name: none;
+}
