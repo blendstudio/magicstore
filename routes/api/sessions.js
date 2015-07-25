@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require('mongoose');
-var Model = Session = require('../../models/session');
+var Model = Session = require('../../models/Session');
 
 var _ = require('lodash');
 
