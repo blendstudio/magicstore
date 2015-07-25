@@ -1,0 +1,36 @@
+ul#nav(ng-show='$storage.menu === "nav"')
+  hr
+  li(ui-sref-active="active-parent") #[a(href='' ui-sref='home') Começo]
+  
+  hr
+  li(ui-sref-active="active-parent") #[a(href='' ui-sref='products.mtg') Magic The Gathering]
+    ul
+      li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "cartas" })') Cartas]
+      li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "boosters" })') Boosters]
+      li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "decks" })') Decks]
+      li(ui-sref-active="active") 
+        a(href='' ui-sref='products.mtg.item({ "item" : "deckbuilders-toolkit" })') Deckbuilder's Toolkit
+      li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "fat-packs" })') Fat Packs]
+      li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "kit-prerelease" })') Kit Prerelease]
+      li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "outros" })') Outros]
+  
+  hr
+  li(ui-sref-active="active-parent") #[a(href='' ui-sref='products.accessories') Acessórios]
+    ul
+      li(ui-sref-active="active-parent") #[a(href='' ui-sref='products.accessories.category({ "category" : "mtg" })') Magic The Gathering]
+        ul
+          li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category.item({ "category" : "mtg", "item" : "deck-boxes" })') Deck Boxes]
+          li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category.item({ "category" : "mtg", "item" : "shields" })') Shields]
+          li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category.item({ "category" : "mtg", "item" : "ficharios-folhas" })') Fichários e Folhas]
+          li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category.item({ "category" : "mtg", "item" : "dados-marcadores" })') Dados e Marcadores]
+          li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category.item({ "category" : "mtg", "item" : "outros" })') Outros]
+      li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category({ "category" : "outros" })') Outros]
+  
+  hr
+  li(ui-sref-active="active-parent") #[a(href='' ui-sref='products.others({ "link" : "outros" })') Outros]
+  
+  hr
+  li(ui-sref-active="active-parent") #[a(href='' ui-sref='products.others({ "link" : "ingressos" })') Ingressos]
+  
+  hr
+  li(ui-sref-active="active-parent") #[a(href='' ui-sref='contact') Contato]

@@ -1,0 +1,9 @@
+
+nav#menu(ng-controller='MenuController')
+  
+  nav.menu-switch
+    img(src='/images/icons/menu.png' ng-click='activateMenu("nav")' ng-class='$storage.menu === "nav" ? "active" : "" ')
+    img(src='/images/icons/wrench.png' ng-click='activateMenu("admin")' ng-class='$storage.menu === "admin" ? "active" : "" ' ng-show='admin')
+  
+  include ./menu-navigation.jade
+  include ./menu-admininstration.jade

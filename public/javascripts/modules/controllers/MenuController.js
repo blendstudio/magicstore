@@ -45,6 +45,7 @@
 
     $scope.$on('user signed out', function(event) {
       $scope.admin = false;
+      $scope.$storage.menu = 'nav';
     });
 
     $scope.loadProfile();
