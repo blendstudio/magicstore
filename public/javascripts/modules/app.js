@@ -70,14 +70,6 @@
     })
 
     /*
-     * shopping cart
-     */
-    .state('shopping cart', {
-      url: '/carrinho',
-      templateUrl: '/states/cart.jade'
-    })
-
-    /*
      * administration
      */
     .state('administration', {
