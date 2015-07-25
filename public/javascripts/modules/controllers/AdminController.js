@@ -5,25 +5,19 @@
     function(SessionService, $cookies, $scope, $state) {
 
     var isSignedProfileAdmin = function() {
-      if ($cookies.sid) {
-        // load profile from session id stored in cookie
-        var promise = SessionService.loadProfile($cookies.sid).then(function (response) {
-          // if there is no response, or no profile that is an admin, false
-          if (!response) {
-            return false;
-          }
-          else if (!(response.values[0].types
-              && response.values[0].types.includes('admin'))) {
-            return false;
-          }
-          return true;
-        });
+      // load profile from session id stored in cookie
+      var promise = SessionService.loadProfile($cookies.sid).then(function (response) {
+        // if there is no response, or no profile that is an admin, false
+        if (!response) {
+          return false;
+        }
+        else if (!(response.values[0].types && response.values[0].types.includes('admin'))) {
+          return false;
+        }
+        return true;
+      });
 
-        return promise;
-      }
-
-      // if no cookie, no session, no profile
-      return false;
+      return promise;
     };
 
     // redirect user if he is not an admin
