@@ -51,6 +51,9 @@
       // set signed in flag to false
       $scope.signedIn = false;
 
+      // notify app that user signed out
+      $rootScope.$broadcast('user signed out');
+
       // create new anonymous session
       createSession();
 
@@ -77,8 +80,10 @@
       }
     };
 
-    // events
-
+    /*
+     * Events
+     */
+    
     $scope.$on('user signed in', function(event, profile) {
       // create new session if none
       if (!$scope.sid) {
@@ -90,7 +95,7 @@
         loadProfileToScope();
       });
 
-      $state.go('products');
+      $state.go('home');
     });
 
     // change state on spa
@@ -103,12 +108,6 @@
       // if there was a session, load profile to scope
       else {
         loadProfileToScope();
-      }
-
-      // redirect to default page if signed in
-      if ($state.current.name === 'home' && $scope.isSignedIn()) {
-        // TODO: change to real one
-        $state.go('products');
       }
     });
 

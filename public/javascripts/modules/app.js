@@ -4,30 +4,89 @@
 
   app.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', function($httpProvider, $stateProvider, $urlRouterProvider) {
 
-    // unknown urls go to /
-    $urlRouterProvider.otherwise('/');
-
     $stateProvider
+
+    /*
+     * home
+     */
     .state('home', {
       url: '/',
       templateUrl: '/states/home.jade'
     })
+
+    /*
+     * products
+     */
     .state('products', {
-       url: '/produtos',
+      url: '/produtos',
       templateUrl: '/states/products.jade'
     })
+
+    .state('products.mtg', {
+      url: '/mtg',
+      templateUrl: '/states/products.jade'
+    })
+    .state('products.mtg.item', {
+      url: '/:item',
+      templateUrl: '/states/products.jade'
+    })
+
+    .state('products.accessories', {
+      url: '/acessorios',
+      templateUrl: '/states/products.jade'
+    })
+    .state('products.accessories.item', {
+      url: '/:item',
+      templateUrl: '/states/products.jade'
+    })
+    .state('products.accessories.category', {
+      url: '/:category',
+      templateUrl: '/states/products.jade'
+    })
+    .state('products.accessories.category.item', {
+      url: '/:item',
+      templateUrl: '/states/products.jade'
+    })
+
+    .state('products.others', {
+      url: '/:link',
+      templateUrl: '/states/products.jade'
+    })
+
+    /*
+     * contact
+     */
+    .state('contact', {
+      url: '/contato',
+      templateUrl: '/states/contact.jade'
+    })
+
+    /*
+     * profile
+     */
     .state('profile', {
-       url: '/perfil',
+      url: '/perfil',
       templateUrl: '/states/profile.jade'
     })
+
+    /*
+     * shopping cart
+     */
     .state('shopping cart', {
-       url: '/carrinho',
+      url: '/carrinho',
       templateUrl: '/states/cart.jade'
     })
+
+    /*
+     * administration
+     */
     .state('administration', {
-       url: '/admin',
+      url: '/admin',
       templateUrl: '/states/admin.jade'
     });
+
+    // unknown states go to home
+    $urlRouterProvider.otherwise('/');
 
   }]);
 

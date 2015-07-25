@@ -11,6 +11,18 @@
   font-size: 100%;
 }
 
+@-webkit-keyframes glow {
+  from { background-color: #787674; -webkit-box-shadow: 0 0 4px #333; }
+  50% { background-color: #787674; -webkit-box-shadow: 0 0 12px #DAD8D6; }
+  to { background-color: #787674; -webkit-box-shadow: 0 0 4px #333; }
+}
+
+.button.glow {
+  -webkit-animation-name: glow;
+  -webkit-animation-duration: 4s;
+  -webkit-animation-iteration-count: infinite;
+}
+
 .button:hover {
   background: #989694;
   text-decoration: none;

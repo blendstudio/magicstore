@@ -1,34 +1,41 @@
 
-nav#menu
+nav#menu(ng-controller='MenuController')
   nav.menu-switch
-    img(src='/images/icons/menu.png')
-    img(src='/images/icons/settings.png')
-  ul
-    li #[a.active(href='') Começo]
-    li #[a(href='') Magic The Gathering]
-      ul.category
-        li #[a(href='') Cartas]
-        li #[a(href='') Boosters]
-        li #[a(href='') Decks]
-        li 
-          a(href='') Deckbuilder's Toolkit
-        li #[a(href='') Fat Packs] 
-        li #[a(href='') Kit Prerelease] 
-        li #[a(href='') Outros] 
+    img(src='/images/icons/menu.png' ng-click='activateMenu("nav")' ng-class='menu === "nav" ? "active" : "" ')
+    img(src='/images/icons/wrench.png' ng-click='activateMenu("admin")' ng-class='menu === "admin" ? "active" : "" ' ng-show='admin')
+  ul#nav(ng-show='menu === "nav"')
+    hr
+    li(ui-sref-active="active-parent") #[a(href='' ui-sref='home') Começo]
     
-    li #[a(href='') Jogos de Tabuleiro] 
+    hr
+    li(ui-sref-active="active-parent") #[a(href='' ui-sref='products.mtg') Magic The Gathering]
+      ul
+        li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "cartas" })') Cartas]
+        li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "boosters" })') Boosters]
+        li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "decks" })') Decks]
+        li(ui-sref-active="active") 
+          a(href='' ui-sref='products.mtg.item({ "item" : "deckbuilders-toolkit" })') Deckbuilder's Toolkit
+        li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "fat-packs" })') Fat Packs]
+        li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "kit-prerelease" })') Kit Prerelease]
+        li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "outros" })') Outros]
     
-    li #[a(href='') Acessórios] 
-      ul.category
-        li #[a(href='') Magic The Gathering] 
-          ul.category
-            li #[a(href='') Deck Boxes] 
-            li #[a(href='') Shields] 
-            li #[a(href='') Fichários e Folhas] 
-            li #[a(href='') Dados e Marcadores] 
-            li #[a(href='') Outros] 
-        li #[a(href='') Outros] 
+    hr
+    li(ui-sref-active="active-parent") #[a(href='' ui-sref='products.accessories') Acessórios]
+      ul
+        li(ui-sref-active="active-parent") #[a(href='' ui-sref='products.accessories.category({ "category" : "mtg" })') Magic The Gathering]
+          ul
+            li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category.item({ "category" : "mtg", "item" : "deck-boxes" })') Deck Boxes]
+            li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category.item({ "category" : "mtg", "item" : "shields" })') Shields]
+            li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category.item({ "category" : "mtg", "item" : "ficharios-folhas" })') Fichários e Folhas]
+            li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category.item({ "category" : "mtg", "item" : "dados-marcadores" })') Dados e Marcadores]
+            li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category.item({ "category" : "mtg", "item" : "outros" })') Outros]
+        li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category({ "category" : "outros" })') Outros]
     
-    li #[a(href='') Outros] 
-    li #[a(href='') Ingressos] 
-    li #[a(href='') Fale Conosco] 
+    hr
+    li(ui-sref-active="active-parent") #[a(href='' ui-sref='products.others({ "link" : "outros" })') Outros]
+    
+    hr
+    li(ui-sref-active="active-parent") #[a(href='' ui-sref='products.others({ "link" : "ingressos" })') Ingressos]
+    
+    hr
+    li(ui-sref-active="active-parent") #[a(href='' ui-sref='contact') Contato]
