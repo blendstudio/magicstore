@@ -1,0 +1,12 @@
+section#edit-avatar.modal(ng-controller='AvatarController' ng-show='modal' ng-click='closeModal()')
+  
+  section.modal-content(ng-click='$event.stopPropagation()')
+    section
+      h2 Avatar
+      br
+    form(action='/api/profiles/edit-avatar', method='post', enctype='multipart/form-data')
+      input(type='file', name='avatar')
+      input(type='hidden', name='email', ng-value='email')
+      br
+      br
+      input(type='submit', value='Enviar' ng-click='refresh()')

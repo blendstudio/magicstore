@@ -12,16 +12,16 @@ div(ng-controller='ProfileController')
     
     div.avatar-image-container
       div.avatar-image
-        img.pointer(src='{{avatar}}')
+        p(class='center')
+          img.pointer(ng-click='showModal("EditAvatar")' src='{{avatar}}' alt='Trocar Avatar')
       
-      div.avatar-edition.middle.avaible(ng-show='isProdutcAvaible(cards[0]) && selected[cards[0].searchName + cards[0].id].quantity' class='{{ hasSelectedProdutcItemDiscount(cards[0]) ? "large" : "small" }}')
+      div.avatar-edition.middle.avaible
         div.avatar-edition-component.edit-button
           p(class='center')
-            strong(class='darker') Trocar Avatar
+            strong(class='darker') {{ username }}
             
     div.card-informations
       div.product-information
-        strong.pointer.big {{ username }}
         hr
         table
           tr
@@ -90,3 +90,5 @@ div(ng-controller='ProfileController')
   div.row
     
   hr
+
+  include ../partials/edit-avatar.jade

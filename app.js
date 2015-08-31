@@ -60,7 +60,7 @@ var routes = require('./routes/index');
 
 // api routes
 var apiProducts = require('./routes/api/products/products');
-var apiCards = require('./routes/api/products/cards');
+var apiCards    = require('./routes/api/products/cards');
 var apiAccounts = require('./routes/api/accounts');
 var apiProfiles = require('./routes/api/profiles');
 var apiSessions = require('./routes/api/sessions');

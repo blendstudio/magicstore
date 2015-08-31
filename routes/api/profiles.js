@@ -1,5 +1,16 @@
 var express = require('express');
-var router = express.Router();
+var multer  = require('multer');
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/images/avatars');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname+'.png');
+  }
+});
+var upload  = multer({ storage: storage });
+var fs = require('fs');
+var router  = express.Router();
 
 var mongoose = require('mongoose');
 var Model = Profile = require('../../models/Profile');
@@ -73,5 +84,12 @@ router.post('/', function(req, res, next) {
   });
 
 });
+
+/* POST profiles resources. */
+router.post('/edit-avatar', upload.single('avatar'), function(req, res, next) {
+  fs.rename('public/images/avatars/avatar.png', 'public/images/avatars/'+req.body.email+'.png');
+  res.status(204).end();
+ });
+
 
 module.exports = router;
