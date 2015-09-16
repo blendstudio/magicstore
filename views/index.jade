@@ -2,34 +2,28 @@ doctype html
 html(ng-app='store')
   head
     title #{title}
-    
     meta(name='viewport' content='width=device-width, initial-scale=1')
-    
     link(rel='stylesheet', href='/stylesheets/style.css')
     
   body
 
     include ./partials/header.jade
-    
     include ./partials/menus/menu.jade
     
-    div#main-content(ui-view)
-    
-    script(src='/javascripts/libraries/string.js')
+    #main-content(ui-view)
       
-    script(src='/vendor/lodash/lodash.min.js')
+    script(src='/javascripts/libraries/string.js')
 
+    script(src='/vendor/lodash/lodash.min.js')
     script(src='/vendor/angular/angular.min.js')
+    script(src='/vendor/ngstorage/ngStorage.min.js')
+    script(src='/vendor/angular-md5/angular-md5.min.js')
+    script(src='/vendor/angular-cookies/angular-cookies.min.js')
+    script(src='/vendor/angular-animate/angular-animate.min.js')
+    script(src='/vendor/angular-messages/angular-messages.min.js')
     script(src='/vendor/ui-router/release/angular-ui-router.min.js')
     script(src='/vendor/angular-locale-pt-br/angular-locale_pt-br.js')
     
-    script(src='/vendor/angular-cookies/angular-cookies.min.js')
-    script(src='/vendor/angular-md5/angular-md5.min.js')
-    script(src='/vendor/ngstorage/ngStorage.min.js')
-    
-    script(src='/vendor/angular-messages/angular-messages.min.js')
-    script(src='/vendor/angular-animate/angular-animate.min.js')
-
     script(src='/javascripts/modules/app.js')
     script(src='/javascripts/modules/services/SessionService.js')
     script(src='/javascripts/modules/controllers/MenuController.js')

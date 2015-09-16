@@ -1,20 +1,21 @@
 
-section.modal {
+.modal {
+  top: 0;
+  left: 0;
+  width: 60vw;
+  height: 60vh;
+  padding: 20vh 20vw 20vh 20vw;
   background-color: rgba(0, 0, 0, 0.75);
   position: absolute;
-  left: 0;
-  top: 0;
-  height: 60vh;
-  width: 60vw;
-  padding: 20vh 20vw 20vh 20vw;
-  z-index: 1;
+  z-index: 1000;
 }
 
-section.modal .modal-content {
-  background: url("../images/backgrounds/rockywall.png");
-  width: 55vw;
-  padding: 4px 4px 10px 20px;
+.modal .modal-content {
+  width: 60vw;
+  max-width: 60vw;
   border-radius: 20px;
+  padding: 4px 20px 4px 20px;
+  background: url("../images/backgrounds/rockywall.png");
   position: relative;
-  z-index: 1;
+  z-index: 1000;
 }

@@ -1,2 +1,87 @@
 
 section#admin(ng-controller='AdminController')
+
+  section.add-card
+
+    section.card-preview
+      
+      span.input
+        label(for='card-id') Multiverse ID 
+        input(ng-model='card.id' type='text' id='card-id')
+      
+      div(ng-show='card.id')
+        a(ng-href='http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid={{card.id}}' target='_blank')
+          img.card-image(ng-src='http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid={{card.id}}&type=card')
+    
+    section.right
+      
+      .row
+        span.input
+          label(for='card-name') Nome 
+          input(ng-model='card.name' type='text' id='card-name')
+      
+      .row
+        span.input
+          label(for='card-mana-cost') Custo de Mana 
+          input(ng-model='card.manaCost' type='text' id='card-mana-cost')
+        
+        br
+        span.input
+          label(for='card-converted-mana-cost') Custo de Mana Convertido 
+          input(ng-model='card.convertedManaCost' type='number' id='card-converted-mana-cost')
+      
+      .row
+        span.input
+          label(for='card-type') Tipo 
+          input(ng-model='card.type' type='text' id='card-type')
+          
+        br
+        span.input
+          label(for='card-subtype') Subtipo 
+          input(ng-model='card.subtype' type='text' id='card-subtype')
+      
+      .row
+        span.input
+          label(for='card-rule') Regras 
+          textarea(ng-model='card.rule' id='card-rule')
+        
+        br
+        span.input
+          label(for='card-flavor') Flavor 
+          textarea(ng-model='card.flavor' id='card-flavor')
+        
+      .row
+        span.input
+          label(for='card-power') Poder 
+          input(ng-model='card.power' type='text' id='card-power')
+          
+        br
+        span.input
+          label(for='card-toughness') Resistência 
+          input(ng-model='card.toughness' type='text' id='card-toughness')
+        
+      .row
+        span.input
+          label(for='card-loyalty') Lealdade 
+          input(ng-model='card.loyalty' type='text' id='card-loyalty')
+        
+      .row
+        span.input
+          label(for='card-expansion') Expansão 
+          input(ng-model='card.expansion' type='text' id='card-expansion')
+        
+        br
+        span.input
+          label(for='card-rarity') Raridade 
+          input(ng-model='card.rarity' type='text' id='card-rarity')
+        
+      .row
+        span.input
+          label(for='card-watermark') Marca d'água 
+          input(ng-model='card.watermark' type='text' id='card-watermark')
+          
+        br
+        span.input
+          label(for='card-artist') Artista 
+          input(ng-model='card.artist' type='text' id='card-artist')
+        

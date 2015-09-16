@@ -1,0 +1,84 @@
+/* card image */
+section#admin img.card-image {
+  width: 223px;
+  height: 310px;
+  border-radius: 15px;
+  margin: 100px 70px 100px 70px;
+}
+
+section#admin img.card-image {
+  border-radius: 15px;
+  transition: all 0.25s ease;
+}
+
+section#admin img.card-image:hover {
+  transform: scale(1.5);
+  border-radius: 15px;
+}
+
+section#admin section.card-preview {
+  float: left;
+  min-width: 363px;
+  min-height: 604px;
+  margin: 40px 20px 0 70px;
+  background-color: rgba(23, 26, 23, 0.5);
+  padding: 10px;
+  border-radius: 7px;
+}
+
+section#admin section.right {
+  float: left;
+  margin: 40px 0 0 0;
+  border-radius: 7px;
+  background-color: rgba(23, 26, 23, 0.5);
+  height: 335px;
+  width: 640px;
+  overflow-y: scroll;
+}
+
+section#admin section.card-preview span.input {
+  margin: auto;
+  display: table;
+  padding: 2px 2px 2px 12px;
+}
+
+section#admin section.right span.input {
+  width: calc(100% - 14px);
+  display: inline-block;
+  padding: 2px 2px 2px 12px;
+  margin: 2px 0 2px 0;
+}
+
+section#admin section.right span.input textarea {
+  margin: 0 0 0 3px;
+  display: inline-block;
+  width: 200px;
+  height: 50px;
+  resize: none;
+  float: left;
+}
+
+section#admin .row {
+  width: calc(100% - 20px);
+  background: #787674;
+  border-radius: 7px;
+  margin: 10px;
+}
+
+section#admin section.right span.input textarea:focus {
+  outline: none;
+}
+
+section#admin section.right span.input label {
+  display: inline-block;
+  margin-top: 3px;
+  width: 100px;
+  max-width: 100px;
+  text-align: right;
+  float: left;
+}
+
+section#admin section.right span.input input {
+  float: right;
+  width: 200px;
+}

@@ -1,36 +1,36 @@
-ul#nav(ng-show='$storage.menu === "nav"')
+ul#nav(ng-show='$storage.menu === "nav"' ng-class='selectedMenu')
   hr
-  li(ui-sref-active="active-parent") #[a(href='' ui-sref='home') Começo]
+  li(ui-sref-active="active-parent") #[a(href='' ui-sref='home' ng-click='selectedMenu = undefined') Começo]
   
   hr
-  li(ui-sref-active="active-parent") #[a(href='' ui-sref='products.mtg') Magic The Gathering]
+  li(ui-sref-active="active-parent") #[a(href='' ui-sref='products.mtg' ng-click='selectedMenu = undefined') Magic The Gathering]
     ul
-      li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "cartas" })') Cartas]
-      li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "boosters" })') Boosters]
-      li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "decks" })') Decks]
+      li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "cartas" })' ng-click='selectedMenu = undefined') Cartas]
+      li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "boosters" })' ng-click='selectedMenu = undefined') Boosters]
+      li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "decks" })' ng-click='selectedMenu = undefined') Decks]
       li(ui-sref-active="active") 
-        a(href='' ui-sref='products.mtg.item({ "item" : "deckbuilders-toolkit" })') Deckbuilder's Toolkit
-      li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "fat-packs" })') Fat Packs]
-      li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "kit-prerelease" })') Kit Prerelease]
-      li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "outros" })') Outros]
+        a(href='' ui-sref='products.mtg.item({ "item" : "deckbuilders-toolkit" })' ng-click='selectedMenu = undefined') Deckbuilder's Toolkit
+      li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "fat-packs" })' ng-click='selectedMenu = undefined') Fat Packs]
+      li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "kit-prerelease" })' ng-click='selectedMenu = undefined') Kit Prerelease]
+      li(ui-sref-active="active") #[a(href='' ui-sref='products.mtg.item({ "item" : "outros" })' ng-click='selectedMenu = undefined') Outros]
   
   hr
-  li(ui-sref-active="active-parent") #[a(href='' ui-sref='products.accessories') Acessórios]
+  li(ui-sref-active="active-parent") #[a(href='' ui-sref='products.accessories' ng-click='selectedMenu = undefined') Acessórios]
     ul
-      li(ui-sref-active="active-parent") #[a(href='' ui-sref='products.accessories.category({ "category" : "mtg" })') Magic The Gathering]
+      li(ui-sref-active="active-parent") #[a(href='' ui-sref='products.accessories.category({ "category" : "mtg" })' ng-click='selectedMenu = undefined') Magic The Gathering]
         ul
-          li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category.item({ "category" : "mtg", "item" : "deck-boxes" })') Deck Boxes]
-          li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category.item({ "category" : "mtg", "item" : "shields" })') Shields]
-          li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category.item({ "category" : "mtg", "item" : "ficharios-folhas" })') Fichários e Folhas]
-          li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category.item({ "category" : "mtg", "item" : "dados-marcadores" })') Dados e Marcadores]
-          li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category.item({ "category" : "mtg", "item" : "outros" })') Outros]
-      li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category({ "category" : "outros" })') Outros]
+          li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category.item({ "category" : "mtg", "item" : "deck-boxes" })' ng-click='selectedMenu = undefined') Deck Boxes]
+          li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category.item({ "category" : "mtg", "item" : "shields" })' ng-click='selectedMenu = undefined') Shields]
+          li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category.item({ "category" : "mtg", "item" : "ficharios-folhas" })' ng-click='selectedMenu = undefined') Fichários e Folhas]
+          li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category.item({ "category" : "mtg", "item" : "dados-marcadores" })' ng-click='selectedMenu = undefined') Dados e Marcadores]
+          li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category.item({ "category" : "mtg", "item" : "outros" })' ng-click='selectedMenu = undefined') Outros]
+      li(ui-sref-active="active") #[a(href='' ui-sref='products.accessories.category({ "category" : "outros" })' ng-click='selectedMenu = undefined') Outros]
   
   hr
-  li(ui-sref-active="active-parent") #[a(href='' ui-sref='products.others({ "link" : "outros" })') Outros]
+  li(ui-sref-active="active-parent") #[a(href='' ui-sref='products.others({ "link" : "outros" })' ng-click='selectedMenu = undefined') Outros]
   
   hr
-  li(ui-sref-active="active-parent") #[a(href='' ui-sref='products.others({ "link" : "ingressos" })') Ingressos]
+  li(ui-sref-active="active-parent") #[a(href='' ui-sref='products.others({ "link" : "ingressos" })' ng-click='selectedMenu = undefined') Ingressos]
   
   hr
-  li(ui-sref-active="active-parent") #[a(href='' ui-sref='contact') Contato]
+  li(ui-sref-active="active-parent") #[a(href='' ui-sref='contact' ng-click='selectedMenu = undefined') Contato]

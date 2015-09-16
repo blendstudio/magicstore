@@ -1,18 +1,18 @@
-ul#nav(ng-show='$storage.menu === "admin"')
+ul#nav(ng-show='$storage.menu === "admin"' ng-class='selectedMenu')
   hr
-  li(ui-sref-active="active-parent") #[a(href='' ui-sref='administration.start') Começo]
+  li(ui-sref-active="active-parent") #[a(href='' ui-sref='administration.start' ng-click='selectedMenu = undefined') Começo]
   
   hr
-  li(ui-sref-active="active-parent") #[a(href='' ui-sref='administration.resources({ "resource" : "products" })') Produtos]
+  li(ui-sref-active="active-parent") #[a(href='' ui-sref='administration.resources({ "resource" : "products" })' ng-click='selectedMenu = undefined') Produtos]
     ul
-      li(ui-sref-active="active") #[a(href='' ui-sref='administration.resources.option({ "resource" : "products", "option" : "create" })') Novo produto]
-      li(ui-sref-active="active") #[a(href='' ui-sref='administration.resources.option({ "resource" : "products", "option" : "read" })') Consultar produto]
-      li(ui-sref-active="active") #[a(href='' ui-sref='administration.resources.option({ "resource" : "products", "option" : "edit" })') Editar produto]
-      li(ui-sref-active="active") #[a(href='' ui-sref='administration.resources.option({ "resource" : "products", "option" : "remove" })') Remover produto]
+      li(ui-sref-active="active") #[a(href='' ui-sref='administration.resources.option({ "resource" : "products", "option" : "create" })' ng-click='selectedMenu = undefined') Novo produto]
+      li(ui-sref-active="active") #[a(href='' ui-sref='administration.resources.option({ "resource" : "products", "option" : "read" })' ng-click='selectedMenu = undefined') Consultar produto]
+      li(ui-sref-active="active") #[a(href='' ui-sref='administration.resources.option({ "resource" : "products", "option" : "edit" })' ng-click='selectedMenu = undefined') Editar produto]
+      li(ui-sref-active="active") #[a(href='' ui-sref='administration.resources.option({ "resource" : "products", "option" : "remove" })' ng-click='selectedMenu = undefined') Remover produto]
       
   hr
-  li(ui-sref-active="active-parent") #[a(href='' ui-sref='administration.resources({ "resource" : "users", "option" : "read" })') Usuários]
+  li(ui-sref-active="active-parent") #[a(href='' ui-sref='administration.resources({ "resource" : "users", "option" : "read" })' ng-click='selectedMenu = undefined') Usuários]
     ul
-      li(ui-sref-active="active") #[a(href='' ui-sref='administration.resources.option({ "resource" : "users", "option" : "read" })') Consultar usuários]
-      li(ui-sref-active="active") #[a(href='' ui-sref='administration.resources.option({ "resource" : "users", "option" : "edit" })') Editar usuários]
-      li(ui-sref-active="active") #[a(href='' ui-sref='administration.resources.option({ "resource" : "users", "option" : "remove" })') Remover usuários]
+      li(ui-sref-active="active") #[a(href='' ui-sref='administration.resources.option({ "resource" : "users", "option" : "read" })' ng-click='selectedMenu = undefined') Consultar usuários]
+      li(ui-sref-active="active") #[a(href='' ui-sref='administration.resources.option({ "resource" : "users", "option" : "edit" })' ng-click='selectedMenu = undefined') Editar usuários]
+      li(ui-sref-active="active") #[a(href='' ui-sref='administration.resources.option({ "resource" : "users", "option" : "remove" })' ng-click='selectedMenu = undefined') Remover usuários]

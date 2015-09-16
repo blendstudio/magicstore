@@ -4,8 +4,9 @@
     ['SessionService', '$cookies', '$location', '$scope', '$sessionStorage', '$state',
     function(SessionService, $cookies, $location, $scope, $sessionStorage, $state) {
 
-    $scope.admin    = false;
-    $scope.$storage = $sessionStorage;
+    $scope.admin        = false;
+    $scope.$storage     = $sessionStorage;
+    $scope.selectedMenu = undefined;
 
     if (!$scope.$storage.menu) {
       $scope.$storage.menu = 'nav';
@@ -26,6 +27,12 @@
 
     $scope.activateMenu = function(menu) {
       $scope.$storage.menu = menu;
+
+      if (!$scope.selectedMenu || $scope.selectedMenu !== 'active') {
+        $scope.selectedMenu = 'active';
+      } else {
+        $scope.selectedMenu = undefined;
+      }
     };
 
     $scope.navigate = function(state, params) {

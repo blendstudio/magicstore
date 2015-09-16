@@ -1,13 +1,13 @@
 
 .button {
-  cursor: pointer;
-  -webkit-user-select: none;
-  user-select: none;
-  border-radius: 7px;
-  text-decoration: none;
   color: #fff;
+  cursor: pointer;
   background: #787674;
+  text-decoration: none;
+  -webkit-user-select: none;
   padding: 4px 12px 4px 12px;
+  border-radius: 7px;
+  user-select: none;
   font-size: 100%;
 }
 

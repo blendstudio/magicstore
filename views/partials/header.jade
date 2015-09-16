@@ -1,14 +1,14 @@
 
-section#header(ng-controller='SessionController')
+#header(ng-controller='SessionController')
 
-  img.logo.pointer(src='images/ms-logo.png' ng-click='navigate("home")')
+  img#logo.pointer(src='images/ms-logo.png' ng-click='navigate("home")')
   
-  span.profile
-    img.icon.signin.glow(ng-hide='signedIn' ng-click='showModal("UserForm")' ng-src='{{ "/images/icons/signin.png" }}' alt='Entrar') 
+  #session-area
+    img.icon.glow(ng-hide='signedIn' ng-click='showModal("UserForm")' ng-src='{{ "/images/icons/signin.png" }}' alt='Entrar') 
     
-    div.profile-link.pointer(href='' ng-click='navigate("profile")')
-      img.avatar(ng-show='avatar' ng-src='{{ avatar ? avatar : "/images/avatars/null.png" }}')
-      strong.pointer.link(ng-show='signedIn') {{ username.truncate(12) }}
+    #profile-link(ng-click='navigate("profile")')
+      img.avatar-thumb(ng-show='avatar' ng-src='{{ avatar ? avatar : "/images/avatars/null.png" }}')
+      strong(ng-show='signedIn') {{ username.truncate(12) }}
 
     img.icon(ng-click='showModal("ShoppingCart")' ng-src='{{ "/images/icons/cart.png" }}' alt='Carrinho de compras')
     

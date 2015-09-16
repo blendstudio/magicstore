@@ -1,25 +1,27 @@
 
-@import 'scrollbar.css';
-@import 'semantic.css';
-@import 'buttons.css';
 @import 'modals.css';
+@import 'semantic.css';
+@import 'scrollbar.css';
+@import 'sections/menu.css';
+@import 'sections/header.css';
+
+@import 'buttons.css';
 @import 'forms.css';
 
 @import 'sections/products.css';
-@import 'sections/header.css';
+@import 'sections/admin.css';
 @import 'sections/cards.css';
-@import 'sections/menu.css';
 
 @import 'sections/pagination-panel.css';
 
 body {
-  margin: 0;
-  padding: 0;
-  font: 100% "Lucida Grande", Helvetica, Arial, sans-serif;
-  font-size: 75%;
   background: url("../images/backgrounds/rockywall.png");
   background-color: #484848;
   color: #b8b6b4;
+  font: 100% "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 75%;
+  padding: 0;
+  margin: 0;
 }
 
 a {
@@ -37,17 +39,13 @@ h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
 hr {
   background: #ccc;
   background-image: linear-gradient(to right, #383838, #000, #383838);
-  height: 1px;
   border: 0;
-}
-
-strong.link:hover {
-  color: #d8d6d4;
+  height: 1px;
 }
 
 #main-content {
-  padding: 8px 0 8px 12px;
   float: left;
+  padding: 8px 0 8px 12px;
   width: 60vw;
 }
 
@@ -56,7 +54,7 @@ strong.link:hover {
   #main-content {
     float: none;
     margin: 0 10vw 0 10vw;
-    width: calc(80vw - 22px);
+    width: 80vw;
   }
 
 }
