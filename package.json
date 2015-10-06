@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
+    "test": "tape ./tests/**/*.js | tap-difflet",
     "postinstall": "./node_modules/bower/bin/bower install",
     "nodemon": "nodemon ./bin/www",
     "windows-start-prd": "set NODE_ENV=production && nodemon ./bin/www"
@@ -23,5 +24,9 @@
     "request": "^2.55.0",
     "serve-favicon": "~2.2.0",
     "stylus": "0.42.3"
+  },
+  "devDependencies": {
+    "tap-difflet": "^0.4.0",
+    "tape": "^4.2.1"
   }
 }
