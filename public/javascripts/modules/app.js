@@ -1,6 +1,6 @@
 (function() {
 
-  var app = angular.module('store', ['angular-md5', 'ngCookies', 'ngMessages', 'ngStorage', 'ui.router']);
+  var app = angular.module('store', ['angular-md5', 'ngCookies', 'ngStorage', 'ui.router']);
 
   app.config(['$httpProvider', '$stateProvider', '$urlRouterProvider', function($httpProvider, $stateProvider, $urlRouterProvider) {
 
