@@ -8,29 +8,26 @@ var _ = require('lodash');
 
 /* GET products */
 router.get('/', function(req, res, next) {
-  var random = req.query.random;
-
   // apply filters
   var count = 0;
 
   var query = {};
 
-  var limit = req.query.limit;
   var skip = req.query.skip;
+  var limit = req.query.limit;
 
-  var search = JSON.parse(req.query.search);
+  var filter = JSON.parse(req.query.filter);
 
-  if (!search.name) {
-    search.name = new RegExp('(.*?)', 'i');
+  if (filter.name) {
+    filter.name = new RegExp(filter.name, 'i');
   } else {
-    search.name = new RegExp(search.name, 'i');
-    random = false;
+    filter.name = new RegExp('(.*?)', 'i');
   }
 
   var chain = [
     // get count
     function() {
-      query = Model.count(search);
+      query = Model.count(filter);
       query.exec(chain.shift());
     },
 
@@ -38,14 +35,14 @@ router.get('/', function(req, res, next) {
     function(err, data) {
       count = data;
 
-      if (random === 'true') {
-        query = Model.findRandom(search);
+      if (req.query.random === 'true') {
+        query = Model.findRandom(filter);
       } else {
-        query = Model.find(search);
+        query = Model.find(filter);
       }
 
-      query = query.skip(skip)
-                  .limit(limit);
+      query = query.skip(skip).limit(limit);
+
       query.exec(chain.shift());
     },
 

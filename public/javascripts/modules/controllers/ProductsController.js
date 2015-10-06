@@ -41,16 +41,14 @@
 
     $scope.search = function(query) {
 
-      var search = {};
+      var filter = {};
 
       if ($scope.getAvaibleOnly) {
-        search = {
-          stock: { $elemMatch: { quantity: { $gt: 0 } } }
-        };
+        filter.stock = { $elemMatch: { quantity: { $gt: 0 } } }
       }
 
       if (query) {
-        search.name = query;
+        filter.name = query;
       }
 
       var skip = ($scope.page - 1) * $scope.items;
@@ -58,10 +56,10 @@
       $http.get('/api/cards', {
           cache: true,
           params: {
-            random: $scope.random,
-            search: search,
+            filter: filter,
             skip: skip,
             limit: $scope.items,
+            random: $scope.random,
           },
       }).success(function(data) {
           $scope.setProductsCollection(data, skip, $scope.items);
