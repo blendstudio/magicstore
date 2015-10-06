@@ -2,4 +2,7 @@
 # Dependency directory
 node_modules
 
+# Bower packages
+public/vendor
+
 public/images/cards
