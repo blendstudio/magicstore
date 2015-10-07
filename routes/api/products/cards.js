@@ -13,6 +13,15 @@ router.get('/', function(req, res, next) {
   // mongoose query
   var query = JSON.parse(req.query.query);
 
+  // apply like operator
+  var property = '';
+  for (var i = 0; i < query['search-options'].like.length; i++) {
+    property = query['search-options'].like[i];
+    if (query.conditions[property]) {
+      query.conditions[property] = new RegExp(query.conditions[property], 'i');
+    }
+  }
+
   var count = 0;
   var chain = [
     // get count
@@ -26,8 +35,7 @@ router.get('/', function(req, res, next) {
       if (err) { throw err; }
 
       count = data;
-      console.log(query.random);
-      if (query.random === true) {
+      if (query['query-options'].random === true) {
         q = Model.findRandom(query.conditions, query.projection, query.options);
       } else {
         q = Model.find(query.conditions, query.projection, query.options);

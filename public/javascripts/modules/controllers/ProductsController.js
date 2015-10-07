@@ -54,11 +54,14 @@
         query: {
           conditions: conditions,
           projection: null,
-          options: {
+          'query-options': {
             skip: skip,
             limit: $scope.items
           },
-          random: $scope.random
+          'search-options': {
+            random: $scope.random,
+            like: ['name']
+          }
         }
       }
 
