@@ -8,46 +8,37 @@ var _ = require('lodash');
 
 /* GET products */
 router.get('/', function(req, res, next) {
-  // apply filters
+  // mongoose query object
+  var q = {};
+  // mongoose query
+  var query = JSON.parse(req.query.query);
+
   var count = 0;
-
-  var query = {};
-
-  var skip = req.query.skip;
-  var limit = req.query.limit;
-
-  var filter = JSON.parse(req.query.filter);
-
-  if (filter.name) {
-    filter.name = new RegExp(filter.name, 'i');
-  } else {
-    filter.name = new RegExp('(.*?)', 'i');
-  }
-
   var chain = [
     // get count
     function() {
-      query = Model.count(filter);
-      query.exec(chain.shift());
+      q = Model.count(query.conditions);
+      q.exec(chain.shift());
     },
 
     // search for models
     function(err, data) {
-      count = data;
+      if (err) { throw err; }
 
-      if (req.query.random === 'true') {
-        query = Model.findRandom(filter);
+      count = data;
+      console.log(query.random);
+      if (query.random === true) {
+        q = Model.findRandom(query.conditions, query.projection, query.options);
       } else {
-        query = Model.find(filter);
+        q = Model.find(query.conditions, query.projection, query.options);
       }
 
-      query = query.skip(skip).limit(limit);
-
-      query.exec(chain.shift());
+      q.exec(chain.shift());
     },
 
     // return response
     function(err, data) {
+      if (err) { throw err; }
       res.json({ values: data, count: count });
     },
   ];

@@ -40,33 +40,35 @@
     };
 
     $scope.search = function(query) {
-
-      var filter = {};
-
-      if ($scope.getAvaibleOnly) {
-        filter.stock = { $elemMatch: { quantity: { $gt: 0 } } }
-      }
-
-      if (query) {
-        filter.name = query;
-      }
-
+      var conditions = {};
       var skip = ($scope.page - 1) * $scope.items;
 
-      $http.get('/api/cards', {
-          cache: true,
-          params: {
-            filter: filter,
+      if ($scope.getAvaibleOnly) {
+        conditions.stock = { $elemMatch: { quantity: { $gt: 0 } } }
+      }
+      if (query) {
+        conditions.name = query;
+      }
+
+      var params = {
+        query: {
+          conditions: conditions,
+          projection: null,
+          options: {
             skip: skip,
-            limit: $scope.items,
-            random: $scope.random,
+            limit: $scope.items
           },
-      }).success(function(data) {
-          $scope.setProductsCollection(data, skip, $scope.items);
-          $location.hash('product-list-top');
-          $anchorScroll();
-          $location.hash('');
-        });
+          random: $scope.random
+        }
+      }
+
+      $http.get('/api/cards', { cache: true, params: params })
+      .success(function(data) {
+        $scope.setProductsCollection(data, skip, $scope.items);
+        $location.hash('product-list-top');
+        $anchorScroll();
+        $location.hash('');
+      });
     };
 
     $scope.paginate = function(operation) {
