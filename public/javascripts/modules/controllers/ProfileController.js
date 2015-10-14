@@ -4,7 +4,7 @@
   ['SessionService', '$rootScope', '$scope', '$http', '$location', '$anchorScroll', '$cookies',
   function(SessionService, $rootScope, $scope, $http, $location, $anchorScroll, $cookies) {
 
-    $scope.sid = $cookies.sid;
+    $scope.sid = $cookies.get('sid');
 
     // load profile to scope to show username and avatar on view
     var loadProfileToScope = function() {

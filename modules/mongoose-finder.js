@@ -8,10 +8,12 @@ exports = module.exports = (function() {
         count    = 0;
 
     // apply like operator
-    for (var i = 0; i < query['search-options'].like.length; i++) {
-      property = query['search-options'].like[i];
-      if (query.conditions[property]) {
-        query.conditions[property] = new RegExp(query.conditions[property], 'i');
+    if (query['search-options']) {
+      for (var i = 0; i < query['search-options'].like.length; i++) {
+        property = query['search-options'].like[i];
+        if (query.conditions[property]) {
+          query.conditions[property] = new RegExp(query.conditions[property], 'i');
+        }
       }
     }
 
@@ -27,7 +29,7 @@ exports = module.exports = (function() {
         if (err) { throw err; }
 
         count = data;
-        if (query['search-options'].random === true) {
+        if (query['search-options'] && query['search-options'].random === true) {
           q = model.findRandom(query.conditions, query.projection, query['query-options']);
         } else {
           q = model.find(query.conditions, query.projection, query['query-options']);

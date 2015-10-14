@@ -6,7 +6,7 @@
 
     // controller states
     $scope.signedIn = false;
-    $scope.sid      = $cookies.sid;
+    $scope.sid      = $cookies.get('sid');
 
     // load profile to scope to show username and avatar on view
     var loadProfileToScope = function() {
@@ -32,7 +32,8 @@
     var createSession = function() {
       if (!$scope.sid) {
         SessionService.create().then(function (data) {
-          $scope.sid = $cookies.sid = data._id;
+          $scope.sid = data._id;
+          $cookies.put('sid', data._id);
         });
       }
     };
@@ -41,7 +42,7 @@
     $scope.closeSession = function() {
       // clear session
       $scope.sid = null;
-      delete $cookies['sid'];
+      $cookies.remove('sid');
 
       // clear profile information
       $scope.email = null;
@@ -83,7 +84,7 @@
     /*
      * Events
      */
-    
+
     $scope.$on('user signed in', function(event, profile) {
       // create new session if none
       if (!$scope.sid) {

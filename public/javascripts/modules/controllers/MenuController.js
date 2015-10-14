@@ -14,7 +14,7 @@
 
     // load profile
     $scope.loadProfile = function() {
-      SessionService.loadProfile($cookies.sid).then(function(response) {
+      SessionService.loadProfile($cookies.get('sid')).then(function(response) {
         if (response && response.count === 1) {
           var profile = response.values[0];
 

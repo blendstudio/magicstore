@@ -1,80 +1,55 @@
-var express = require('express');
-var router = express.Router();
+(function() {
+  var mongooseFinder = require('../../modules/mongoose-finder'),
+            mongoose = require('mongoose'),
+               model = require('../../models/Session'),
 
-var mongoose = require('mongoose');
-var Model = Session = require('../../models/Session');
+             express = require('express'),
+              router = express.Router(),
 
-var _ = require('lodash');
+                   _ = require('lodash');
 
-/* GET profiles resources. */
-router.get('/', function(req, res, next) {
-  // apply filters
-  var count = 0;
+  /* GET profiles resources. */
+  router.get('/', function(req, res, next) {
+    var query = JSON.parse(req.query.query);
 
-  var query = {};
-
-  var limit = req.query.limit;
-  var skip = req.query.skip;
-
-  var search = JSON.parse(req.query.search);
-
-  var chain = [
-    // get count
-    function() {
-      query = Model.count(search);
-      query.exec(chain.shift());
-    },
-
-    // search for models
-    function(err, data) {
-      count = data;
-
-      query = Model.find(search);
-      query = query.skip(skip).
-                limit(limit);
-      query.exec(chain.shift());
-    },
-
-    // return response
-    function(err, data) {
+    mongooseFinder.find(model, query, function(data, count) {
       res.json({ values: data, count: count });
-    },
-  ];
+    });
+  });
 
-  chain.shift()();
-});
+  /* POST profiles resources. */
+  // TODO: refactor
+  router.post('/', function(req, res, next) {
+    // retrieve parameters from request's body
+    var sessionId = req.body.sessionId;
+    var profileId = req.body.profileId;
 
-/* POST profiles resources. */
-router.post('/', function(req, res, next) {
-  // retrieve parameters from request's body
-  var sessionId = req.body.sessionId;
-  var profileId = req.body.profileId;
-
-  if (sessionId) {
-    // search session by id
-    Session.findById(sessionId, function(err, doc) {
-      if (err) throw err;
-      // link profile to session
-      doc.profileId = profileId;
-
-      // update session
-      doc.save(function (err) {
+    if (sessionId) {
+      // search session by id
+      model.findById(sessionId, function(err, doc) {
         if (err) throw err;
-        res.json(doc);
+        // link profile to session
+        doc.profileId = profileId;
+
+        // update session
+        doc.save(function (err) {
+          if (err) throw err;
+          res.json(doc);
+        });
       });
-    });
-  } else {
-    // create new session
-    var session = new Session();
-    // link profile to session
-    session.profileId = profileId;
+    } else {
+      // create new session
+      var session = new model();
+      // link profile to session
+      session.profileId = profileId;
 
-    // save session to database
-    session.save(function (err) {
-      if (err) throw err;
-      res.json(session);
-    });
-  }
-});
+      // save session to database
+      session.save(function (err) {
+        if (err) throw err;
+        res.json(session);
+      });
+    }
+  });
 
-module.exports = router;
+  module.exports = router;
+})();

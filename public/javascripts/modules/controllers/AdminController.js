@@ -6,7 +6,7 @@
 
     var isSignedProfileAdmin = function() {
       // load profile from session id stored in cookie
-      var promise = SessionService.loadProfile($cookies.sid).then(function (response) {
+      var promise = SessionService.loadProfile($cookies.get('sid')).then(function (response) {
         // if there is no response, or no profile that is an admin, false
         if (!response) {
           return false;

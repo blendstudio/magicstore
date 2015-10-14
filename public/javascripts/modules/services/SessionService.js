@@ -1,6 +1,6 @@
 (function() {
 
-  angular.module('store').factory('SessionService', ['$http', '$cookies', function($http, $cookies) {
+  angular.module('store').factory('SessionService', ['$http', function($http) {
 
     var create = function() {
       var promise = $http.post('/api/sessions').then(function(response) {
@@ -11,7 +11,7 @@
     };
 
     var loadSession = function(sessionId) {
-      var promise = $http.get('/api/sessions', { params: { search: { '_id': sessionId } } }).then(function(response) {
+      var promise = $http.get('/api/sessions', { params: { query: { conditions: { '_id': sessionId } } } }).then(function(response) {
         return response.data;
       });
 
@@ -27,7 +27,7 @@
         var session = response.values[0];
 
         if (session && session.profileId) {
-          return $http.get('/api/profiles', { params: { search: { '_id': session.profileId } } });
+          return $http.get('/api/profiles', { params: { query: { conditions: { '_id': session.profileId } } } });
         }
 
         return null;

@@ -1,6 +1,6 @@
 (function() {
 
-  angular.module('store').controller('UserFormController', ['$scope', '$rootScope', '$http', 'md5', function($scope, $rootScope, $http, md5) {
+  angular.module('store').controller('UserFormController', ['$scope', '$rootScope', '$http', 'md5', 'Notification', function($scope, $rootScope, $http, md5, Notification) {
 
     $scope.modal = false;
 
@@ -42,9 +42,11 @@
       $http.get('/api/accounts', {
           cache: false,
           params: {
-            search: {
-              'email' : account.email,
-              'password' : account.password,
+            query: {
+              conditions: {
+                  'email' : account.email,
+                  'password' : account.password
+              }
             }
           }
       }).
@@ -54,8 +56,10 @@
             $http.get('/api/profiles', {
                 cache: false,
                 params: {
-                  search: {
-                    'email' : account.email,
+                  query: {
+                    conditions: {
+                      'email' : account.email
+                    }
                   }
                 }
             }).
@@ -64,22 +68,22 @@
                   $rootScope.$broadcast('user signed in', data.values[0]);
                   $scope.closeUserFormModal();
                 } else {
-                  $scope.forms.error = { 'profile' : true, 'message' : 'Perfil não encontrado' };
+                  Notification.error({ message: 'Perfil não encontrado', delay: 2500 });
                   account.password = password;
                 }
               }).
               error(function(data, status, headers, config) {
-                $scope.forms.error = { 'http' : true, 'message' : '/api/profiles http status code ' + status };
+                Notification.error({ message: '/api/profiles http status code ' + status, delay: 2500 });
                 account.password = password;
               });
 
           } else {
-            $scope.forms.error = { 'account' : true, 'message' : 'E-mail e/ou senha inválidos' };
+            Notification.error({ message: 'E-mail e/ou senha inválidos', delay: 2500 });
             account.password = password;
           }
         }).
         error(function(data, status, headers, config) {
-          $scope.forms.error = { 'htpp' : true, 'message' : '/api/accounts http status code ' + status };
+          Notification.error({ message: '/api/accounts http status code ' + status, delay: 2500 });
           account.password = password;
         });
 

@@ -1,11 +1,21 @@
-var express = require('express');
-var router = express.Router();
+(function() {
+  var mongooseFinder = require('../../../modules/mongoose-finder'),
+            mongoose = require('mongoose'),
+               model = require('../../../models/Product'),
 
-var mongoose = require('mongoose');
-var Model = Product = require('../../../models/Card');
+             express = require('express'),
+              router = express.Router(),
 
-var _ = require('lodash');
+                   _ = require('lodash');
 
-/* GET products */
+  /* GET products */
+  router.get('/', function(req, res, next) {
+    var query = JSON.parse(req.query.query);
 
-module.exports = router;
+    mongooseFinder.find(model, query, function(data, count) {
+      res.json({ values: data, count: count });
+    });
+  });
+
+  module.exports = router;
+})();
